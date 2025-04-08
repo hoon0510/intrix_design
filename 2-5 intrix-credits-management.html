@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intrix - Credits Management</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2563EB;
+            --primary-dark: #1E40AF;
+            --primary-light: #DBEAFE;
+            --secondary: #10B981;
+            --accent: #F59E0B;
+            --dark: #111827;
+            --light: #F9FAFB;
+            --gray: #9CA3AF;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            color: var(--dark);
+            background-color: #F3F4F6;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #2563EB, #1E3A8A);
+        }
+        
+        .card {
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: all 0.2s ease;
+        }
+        
+        .card:hover {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .btn-outline {
+            background-color: white;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+            padding: 0.5rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary-light);
+        }
+        
+        .btn-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+        
+        .btn-icon:hover {
+            background-color: #F3F4F6;
+        }
+        
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 5px;
+            transition: all 0.2s;
+        }
+        
+        .sidebar-link:hover {
+            background-color: #EFF6FF;
+        }
+        
+        .sidebar-link.active {
+            background-color: #DBEAFE;
+            color: #2563EB;
+            font-weight: 500;
+        }
+        
+        .sidebar-link i {
+            width: 20px;
+            text-align: center;
+            margin-right: 10px;
+        }
+        
+        .credit-plan {
+            border-radius: 8px;
+            border: 1px solid #E5E7EB;
+            transition: all 0.2s ease;
+        }
+        
+        .credit-plan:hover {
+            border-color: #2563EB;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .credit-plan.selected {
+            border-color: #2563EB;
+            background-color: #EFF6FF;
+        }
+        
+        .usage-table th {
+            padding: 0.75rem;
+            text-align: left;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: #6B7280;
+            font-weight: 600;
+        }
+        
+        .usage-table td {
+            padding: 1rem 0.75rem;
+            vertical-align: top;
+            border-top: 1px solid #E5E7EB;
+        }
+        
+        .tab-button {
+            padding: 0.75rem 1rem;
+            font-weight: 500;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s ease;
+        }
+        
+        .tab-button:hover {
+            color: #2563EB;
+        }
+        
+        .tab-button.active {
+            color: #2563EB;
+            border-bottom-color: #2563EB;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .progress-bar {
+            height: 10px;
+            border-radius: 5px;
+            background-color: #E5E7EB;
+        }
+        
+        .progress-value {
+            height: 10px;
+            border-radius: 5px;
+            background-color: var(--primary);
+        }
+        
+        .payment-option {
+            padding: 0.75rem;
+            border-radius: 6px;
+            border: 1px solid #E5E7EB;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .payment-option:hover {
+            border-color: #2563EB;
+            background-color: #F9FAFB;
+        }
+        
+        .payment-option.selected {
+            border-color: #2563EB;
+            background-color: #EFF6FF;
+        }
+        
+        .payment-option input[type="radio"] {
+            margin-right: 0.5rem;
+        }
+        
+        .tag {
+            padding: 0.25rem 0.5rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+            border-radius: 9999px;
+            margin-right: 0.5rem;
+        }
+        
+        .tag-blue {
+            background-color: #DBEAFE;
+            color: #1E40AF;
+        }
+        
+        .tag-green {
+            background-color: #D1FAE5;
+            color: #065F46;
+        }
+        
+        .tag-red {
+            background-color: #FEE2E2;
+            color: #B91C1C;
+        }
+        
+        .tag-yellow {
+            background-color: #FEF3C7;
+            color: #92400E;
+        }
+        
+        @media (max-width: 768px) {
+            .desktop-sidebar {
+                display: none;
+            }
+            
+            .mobile-nav {
+                display: flex;
+            }
+        }
+        
+        @media (min-width: 769px) {
+            .desktop-sidebar {
+                display: block;
+            }
+            
+            .mobile-nav {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Main Layout -->
+    <div class="flex flex-col min-h-screen">
+        <!-- Top Navigation Bar -->
+        <header class="bg-white shadow-sm sticky top-0 z-10">
+            <div class="container mx-auto px-4 py-3">
+                <div class="flex justify-between items-center">
+                    <!-- Logo -->
+                    <div class="flex items-center">
+                        <div class="text-2xl font-bold text-blue-600 tracking-tight">intrix</div>
+                        <div class="ml-1 md:ml-2 bg-blue-100 text-blue-800 text-xs px-1.5 py-0.5 rounded-full font-medium">BETA</div>
+                    </div>
+                    
+                    <!-- Search Bar - Only on desktop -->
+                    <div class="hidden md:flex items-center flex-1 max-w-md mx-4 md:mx-8">
+                        <div class="relative w-full">
+                            <input type="text" placeholder="Search projects or reports..." class="w-full bg-gray-100 rounded-lg py-2 px-4 pl-10 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white">
+                            <div class="absolute left-3 top-2.5 text-gray-400">
+                                <i class="fas fa-search"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Right Navigation Items -->
+                    <div class="flex items-center space-x-1 md:space-x-4">
+                        <div class="hidden md:block py-1 px-3 bg-gray-100 rounded-lg">
+                            <span class="text-sm text-gray-500">Credits:</span>
+                            <span class="text-sm font-medium">2,450</span>
+                        </div>
+                        <button class="p-2 text-gray-500 hover:text-gray-700 relative">
+                            <i class="far fa-bell"></i>
+                            <span class="absolute top-0 right-0 w-4 h-4 bg-red-500 text-white text-xs flex items-center justify-center rounded-full">3</span>
+                        </button>
+                        <button class="hidden md:block p-2 text-gray-500 hover:text-gray-700">
+                            <i class="far fa-question-circle"></i>
+                        </button>
+                        <div class="flex items-center">
+                            <img src="/api/placeholder/32/32" class="w-8 h-8 rounded-full" alt="User profile">
+                            <span class="hidden md:inline-block ml-2 text-sm font-medium">John Smith</span>
+                            <i class="hidden md:inline-block fas fa-chevron-down text-xs ml-2 text-gray-500"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content Area with Sidebar -->
+        <div class="flex flex-1 container mx-auto">
+            <!-- Desktop Sidebar -->
+            <aside class="desktop-sidebar w-56 pt-6 pr-4 pl-4 overflow-y-auto">
+                <div class="mb-6">
+                    <button class="btn-primary w-full flex items-center justify-center">
+                        <i class="fas fa-plus mr-2"></i>
+                        <span>New Analysis</span>
+                    </button>
+                </div>
+                
+                <div class="mb-4">
+                    <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 px-2">NAVIGATION</h3>
+                    <nav>
+                        <a href="#" class="sidebar-link">
+                            <i class="fas fa-th-large"></i>
+                            <span>Dashboard</span>
+                        </a>
+                        <a href="#" class="sidebar-link">
+                            <i class="fas fa-project-diagram"></i>
+                            <span>Projects</span>
+                        </a>
+                        <a href="#" class="sidebar-link">
+                            <i class="fas fa-chart-bar"></i>
+                            <span>Analytics</span>
+                        </a>
+                        <a href="#" class="sidebar-link">
+                            <i class="fas fa-file-alt"></i>
+                            <span>Reports</span>
+                        </a>
+                        <a href="#" class="sidebar-link active">
+                            <i class="fas fa-coins"></i>
+                            <span>Credits</span>
+                        </a>
+                    </nav>
+                </div>
+                
+                <div>
+                    <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 px-2">ACCOUNT</h3>
+                    <nav>
+                        <a href="#" class="sidebar-link">
+                            <i class="fas fa-user-circle"></i>
+                            <span>Profile</span>
+                        </a>
+                        <a href="#" class="sidebar-link">
+                            <i class="fas fa-credit-card"></i>
+                            <span>Billing</span>
+                        </a>
+                        <a href="#" class="sidebar-link">
+                            <i class="fas fa-cog"></i>
+                            <span>Settings</span>
+                        </a>
+                    </nav>
+                </div>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="flex-1 p-4 pb-20 md:pb-8">
+                <!-- Mobile Search Bar -->
+                <div class="md:hidden mb-4 relative">
+                    <input type="text" placeholder="Search credits or transactions..." class="w-full bg-gray-100 rounded-lg py-2 px-4 pl-10 text-sm">
+                    <div class="absolute left-3 top-2.5 text-gray-400">
+                        <i class="fas fa-search"></i>
+                    </div>
+                </div>
+                
+                <!-- Page Header -->
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
+                    <div>
+                        <h1 class="text-xl md:text-2xl font-bold text-gray-900">Credits & Subscription</h1>
+                        <p class="text-sm text-gray-500">Manage your credits, view usage history, and edit subscription</p>
+                    </div>
+                </div>
+                
+                <!-- Credit Overview -->
+                <div class="bg-white rounded-lg p-5 card mb-6">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <!-- Current Balance -->
+                        <div>
+                            <h3 class="text-sm font-semibold text-gray-500 mb-2">Current Balance</h3>
+                            <div class="flex items-end mb-2">
+                                <div class="text-3xl font-bold text-gray-900">2,450</div>
+                                <div class="ml-2 text-sm text-gray-500">credits</div>
+                            </div>
+                            <div class="mb-2">
+                                <div class="progress-bar">
+                                    <div class="progress-value" style="width: 65%"></div>
+                                </div>
+                            </div>
+                            <p class="text-xs text-gray-500">65% remaining of 3,750 total purchased</p>
+                        </div>
+                        
+                        <!-- Current Plan -->
+                        <div>
+                            <h3 class="text-sm font-semibold text-gray-500 mb-2">Current Plan</h3>
+                            <div class="text-lg font-bold text-gray-900 mb-1">Professional</div>
+                            <div class="flex items-center mb-2">
+                                <span class="tag tag-blue">Monthly</span>
+                                <span class="text-sm text-gray-500">Renews on May 6, 2025</span>
+                            </div>
+                            <button class="text-sm text-blue-600 hover:underline flex items-center">
+                                <i class="fas fa-exchange-alt mr-1 text-xs"></i>
+                                Change Plan
+                            </button>
+                        </div>
+                        
+                        <!-- Quick Actions -->
+                        <div>
+                            <h3 class="text-sm font-semibold text-gray-500 mb-3">Quick Actions</h3>
+                            <div class="flex flex-col space-y-2">
+                                <button class="btn-primary flex items-center justify-center text-sm py-2">
+                                    <i class="fas fa-shopping-cart mr-2"></i>
+                                    Buy More Credits
+                                </button>
+                                <button class="btn-outline flex items-center justify-center text-sm py-2">
+                                    <i class="fas fa-file-invoice-dollar mr-2"></i>
+                                    View Invoices
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tabs -->
+                <div class="mb-6">
+                    <div class="border-b border-gray-200">
+                        <div class="flex overflow-x-auto">
+                            <button class="tab-button active" data-tab="buy-credits">Buy Credits</button>
+                            <button class="tab-button" data-tab="usage-history">Usage History</button>
+                            <button class="tab-button" data-tab="subscription">Subscription</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Buy Credits Tab -->
+                <div id="buy-credits" class="tab-content active">
+                    <div class="bg-white rounded-lg p-5 card mb-6">
+                        <h2 class="text-lg font-bold mb-4">Select Credit Package</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                            <!-- Package 1 -->
+                            <div class="credit-plan p-4">
+                                <div class="flex justify-between items-center mb-3">
+                                    <div>
+                                        <h3 class="font-bold text-gray-900">Starter</h3>
+                                        <p class="text-sm text-gray-500">For occasional use</p>
+                                    </div>
+                                    <div class="w-6 h-6 rounded-full border-2 border-gray-300"></div>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="text-2xl font-bold">500</div>
+                                    <div class="text-sm text-gray-500">credits</div>
+                                </div>
+                                <div class="flex items-end mb-4">
+                                    <div class="text-xl font-bold text-gray-900">$5.99</div>
+                                    <div class="ml-2 text-sm text-gray-500 line-through">$7.99</div>
+                                    <div class="ml-2 text-xs text-green-800 bg-green-100 px-2 py-0.5 rounded-full">25% off</div>
+                                </div>
+                                <p class="text-xs text-gray-500">Approximately 1-2 analyses</p>
+                            </div>
+                            
+                            <!-- Package 2 -->
+                            <div class="credit-plan selected p-4">
+                                <div class="flex justify-between items-center mb-3">
+                                    <div>
+                                        <h3 class="font-bold text-gray-900">Professional</h3>
+                                        <p class="text-sm text-gray-500">Most popular</p>
+                                    </div>
+                                    <div class="w-6 h-6 rounded-full border-2 border-blue-600 flex items-center justify-center">
+                                        <div class="w-3 h-3 rounded-full bg-blue-600"></div>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="text-2xl font-bold">2,000</div>
+                                    <div class="text-sm text-gray-500">credits</div>
+                                </div>
+                                <div class="flex items-end mb-4">
+                                    <div class="text-xl font-bold text-gray-900">$21.99</div>
+                                    <div class="ml-2 text-sm text-gray-500 line-through">$29.99</div>
+                                    <div class="ml-2 text-xs text-green-800 bg-green-100 px-2 py-0.5 rounded-full">26% off</div>
+                                </div>
+                                <p class="text-xs text-gray-500">Approximately 6-7 analyses</p>
+                            </div>
+                            
+                            <!-- Package 3 -->
+                            <div class="credit-plan p-4">
+                                <div class="flex justify-between items-center mb-3">
+                                    <div>
+                                        <h3 class="font-bold text-gray-900">Business</h3>
+                                        <p class="text-sm text-gray-500">For teams</p>
+                                    </div>
+                                    <div class="w-6 h-6 rounded-full border-2 border-gray-300"></div>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="text-2xl font-bold">10,000</div>
+                                    <div class="text-sm text-gray-500">credits</div>
+                                </div>
+                                <div class="flex items-end mb-4">
+                                    <div class="text-xl font-bold text-gray-900">$89.99</div>
+                                    <div class="ml-2 text-sm text-gray-500 line-through">$119.99</div>
+                                    <div class="ml-2 text-xs text-green-800 bg-green-100 px-2 py-0.5 rounded-full">25% off</div>
+                                </div>
+                                <p class="text-xs text-gray-500">Approximately 30-35 analyses</p>
+                            </div>
+                        </div>
+                        
+                        <h2 class="text-lg font-bold mb-4">Payment Method</h2>
+                        <div class="space-y-3 mb-6">
+                            <!-- Credit Card Option -->
+                            <label class="payment-option selected flex items-center">
+                                <input type="radio" name="payment-method" checked>
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center mr-3">
+                                        <i class="fas fa-credit-card text-blue-600"></i>
+                                    </div>
+                                    <div>
+                                        <div class="font-medium">Credit Card</div>
+                                        <div class="text-sm text-gray-500">•••• •••• •••• 4242</div>
+                                    </div>
+                                </div>
+                            </label>
+                            
+                            <!-- PayPal Option -->
+                            <label class="payment-option flex items-center">
+                                <input type="radio" name="payment-method">
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center mr-3">
+                                        <i class="fab fa-paypal text-blue-600"></i>
+                                    </div>
+                                    <div>
+                                        <div class="font-medium">PayPal</div>
+                                        <div class="text-sm text-gray-500">john.smith@example.com</div>
+                                    </div>
+                                </div>
+                            </label>
+                            
+                            <!-- Add New Payment Method -->
+                            <button class="flex items-center text-blue-600 hover:underline mt-2">
+                                <i class="fas fa-plus text-xs mr-1"></i>
+                                <span>Add new payment method</span>
+                            </button>
+                        </div>
+                        
+                        <!-- Order Summary -->
+                        <div class="bg-gray-50 p-4 rounded-lg mb-4">
+                            <h3 class="font-bold mb-3">Order Summary</h3>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-gray-600">Professional Package (2,000 credits)</span>
+                                <span class="font-medium">$21.99</span>
+                            </div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-gray-600">Discount</span>
+                                <span class="text-green-600">-$8.00</span>
+                            </div>
+                            <div class="border-t border-gray-200 my-2 pt-2">
+                                <div class="flex justify-between font-bold">
+                                    <span>Total</span>
+                                    <span>$21.99</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex justify-end">
+                            <button class="btn-primary">Complete Purchase</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Usage History Tab -->
+                <div id="usage-history" class="tab-content">
+                    <div class="bg-white rounded-lg p-5 card mb-6">
+                        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4">
+                            <h2 class="text-lg font-bold">Credit Usage History</h2>
+                            
+                            <!-- Date Filter -->
+                            <div class="relative mt-2 md:mt-0">
+                                <select class="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 appearance-none pr-8">
+                                    <option value="30">Last 30 days</option>
+                                    <option value="90">Last 90 days</option>
+                                    <option value="180">Last 6 months</option>
+                                    <option value="365">Last year</option>
+                                    <option value="all">All time</option>
+                                </select>
+                                <div class="absolute right-3 top-2.5 text-gray-400 pointer-events-none">
+                                    <i class="fas fa-chevron-down text-xs"></i>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Usage Table -->
+                        <div class="overflow-x-auto">
+                            <table class="w-full usage-table">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Description</th>
+                                        <th>Project</th>
+                                        <th>Credits</th>
+                                        <th>Balance</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="text-sm text-gray-600">Apr 5, 2025</td>
+                                        <td>
+                                            <div class="font-medium">Analysis Completed</div>
+                                            <div class="text-sm text-gray-500">30 reviews analyzed</div>
+                                        </td>
+                                        <td>
+                                            <span class="tag tag-blue">Smartwatch Reviews</span>
+                                        </td>
+                                        <td class="text-red-600 font-medium">-350</td>
+                                        <td class="font-medium">2,450</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-sm text-gray-600">Apr 4, 2025</td>
+                                        <td>
+                                            <div class="font-medium">Analysis Started</div>
+                                            <div class="text-sm text-gray-500">12 reviews analyzed</div>
+                                        </td>
+                                        <td>
+                                            <span class="tag tag-yellow">Coffee Brand</span>
+                                        </td>
+                                        <td class="text-red-600 font-medium">-120</td>
+                                        <td class="font-medium">2,800</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-sm text-gray-600">Apr 1, 2025</td>
+                                        <td>
+                                            <div class="font-medium">Credits Purchased</div>
+                                            <div class="text-sm text-gray-500">Professional Package</div>
+                                        </td>
+                                        <td>
+                                            <span class="tag tag-green">System</span>
+                                        </td>
+                                        <td class="text-green-600 font-medium">+2,000</td>
+                                        <td class="font-medium">2,920</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-sm text-gray-600">Mar 25, 2025</td>
+                                        <td>
+                                            <div class="font-medium">Analysis Completed</div>
+                                            <div class="text-sm text-gray-500">28 reviews analyzed</div>
+                                        </td>
+                                        <td>
+                                            <span class="tag tag-blue">Sports App</span>
+                                        </td>
+                                        <td class="text-red-600 font-medium">-280</td>
+                                        <td class="font-medium">920</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-sm text-gray-600">Mar 18, 2025</td>
+                                        <td>
+                                            <div class="font-medium">Analysis Started</div>
+                                            <div class="text-sm text-gray-500">15 reviews analyzed</div>
+                                        </td>
+                                        <td>
+                                            <span class="tag tag-yellow">Food Delivery</span>
+                                        </td>
+                                        <td class="text-red-600 font-medium">-150</td>
+                                        <td class="font-medium">1,200</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <!-- Pagination -->
+                        <div class="flex justify-between items-center mt-6">
+                            <div class="text-sm text-gray-600">
+                                Showing 5 of 14 transactions
+                            </div>
+                            <div class="flex items-center space-x-1">
+                                <button class="btn-icon text-gray-400">
+                                    <i class="fas fa-chevron-left"></i>
+                                </button>
+                                <button class="w-8 h-8 rounded-md flex items-center justify-center text-gray-600 text-sm hover:bg-gray-100">2</button>
+                                <button class="w-8 h-8 rounded-md flex items-center justify-center text-gray-600 text-sm hover:bg-gray-100">3</button>
+                                <button class="btn-icon text-gray-600">
+                                    <i class="fas fa-chevron-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Subscription Tab -->
+                <div id="subscription" class="tab-content">
+                    <div class="bg-white rounded-lg p-5 card mb-6">
+                        <h2 class="text-lg font-bold mb-4">Subscription Details</h2>
+                        
+                        <!-- Current Plan -->
+                        <div class="border border-gray-200 rounded-lg p-4 mb-6">
+                            <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+                                <div>
+                                    <div class="flex items-center mb-2">
+                                        <div class="tag tag-blue mr-2">Current Plan</div>
+                                        <h3 class="font-bold text-lg">Professional</h3>
+                                    </div>
+                                    <p class="text-gray-600 text-sm mb-2">$21.99/month • 2,000 credits per billing cycle</p>
+                                    <div class="flex items-center">
+                                        <span class="text-sm text-gray-600 mr-3">Next renewal: May 6, 2025</span>
+                                        <span class="text-xs text-green-600 px-2 py-0.5 bg-green-100 rounded-full">Auto-renew ON</span>
+                                    </div>
+                                </div>
+                                <div class="flex space-x-2 mt-4 md:mt-0">
+                                    <button class="btn-outline py-1 px-3 text-sm">Cancel</button>
+                                    <button class="btn-primary py-1 px-3 text-sm">Change Plan</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <h3 class="font-bold text-md mb-3">Payment Method</h3>
+                        
+                        <!-- Payment Methods -->
+                        <div class="border border-gray-200 rounded-lg p-4 mb-6">
+                            <div class="flex items-start justify-between">
+                                <div class="flex items-start">
+                                    <div class="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center mr-3">
+                                        <i class="fas fa-credit-card text-blue-600"></i>
+                                    </div>
+                                    <div>
+                                        <div class="font-medium">Visa ending in 4242</div>
+                                        <div class="text-sm text-gray-500">Expires 12/25</div>
+                                        <div class="text-xs text-blue-600 mt-1">Default payment method</div>
+                                    </div>
+                                </div>
+                                <div class="flex space-x-2">
+                                    <button class="btn-icon text-gray-400">
+                                        <i class="fas fa-pen"></i>
+                                    </button>
+                                    <button class="btn-icon text-gray-400">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="border-t border-gray-200 mt-4 pt-4">
+                                <button class="flex items-center text-blue-600 hover:underline">
+                                    <i class="fas fa-plus text-xs mr-1"></i>
+                                    <span>Add new payment method</span>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <h3 class="font-bold text-md mb-3">Billing Address</h3>
+                        
+                        <!-- Billing Address -->
+                        <div class="border border-gray-200 rounded-lg p-4 mb-6">
+                            <div class="flex items-start justify-between">
+                                <div>
+                                    <p class="font-medium">John Smith</p>
+                                    <p class="text-sm text-gray-600">123 Main Street</p>
+                                    <p class="text-sm text-gray-600">San Francisco, CA 94105</p>
+                                    <p class="text-sm text-gray-600">United States</p>
+                                </div>
+                                <button class="btn-icon text-gray-400">
+                                    <i class="fas fa-pen"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <h3 class="font-bold text-md mb-3">Billing History</h3>
+                        
+                        <!-- Billing History -->
+                        <div class="border border-gray-200 rounded-lg overflow-hidden">
+                            <table class="w-full usage-table">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Description</th>
+                                        <th>Amount</th>
+                                        <th>Status</th>
+                                        <th>Invoice</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="text-sm text-gray-600">Apr 6, 2025</td>
+                                        <td>
+                                            <div class="font-medium">Professional Monthly Plan</div>
+                                            <div class="text-sm text-gray-500">2,000 credits</div>
+                                        </td>
+                                        <td class="font-medium">$21.99</td>
+                                        <td><span class="tag tag-green">Paid</span></td>
+                                        <td>
+                                            <a href="#" class="text-blue-600 hover:underline">
+                                                <i class="fas fa-download mr-1"></i>
+                                                PDF
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-sm text-gray-600">Mar 6, 2025</td>
+                                        <td>
+                                            <div class="font-medium">Professional Monthly Plan</div>
+                                            <div class="text-sm text-gray-500">2,000 credits</div>
+                                        </td>
+                                        <td class="font-medium">$21.99</td>
+                                        <td><span class="tag tag-green">Paid</span></td>
+                                        <td>
+                                            <a href="#" class="text-blue-600 hover:underline">
+                                                <i class="fas fa-download mr-1"></i>
+                                                PDF
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-sm text-gray-600">Feb 6, 2025</td>
+                                        <td>
+                                            <div class="font-medium">Professional Monthly Plan</div>
+                                            <div class="text-sm text-gray-500">2,000 credits</div>
+                                        </td>
+                                        <td class="font-medium">$21.99</td>
+                                        <td><span class="tag tag-green">Paid</span></td>
+                                        <td>
+                                            <a href="#" class="text-blue-600 hover:underline">
+                                                <i class="fas fa-download mr-1"></i>
+                                                PDF
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <!-- Mobile Bottom Navigation -->
+        <nav class="mobile-nav bg-white bottom-tab fixed bottom-0 left-0 right-0 h-16 px-4 z-10">
+            <div class="flex justify-around items-center h-full max-w-md mx-auto">
+                <button class="flex flex-col items-center justify-center text-gray-400">
+                    <i class="fas fa-th-large text-lg"></i>
+                    <span class="text-xs mt-1">Dashboard</span>
+                </button>
+                <button class="flex flex-col items-center justify-center text-gray-400">
+                    <i class="fas fa-folder text-lg"></i>
+                    <span class="text-xs mt-1">Projects</span>
+                </button>
+                <button class="flex flex-col items-center justify-center -mt-6">
+                    <div class="bg-blue-600 w-12 h-12 rounded-full flex items-center justify-center text-white shadow-lg">
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <span class="text-xs mt-1">New</span>
+                </button>
+                <button class="flex flex-col items-center justify-center text-gray-400">
+                    <i class="fas fa-chart-bar text-lg"></i>
+                    <span class="text-xs mt-1">Analytics</span>
+                </button>
+                <button class="flex flex-col items-center justify-center text-blue-600">
+                    <i class="fas fa-coins text-lg"></i>
+                    <span class="text-xs mt-1">Credits</span>
+                </button>
+            </div>
+        </nav>
+    </div>
+
+    <script>
+        // Tab switching
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Remove active class from all buttons and contents
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    tabContents.forEach(content => content.classList.remove('active'));
+                    
+                    // Add active class to clicked button and corresponding content
+                    button.classList.add('active');
+                    const tabId = button.getAttribute('data-tab');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+            
+            // Credit plan selection
+            const creditPlans = document.querySelectorAll('.credit-plan');
+            creditPlans.forEach(plan => {
+                plan.addEventListener('click', () => {
+                    creditPlans.forEach(p => p.classList.remove('selected'));
+                    plan.classList.add('selected');
+                    
+                    // Update radio button state
+                    const radioBtn = plan.querySelector('input[type="radio"]');
+                    if (radioBtn) {
+                        radioBtn.checked = true;
+                    }
+                });
+            });
+            
+            // Payment method selection
+            const paymentOptions = document.querySelectorAll('.payment-option');
+            paymentOptions.forEach(option => {
+                option.addEventListener('click', () => {
+                    paymentOptions.forEach(opt => opt.classList.remove('selected'));
+                    option.classList.add('selected');
+                    
+                    // Update radio button state
+                    const radioBtn = option.querySelector('input[type="radio"]');
+                    if (radioBtn) {
+                        radioBtn.checked = true;
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>h-8 rounded-md flex items-center justify-center bg-blue-600 text-white text-sm">1</button>
+                                <button class="w-8 

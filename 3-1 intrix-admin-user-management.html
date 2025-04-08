@@ -1,0 +1,1533 @@
+                                    <div class="font-medium">5,230</div>
+                                    <div class="text-sm text-gray-500">of 10,000</div>
+                                </td>
+                                <td>24</td>
+                                <td>
+                                    <div class="text-sm">Apr 2, 2025</div>
+                                    <div class="text-sm text-gray-500">3:28 PM</div>
+                                </td>
+                                <td>
+                                    <div class="flex space-x-2">
+                                        <button class="btn-icon text-gray-500 hover:text-blue-600" onclick="viewUserDetails('user4')">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button class="btn-icon text-gray-500 hover:text-green-600" onclick="openCreditAdjustmentModal('user4')">
+                                            <i class="fas fa-coins"></i>
+                                        </button>
+                                        <button class="btn-icon text-gray-500 hover:text-gray-700">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            
+                            <!-- User Row 5 -->
+                            <tr>
+                                <td>
+                                    <div class="flex items-center">
+                                        <img src="/api/placeholder/40/40" class="w-10 h-10 rounded-full mr-3" alt="User avatar">
+                                        <div>
+                                            <div class="font-medium">Robert Brown</div>
+                                            <div class="text-sm text-gray-500">robert.b@example.com</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="status-badge status-active">Active</span>
+                                </td>
+                                <td>
+                                    <div class="font-medium">Enterprise</div>
+                                    <div class="text-sm text-gray-500">Monthly</div>
+                                </td>
+                                <td>
+                                    <div class="font-medium">15,780</div>
+                                    <div class="text-sm text-gray-500">of 25,000</div>
+                                </td>
+                                <td>42</td>
+                                <td>
+                                    <div class="text-sm">Apr 5, 2025</div>
+                                    <div class="text-sm text-gray-500">11:10 AM</div>
+                                </td>
+                                <td>
+                                    <div class="flex space-x-2">
+                                        <button class="btn-icon text-gray-500 hover:text-blue-600" onclick="viewUserDetails('user5')">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button class="btn-icon text-gray-500 hover:text-green-600" onclick="openCreditAdjustmentModal('user5')">
+                                            <i class="fas fa-coins"></i>
+                                        </button>
+                                        <button class="btn-icon text-gray-500 hover:text-gray-700">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <!-- Pagination -->
+                    <div class="pagination">
+                        <div class="pagination-info">
+                            Showing 1-5 of 24 users
+                        </div>
+                        <div class="pagination-actions">
+                            <button class="btn-icon text-gray-400">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <button class="page-number active">1</button>
+                            <button class="page-number">2</button>
+                            <button class="page-number">3</button>
+                            <button class="page-number">4</button>
+                            <button class="page-number">5</button>
+                            <button class="btn-icon text-gray-600">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- User Details Content (Initially Hidden) -->
+            <div id="user-details-content" class="p-6 hidden">
+                <!-- Back Button -->
+                <button class="flex items-center text-gray-600 hover:text-blue-600 mb-4" id="back-to-user-list">
+                    <i class="fas fa-arrow-left mr-2"></i>
+                    <span>Back to All Users</span>
+                </button>
+                
+                <!-- User Info Header -->
+                <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
+                    <div class="flex flex-col md:flex-row">
+                        <!-- User Avatar and Basic Info -->
+                        <div class="flex items-start mb-4 md:mb-0">
+                            <img src="/api/placeholder/80/80" class="user-avatar mr-4" alt="User avatar">
+                            <div>
+                                <h2 class="text-2xl font-bold mb-1">John Smith</h2>
+                                <p class="text-gray-600 mb-2">john.smith@example.com</p>
+                                <div class="flex items-center space-x-2 mb-3">
+                                    <span class="status-badge status-active">Active</span>
+                                    <span class="text-sm text-gray-500">ID: USR-7851</span>
+                                </div>
+                                <p class="text-sm text-gray-500">Member since: January 15, 2025</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Actions -->
+                        <div class="md:ml-auto space-y-2">
+                            <button class="btn-outline w-full md:w-auto">
+                                <i class="fas fa-envelope mr-2"></i>
+                                Send Email
+                            </button>
+                            <button class="btn-outline w-full md:w-auto">
+                                <i class="fas fa-user-edit mr-2"></i>
+                                Edit User
+                            </button>
+                            <button class="btn-danger w-full md:w-auto">
+                                <i class="fas fa-ban mr-2"></i>
+                                Suspend User
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Stats Overview -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+                    <div class="stat-card">
+                        <div class="stat-label">Subscription Plan</div>
+                        <div class="stat-value">Professional</div>
+                        <div class="text-sm text-gray-500">Monthly • Renews May 6, 2025</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-label">Available Credits</div>
+                        <div class="stat-value">2,450</div>
+                        <div class="text-sm text-gray-500">65% of 3,750 total</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-label">Total Projects</div>
+                        <div class="stat-value">12</div>
+                        <div class="text-sm text-gray-500">8 active, 4 completed</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-label">Last Login</div>
+                        <div class="stat-value">Today</div>
+                        <div class="text-sm text-gray-500">Apr 5, 2025 at 10:32 AM</div>
+                    </div>
+                </div>
+                
+                <!-- Tabs for User Details, Projects, and Credit History -->
+                <div class="mb-6">
+                    <div class="border-b border-gray-200">
+                        <div class="flex overflow-x-auto">
+                            <button class="tab-button active" data-tab="user-info">User Information</button>
+                            <button class="tab-button" data-tab="credit-history">Credit History</button>
+                            <button class="tab-button" data-tab="projects">Projects</button>
+                            <button class="tab-button" data-tab="activity">Activity Log</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- User Information Tab Content -->
+                <div id="user-info" class="tab-content active">
+                    <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
+                        <h3 class="text-lg font-bold mb-4">Personal Information</h3>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <p class="text-sm text-gray-500 mb-1">Full Name</p>
+                                <p class="font-medium">John Robert Smith</p>
+                            </div>
+                            
+                            <div>
+                                <p class="text-sm text-gray-500 mb-1">Email Address</p>
+                                <p class="font-medium">john.smith@example.com</p>
+                            </div>
+                            
+                            <div>
+                                <p class="text-sm text-gray-500 mb-1">Phone Number</p>
+                                <p class="font-medium">+1 (555) 123-4567</p>
+                            </div>
+                            
+                            <div>
+                                <p class="text-sm text-gray-500 mb-1">Company</p>
+                                <p class="font-medium">Acme Corporation</p>
+                            </div>
+                            
+                            <div>
+                                <p class="text-sm text-gray-500 mb-1">Job Title</p>
+                                <p class="font-medium">Marketing Director</p>
+                            </div>
+                            
+                            <div>
+                                <p class="text-sm text-gray-500 mb-1">Location</p>
+                                <p class="font-medium">San Francisco, CA</p>
+                            </div>
+                        </div>
+                        
+                        <h3 class="text-lg font-bold mt-6 mb-4">Account Settings</h3>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <p class="text-sm text-gray-500 mb-1">Account Status</p>
+                                <p class="font-medium">Active</p>
+                            </div>
+                            
+                            <div>
+                                <p class="text-sm text-gray-500 mb-1">Account ID</p>
+                                <p class="font-medium">USR-7851</p>
+                            </div>
+                            
+                            <div>
+                                <p class="text-sm text-gray-500 mb-1">Registration Date</p>
+                                <p class="font-medium">January 15, 2025</p>
+                            </div>
+                            
+                            <div>
+                                <p class="text-sm text-gray-500 mb-1">Last Password Change</p>
+                                <p class="font-medium">March 10, 2025</p>
+                            </div>
+                            
+                            <div>
+                                <p class="text-sm text-gray-500 mb-1">Two-Factor Authentication</p>
+                                <p class="font-medium">Enabled</p>
+                            </div>
+                            
+                            <div>
+                                <p class="text-sm text-gray-500 mb-1">Login Method</p>
+                                <p class="font-medium">Google OAuth</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Credit History Tab Content -->
+                <div id="credit-history" class="tab-content">
+                    <div class="bg-white rounded-lg shadow-sm overflow-hidden mb-6">
+                        <div class="p-4 border-b border-gray-200 flex justify-between items-center">
+                            <h3 class="text-lg font-bold">Credit History</h3>
+                            <button class="btn-primary btn-sm" onclick="openCreditAdjustmentModal('user1')">
+                                <i class="fas fa-coins mr-1"></i>
+                                Adjust Credits
+                            </button>
+                        </div>
+                        
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Description</th>
+                                    <th>Amount</th>
+                                    <th>Type</th>
+                                    <th>Balance</th>
+                                    <th>Admin</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="text-sm">Apr 5, 2025</div>
+                                        <div class="text-xs text-gray-500">10:32 AM</div>
+                                    </td>
+                                    <td>
+                                        <div class="font-medium">Analysis Completed</div>
+                                        <div class="text-sm text-gray-500">Smartwatch Reviews</div>
+                                    </td>
+                                    <td class="text-red-600 font-medium">-350</td>
+                                    <td><span class="status-badge status-active">Automatic</span></td>
+                                    <td class="font-medium">2,450</td>
+                                    <td>-</td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>
+                                        <div class="text-sm">Apr 4, 2025</div>
+                                        <div class="text-xs text-gray-500">2:15 PM</div>
+                                    </td>
+                                    <td>
+                                        <div class="font-medium">Analysis Started</div>
+                                        <div class="text-sm text-gray-500">Coffee Brand</div>
+                                    </td>
+                                    <td class="text-red-600 font-medium">-120</td>
+                                    <td><span class="status-badge status-active">Automatic</span></td>
+                                    <td class="font-medium">2,800</td>
+                                    <td>-</td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>
+                                        <div class="text-sm">Apr 2, 2025</div>
+                                        <div class="text-xs text-gray-500">11:45 AM</div>
+                                    </td>
+                                    <td>
+                                        <div class="font-medium">Manual Credit Adjustment</div>
+                                        <div class="text-sm text-gray-500">Support compensation</div>
+                                    </td>
+                                    <td class="text-green-600 font-medium">+500</td>
+                                    <td><span class="status-badge status-trial">Manual</span></td>
+                                    <td class="font-medium">2,920</td>
+                                    <td>admin@intrix.com</td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>
+                                        <div class="text-sm">Apr 1, 2025</div>
+                                        <div class="text-xs text-gray-500">9:30 AM</div>
+                                    </td>
+                                    <td>
+                                        <div class="font-medium">Credits Purchased</div>
+                                        <div class="text-sm text-gray-500">Professional Package</div>
+                                    </td>
+                                    <td class="text-green-600 font-medium">+2,000</td>
+                                    <td><span class="status-badge status-active">Automatic</span></td>
+                                    <td class="font-medium">2,420</td>
+                                    <td>-</td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>
+                                        <div class="text-sm">Mar 25, 2025</div>
+                                        <div class="text-xs text-gray-500">3:20 PM</div>
+                                    </td>
+                                    <td>
+                                        <div class="font-medium">Analysis Completed</div>
+                                        <div class="text-sm text-gray-500">Sports App</div>
+                                    </td>
+                                    <td class="text-red-600 font-medium">-280</td>
+                                    <td><span class="status-badge status-active">Automatic</span></td>
+                                    <td class="font-medium">420</td>
+                                    <td>-</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <!-- Pagination -->
+                        <div class="pagination">
+                            <div class="pagination-info">
+                                Showing 1-5 of 15 transactions
+                            </div>
+                            <div class="pagination-actions">
+                                <button class="btn-icon text-gray-400">
+                                    <i class="fas fa-chevron-left"></i>
+                                </button>
+                                <button class="page-number active">1</button>
+                                <button class="page-number">2</button>
+                                <button class="page-number">3</button>
+                                <button class="btn-icon text-gray-600">
+                                    <i class="fas fa-chevron-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Projects Tab Content -->
+                <div id="projects" class="tab-content">
+                    <div class="bg-white rounded-lg shadow-sm overflow-hidden mb-6">
+                        <div class="p-4 border-b border-gray-200">
+                            <h3 class="text-lg font-bold">User Projects</h3>
+                        </div>
+                        
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Project Name</th>
+                                    <th>Type</th>
+                                    <th>Status</th>
+                                    <th>Created</th>
+                                    <th>Last Updated</th>
+                                    <th>Credits Used</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="font-medium">Smartwatch Reviews</div>
+                                    </td>
+                                    <td>Brand Analysis</td>
+                                    <td><span class="status-badge status-active">Completed</span></td>
+                                    <td>Apr 3, 2025</td>
+                                    <td>Apr 5, 2025</td>
+                                    <td>350</td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>
+                                        <div class="font-medium">Coffee Brand</div>
+                                    </td>
+                                    <td>Brand Analysis</td>
+                                    <td><span class="status-badge status-trial">In Progress</span></td>
+                                    <td>Apr 4, 2025</td>
+                                    <td>Apr 4, 2025</td>
+                                    <td>120</td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>
+                                        <div class="font-medium">Summer Collection</div>
+                                    </td>
+                                    <td>Product Launch</td>
+                                    <td><span class="status-badge status-trial">New</span></td>
+                                    <td>Apr 3, 2025</td>
+                                    <td>Apr 3, 2025</td>
+                                    <td>0</td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>
+                                        <div class="font-medium">Sports App</div>
+                                    </td>
+                                    <td>Product Analysis</td>
+                                    <td><span class="status-badge status-active">Completed</span></td>
+                                    <td>Mar 24, 2025</td>
+                                    <td>Mar 25, 2025</td>
+                                    <td>280</td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>
+                                        <div class="font-medium">Food Delivery</div>
+                                    </td>
+                                    <td>Service Analysis</td>
+                                    <td><span class="status-badge status-trial">In Progress</span></td>
+                                    <td>Mar 18, 2025</td>
+                                    <td>Mar 18, 2025</td>
+                                    <td>150</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <!-- Pagination -->
+                        <div class="pagination">
+                            <div class="pagination-info">
+                                Showing 1-5 of 12 projects
+                            </div>
+                            <div class="pagination-actions">
+                                <button class="btn-icon text-gray-400">
+                                    <i class="fas fa-chevron-left"></i>
+                                </button>
+                                <button class="page-number active">1</button>
+                                <button class="page-number">2</button>
+                                <button class="page-number">3</button>
+                                <button class="btn-icon text-gray-600">
+                                    <i class="fas fa-chevron-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Activity Log Tab Content -->
+                <div id="activity" class="tab-content">
+                    <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
+                        <h3 class="text-lg font-bold mb-4">Activity Timeline</h3>
+                        
+                        <div class="activity-timeline">
+                            <div class="activity-item">
+                                <div class="activity-dot"></div>
+                                <div class="activity-time">Today at 10:32 AM</div>
+                                <div class="activity-content">Completed analysis for <strong>Smartwatch Reviews</strong> project, using 350 credits.</div>
+                            </div>
+                            
+                            <div class="activity-item">
+                                <div class="activity-dot"></div>
+                                <div class="activity-time">Today at 10:15 AM</div>
+                                <div class="activity-content">Logged in to account.</div>
+                            </div>
+                            
+                            <div class="activity-item">
+                                <div class="activity-dot yellow"></div>
+                                <div class="activity-time">Apr 4, 2025 at 2:15 PM</div>
+                                <div class="activity-content">Started analysis for <strong>Coffee Brand</strong> project, using 120 credits.</div>
+                            </div>
+                            
+                            <div class="activity-item">
+                                <div class="activity-dot"></div>
+                                <div class="activity-time">Apr 4, 2025 at 1:30 PM</div>
+                                <div class="activity-content">Created new project: <strong>Coffee Brand</strong>.</div>
+                            </div>
+                            
+                            <div class="activity-item">
+                                <div class="activity-dot"></div>
+                                <div class="activity-time">Apr 4, 2025 at 11:45 AM</div>
+                                <div class="activity-content">Logged in to account.</div>
+                            </div>
+                            
+                            <div class="activity-item">
+                                <div class="activity-dot green"></div>
+                                <div class="activity-time">Apr 2, 2025 at 11:45 AM</div>
+                                <div class="activity-content">Received 500 credits from admin (Support compensation).</div>
+                            </div>
+                            
+                            <div class="activity-item">
+                                <div class="activity-dot green"></div>
+                                <div class="activity-time">Apr 1, 2025 at 9:30 AM</div>
+                                <div class="activity-content">Purchased Professional package (2,000 credits).</div>
+                            </div>
+                            
+                            <div class="activity-item">
+                                <div class="activity-dot"></div>
+                                <div class="activity-time">Apr 1, 2025 at 9:15 AM</div>
+                                <div class="activity-content">Logged in to account.</div>
+                            </div>
+                            
+                            <div class="activity-item">
+                                <div class="activity-dot red"></div>
+                                <div class="activity-time">Mar 25, 2025 at 3:20 PM</div>
+                                <div class="activity-content">Completed analysis for <strong>Sports App</strong> project, using 280 credits.</div>
+                            </div>
+                            
+                            <div class="activity-item">
+                                <div class="activity-dot"></div>
+                                <div class="activity-time">Mar 25, 2025 at 3:00 PM</div>
+                                <div class="activity-content">Logged in to account.</div>
+                            </div>
+                        </div>
+                        
+                        <div class="text-center mt-6">
+                            <button class="btn-outline">
+                                <i class="fas fa-history mr-2"></i>
+                                Load More Activity
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Credit Adjustment Modal -->
+    <div class="modal-backdrop" id="credit-adjustment-modal">
+        <div class="modal-content">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-xl font-bold">Adjust User Credits</h2>
+                <button class="btn-icon text-gray-400" id="close-credit-modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="mb-4">
+                <div class="flex items-center mb-2">
+                    <img src="/api/placeholder/40/40" class="w-10 h-10 rounded-full mr-3" alt="User avatar">
+                    <div>
+                        <div class="font-medium">John Smith</div>
+                        <div class="text-sm text-gray-500">john.smith@example.com</div>
+                    </div>
+                </div>
+                
+                <div class="mt-2 p-3 bg-gray-50 rounded-lg">
+                    <div class="flex justify-between items-center mb-1">
+                        <span class="text-sm text-gray-500">Current Balance:</span>
+                        <span class="font-bold">2,450 credits</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm text-gray-500">Plan Allocation:</span>
+                        <span>3,750 credits</span>
+                    </div>
+                </div>
+            </div>
+            
+            <form>
+                <!-- Adjustment Type -->
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Adjustment Type</label>
+                    
+                    <div class="space-y-3">
+                        <label class="credit-adjustment-option flex items-center selected">
+                            <input type="radio" name="adjustment-type" value="add" checked class="mr-3">
+                            <div>
+                                <div class="font-medium">Add Credits</div>
+                                <div class="text-sm text-gray-500">Increase user's credit balance</div>
+                            </div>
+                        </label>
+                        
+                        <label class="credit-adjustment-option flex items-center">
+                            <input type="radio" name="adjustment-type" value="subtract" class="mr-3">
+                            <div>
+                                <div class="font-medium">Subtract Credits</div>
+                                <div class="text-sm text-gray-500">Decrease user's credit balance</div>
+                            </div>
+                        </label>
+                        
+                        <label class="credit-adjustment-option flex items-center">
+                            <input type="radio" name="adjustment-type" value="set" class="mr-3">
+                            <div>
+                                <div class="font-medium">Set Exact Credits</div>
+                                <div class="text-sm text-gray-500">Override current balance with specific value</div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+                
+                <!-- Credit Amount -->
+                <div class="mb-4">
+                    <label for="credit-amount" class="block text-sm font-medium text-gray-700 mb-2">Credit Amount</label>
+                    <input 
+                        type="number" 
+                        id="credit-amount" 
+                        class="credit-input" 
+                        placeholder="Enter number of credits"
+                        min="1"
+                        required
+                    >
+                </div>
+                
+                <!-- Reason -->
+                <div class="mb-6">
+                    <label for="adjustment-reason" class="block text-sm font-medium text-gray-700 mb-2">Reason for Adjustment</label>
+                    <select id="adjustment-reason" class="filter-select w-full">
+                        <option value="">Select reason...</option>
+                        <option value="compensation">Customer Support Compensation</option>
+                        <option value="goodwill">Goodwill Credit</option>
+                        <option value="promotion">Promotional Credit</option>
+                        <option value="correction">Billing Correction</option>
+                        <option value="refund">Refund</option>
+                        <option value="other">Other (specify in notes)</option>
+                    </select>
+                </div>
+                
+                <!-- Notes -->
+                <div class="mb-6">
+                    <label for="adjustment-notes" class="block text-sm font-medium text-gray-700 mb-2">Notes (Optional)</label>
+                    <textarea 
+                        id="adjustment-notes" 
+                        class="credit-input" 
+                        placeholder="Add additional details about this adjustment"
+                        rows="3"
+                    ></textarea>
+                </div>
+                
+                <div class="flex justify-end space-x-3">
+                    <button type="button" class="btn-outline" id="cancel-credit-adjustment">Cancel</button>
+                    <button type="submit" class="btn-primary">Submit Adjustment</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Tab switching
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Remove active class from all buttons and contents
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    tabContents.forEach(content => content.classList.remove('active'));
+                    
+                    // Add active class to clicked button and corresponding content
+                    button.classList.add('active');
+                    const tabId = button.getAttribute('data-tab');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+            
+            // View user details
+            window.viewUserDetails = function(userId) {
+                document.getElementById('user-list-content').classList.add('hidden');
+                document.getElementById('user-details-content').classList.remove('hidden');
+            };
+            
+            // Back to user list
+            document.getElementById('back-to-user-list').addEventListener('click', function() {
+                document.getElementById('user-details-content').classList.add('hidden');
+                document.getElementById('user-list-content').classList.remove('hidden');
+            });
+            
+            // Credit adjustment modal
+            window.openCreditAdjustmentModal = function(userId) {
+                document.getElementById('credit-adjustment-modal').classList.add('show');
+            };
+            
+            // Close credit adjustment modal
+            document.getElementById('close-credit-modal').addEventListener('click', function() {
+                document.getElementById('credit-adjustment-modal').classList.remove('show');
+            });
+            
+            document.getElementById('cancel-credit-adjustment').addEventListener('click', function() {
+                document.getElementById('credit-adjustment-modal').classList.remove('show');
+            });
+            
+            // Credit adjustment options
+            const adjustmentOptions = document.querySelectorAll('.credit-adjustment-option');
+            adjustmentOptions.forEach(option => {
+                option.addEventListener('click', () => {
+                    adjustmentOptions.forEach(opt => opt.classList.remove('selected'));
+                    option.classList.add('selected');
+                    
+                    // Update radio button state
+                    const radioBtn = option.querySelector('input[type="radio"]');
+                    if (radioBtn) {
+                        radioBtn.checked = true;
+                    }
+                });
+            });
+            
+            // Close modals when clicking outside
+            window.addEventListener('click', function(event) {
+                const creditModal = document.getElementById('credit-adjustment-modal');
+                if (event.target === creditModal) {
+                    creditModal.classList.remove('show');
+                }
+            });
+        });
+    </script>
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intrix Admin - User Management</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2563EB;
+            --primary-dark: #1E40AF;
+            --primary-light: #DBEAFE;
+            --secondary: #10B981;
+            --accent: #F59E0B;
+            --dark: #111827;
+            --light: #F9FAFB;
+            --gray: #9CA3AF;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            color: var(--dark);
+            background-color: #F3F4F6;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #2563EB, #1E3A8A);
+        }
+        
+        .card {
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: all 0.2s ease;
+        }
+        
+        .card:hover {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .btn-outline {
+            background-color: white;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+            padding: 0.5rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary-light);
+        }
+        
+        .btn-danger {
+            background-color: #EF4444;
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+        
+        .btn-danger:hover {
+            background-color: #DC2626;
+        }
+        
+        .btn-green {
+            background-color: #10B981;
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+        
+        .btn-green:hover {
+            background-color: #059669;
+        }
+        
+        .btn-sm {
+            padding: 0.25rem 0.75rem;
+            font-size: 0.875rem;
+        }
+        
+        .btn-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+        
+        .btn-icon:hover {
+            background-color: #F3F4F6;
+        }
+        
+        .admin-sidebar {
+            width: 280px;
+            background-color: #1A202C;
+            color: white;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            overflow-y: auto;
+        }
+        
+        .admin-content {
+            margin-left: 280px;
+        }
+        
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            color: #D1D5DB;
+            transition: all 0.2s ease;
+        }
+        
+        .sidebar-link:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+        
+        .sidebar-link.active {
+            background-color: #2563EB;
+            color: white;
+        }
+        
+        .sidebar-link i {
+            width: 20px;
+            text-align: center;
+            margin-right: 12px;
+        }
+        
+        .sidebar-divider {
+            height: 1px;
+            background-color: rgba(255, 255, 255, 0.1);
+            margin: 1rem 0;
+        }
+        
+        .sidebar-heading {
+            padding: 0.75rem 1.5rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: #6B7280;
+            letter-spacing: 0.05em;
+        }
+        
+        .status-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        
+        .status-active {
+            background-color: rgba(16, 185, 129, 0.1);
+            color: #065F46;
+        }
+        
+        .status-inactive {
+            background-color: rgba(156, 163, 175, 0.1);
+            color: #374151;
+        }
+        
+        .status-trial {
+            background-color: rgba(245, 158, 11, 0.1);
+            color: #92400E;
+        }
+        
+        .status-suspended {
+            background-color: rgba(239, 68, 68, 0.1);
+            color: #B91C1C;
+        }
+        
+        .tab-button {
+            padding: 0.75rem 1rem;
+            font-weight: 500;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s ease;
+        }
+        
+        .tab-button:hover {
+            color: #2563EB;
+        }
+        
+        .tab-button.active {
+            color: #2563EB;
+            border-bottom-color: #2563EB;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .modal-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 50;
+        }
+        
+        .modal-backdrop.show {
+            display: flex;
+        }
+        
+        .modal-content {
+            background-color: white;
+            border-radius: 8px;
+            max-width: 500px;
+            width: 100%;
+            padding: 1.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Data table styles */
+        .data-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+        
+        .data-table th {
+            text-align: left;
+            padding: 0.75rem 1rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: #6B7280;
+            border-bottom: 1px solid #E5E7EB;
+        }
+        
+        .data-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #E5E7EB;
+            vertical-align: top;
+        }
+        
+        .data-table tr:hover {
+            background-color: #F9FAFB;
+        }
+        
+        .pagination {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem;
+        }
+        
+        .pagination-info {
+            font-size: 0.875rem;
+            color: #6B7280;
+        }
+        
+        .pagination-actions {
+            display: flex;
+            align-items: center;
+        }
+        
+        .page-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 2rem;
+            height: 2rem;
+            margin: 0 0.25rem;
+            border-radius: 0.375rem;
+            transition: all 0.2s ease;
+        }
+        
+        .page-number.active {
+            background-color: #2563EB;
+            color: white;
+        }
+        
+        .page-number:hover:not(.active) {
+            background-color: #F3F4F6;
+        }
+        
+        /* Search and filter styles */
+        .search-input {
+            padding: 0.5rem 1rem 0.5rem 2.5rem;
+            border: 1px solid #D1D5DB;
+            border-radius: 0.375rem;
+            font-size: 0.875rem;
+            width: 100%;
+            transition: all 0.2s ease;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: #2563EB;
+            box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+        }
+        
+        .search-icon {
+            position: absolute;
+            left: 0.75rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #9CA3AF;
+        }
+        
+        .filter-select {
+            padding: 0.5rem 2rem 0.5rem 1rem;
+            border: 1px solid #D1D5DB;
+            border-radius: 0.375rem;
+            font-size: 0.875rem;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%239CA3AF'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 0.5rem center;
+            background-size: 1.5em 1.5em;
+            appearance: none;
+        }
+        
+        .filter-select:focus {
+            outline: none;
+            border-color: #2563EB;
+            box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+        }
+        
+        /* User detail styles */
+        .user-avatar {
+            width: 4rem;
+            height: 4rem;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        
+        .activity-timeline {
+            position: relative;
+            padding-left: 1.5rem;
+        }
+        
+        .activity-timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0.5rem;
+            width: 2px;
+            background-color: #E5E7EB;
+        }
+        
+        .activity-item {
+            position: relative;
+            padding-bottom: 1.5rem;
+        }
+        
+        .activity-dot {
+            position: absolute;
+            top: 0.25rem;
+            left: -1.5rem;
+            width: 1rem;
+            height: 1rem;
+            border-radius: 50%;
+            background-color: #2563EB;
+            border: 2px solid white;
+        }
+        
+        .activity-dot.green {
+            background-color: #10B981;
+        }
+        
+        .activity-dot.red {
+            background-color: #EF4444;
+        }
+        
+        .activity-dot.yellow {
+            background-color: #F59E0B;
+        }
+        
+        .activity-time {
+            font-size: 0.75rem;
+            color: #6B7280;
+            margin-bottom: 0.25rem;
+        }
+        
+        .activity-content {
+            font-size: 0.875rem;
+            color: #1F2937;
+        }
+        
+        .stat-card {
+            padding: 1rem;
+            background-color: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: all 0.2s ease;
+        }
+        
+        .stat-card:hover {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .stat-label {
+            font-size: 0.875rem;
+            color: #6B7280;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1F2937;
+        }
+        
+        /* Credit adjustment modal styles */
+        .credit-adjustment-option {
+            padding: 1rem;
+            border: 1px solid #E5E7EB;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .credit-adjustment-option:hover {
+            border-color: #2563EB;
+            background-color: #F9FAFB;
+        }
+        
+        .credit-adjustment-option.selected {
+            border-color: #2563EB;
+            background-color: #EFF6FF;
+        }
+        
+        .credit-input {
+            padding: 0.5rem 1rem;
+            border: 1px solid #D1D5DB;
+            border-radius: 0.375rem;
+            font-size: 0.875rem;
+            width: 100%;
+            transition: all 0.2s ease;
+        }
+        
+        .credit-input:focus {
+            outline: none;
+            border-color: #2563EB;
+            box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <!-- Admin Layout -->
+    <div class="flex">
+        <!-- Sidebar -->
+        <aside class="admin-sidebar">
+            <!-- Logo -->
+            <div class="py-6 px-6 flex items-center">
+                <div class="text-2xl font-bold text-white tracking-tight">intrix</div>
+                <div class="ml-2 bg-blue-700 text-white text-xs px-1.5 py-0.5 rounded-full font-medium">ADMIN</div>
+            </div>
+            
+            <!-- Navigation -->
+            <nav class="mt-4">
+                <a href="#" class="sidebar-link">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </a>
+                
+                <div class="sidebar-divider"></div>
+                <div class="sidebar-heading">User Management</div>
+                
+                <a href="#" class="sidebar-link active">
+                    <i class="fas fa-users"></i>
+                    <span>Users</span>
+                </a>
+                <a href="#" class="sidebar-link">
+                    <i class="fas fa-user-shield"></i>
+                    <span>Roles & Permissions</span>
+                </a>
+                <a href="#" class="sidebar-link">
+                    <i class="fas fa-lock"></i>
+                    <span>Authentication</span>
+                </a>
+                
+                <div class="sidebar-divider"></div>
+                <div class="sidebar-heading">Content</div>
+                
+                <a href="#" class="sidebar-link">
+                    <i class="fas fa-project-diagram"></i>
+                    <span>Projects</span>
+                </a>
+                <a href="#" class="sidebar-link">
+                    <i class="fas fa-chart-bar"></i>
+                    <span>Analytics</span>
+                </a>
+                <a href="#" class="sidebar-link">
+                    <i class="fas fa-file-alt"></i>
+                    <span>Reports</span>
+                </a>
+                
+                <div class="sidebar-divider"></div>
+                <div class="sidebar-heading">Billing</div>
+                
+                <a href="#" class="sidebar-link">
+                    <i class="fas fa-coins"></i>
+                    <span>Credits & Plans</span>
+                </a>
+                <a href="#" class="sidebar-link">
+                    <i class="fas fa-credit-card"></i>
+                    <span>Transactions</span>
+                </a>
+                <a href="#" class="sidebar-link">
+                    <i class="fas fa-tags"></i>
+                    <span>Pricing</span>
+                </a>
+                
+                <div class="sidebar-divider"></div>
+                <div class="sidebar-heading">System</div>
+                
+                <a href="#" class="sidebar-link">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+                <a href="#" class="sidebar-link">
+                    <i class="fas fa-bell"></i>
+                    <span>Notifications</span>
+                </a>
+                <a href="#" class="sidebar-link">
+                    <i class="fas fa-history"></i>
+                    <span>System Logs</span>
+                </a>
+            </nav>
+            
+            <!-- User Info -->
+            <div class="absolute bottom-0 left-0 right-0 px-6 py-4 bg-gray-900">
+                <div class="flex items-center">
+                    <img src="/api/placeholder/32/32" class="w-8 h-8 rounded-full mr-3" alt="Admin profile">
+                    <div>
+                        <div class="text-sm font-medium text-white">Admin User</div>
+                        <div class="text-xs text-gray-400">admin@intrix.com</div>
+                    </div>
+                    <button class="ml-auto text-gray-400 hover:text-white">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </button>
+                </div>
+            </div>
+        </aside>
+        
+        <!-- Main Content -->
+        <div class="admin-content flex-1">
+            <!-- Top Navbar -->
+            <header class="bg-white shadow-sm py-4 px-6 flex items-center justify-between">
+                <div>
+                    <h1 class="text-xl font-bold text-gray-900">User Management</h1>
+                    <p class="text-sm text-gray-500">Manage users, view activity, and adjust credits</p>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                    <button class="text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-bell text-xl"></i>
+                    </button>
+                    <button class="text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-cog text-xl"></i>
+                    </button>
+                    <button class="text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-question-circle text-xl"></i>
+                    </button>
+                </div>
+            </header>
+            
+            <!-- User List Content -->
+            <div id="user-list-content" class="p-6">
+                <!-- Search and Filters -->
+                <div class="bg-white rounded-lg shadow-sm p-4 mb-6">
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                        <!-- Search -->
+                        <div class="relative col-span-2">
+                            <i class="fas fa-search search-icon"></i>
+                            <input 
+                                type="text" 
+                                class="search-input" 
+                                placeholder="Search users by name, email, or ID"
+                            >
+                        </div>
+                        
+                        <!-- Status Filter -->
+                        <div>
+                            <select class="filter-select w-full">
+                                <option value="all">All Status</option>
+                                <option value="active">Active</option>
+                                <option value="inactive">Inactive</option>
+                                <option value="trial">Trial</option>
+                                <option value="suspended">Suspended</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Plan Filter -->
+                        <div>
+                            <select class="filter-select w-full">
+                                <option value="all">All Plans</option>
+                                <option value="starter">Starter</option>
+                                <option value="professional">Professional</option>
+                                <option value="business">Business</option>
+                                <option value="enterprise">Enterprise</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center justify-between mt-4">
+                        <div class="flex space-x-2">
+                            <button class="btn-outline btn-sm">
+                                <i class="fas fa-filter mr-1"></i>
+                                Advanced Filters
+                            </button>
+                            <button class="btn-outline btn-sm">
+                                <i class="fas fa-sync-alt mr-1"></i>
+                                Reset
+                            </button>
+                        </div>
+                        
+                        <div class="flex space-x-2">
+                            <button class="btn-outline btn-sm">
+                                <i class="fas fa-file-export mr-1"></i>
+                                Export
+                            </button>
+                            <button class="btn-primary btn-sm">
+                                <i class="fas fa-user-plus mr-1"></i>
+                                Add User
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Users Table -->
+                <div class="bg-white rounded-lg shadow-sm mb-6 overflow-hidden">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>User</th>
+                                <th>Status</th>
+                                <th>Plan</th>
+                                <th>Credits</th>
+                                <th>Projects</th>
+                                <th>Last Activity</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- User Row 1 -->
+                            <tr>
+                                <td>
+                                    <div class="flex items-center">
+                                        <img src="/api/placeholder/40/40" class="w-10 h-10 rounded-full mr-3" alt="User avatar">
+                                        <div>
+                                            <div class="font-medium">John Smith</div>
+                                            <div class="text-sm text-gray-500">john.smith@example.com</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="status-badge status-active">Active</span>
+                                </td>
+                                <td>
+                                    <div class="font-medium">Professional</div>
+                                    <div class="text-sm text-gray-500">Monthly</div>
+                                </td>
+                                <td>
+                                    <div class="font-medium">2,450</div>
+                                    <div class="text-sm text-gray-500">of 3,750</div>
+                                </td>
+                                <td>12</td>
+                                <td>
+                                    <div class="text-sm">Apr 5, 2025</div>
+                                    <div class="text-sm text-gray-500">10:32 AM</div>
+                                </td>
+                                <td>
+                                    <div class="flex space-x-2">
+                                        <button class="btn-icon text-gray-500 hover:text-blue-600" onclick="viewUserDetails('user1')">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button class="btn-icon text-gray-500 hover:text-green-600" onclick="openCreditAdjustmentModal('user1')">
+                                            <i class="fas fa-coins"></i>
+                                        </button>
+                                        <button class="btn-icon text-gray-500 hover:text-gray-700">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            
+                            <!-- User Row 2 -->
+                            <tr>
+                                <td>
+                                    <div class="flex items-center">
+                                        <img src="/api/placeholder/40/40" class="w-10 h-10 rounded-full mr-3" alt="User avatar">
+                                        <div>
+                                            <div class="font-medium">Emily Johnson</div>
+                                            <div class="text-sm text-gray-500">emily.j@example.com</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="status-badge status-trial">Trial</span>
+                                </td>
+                                <td>
+                                    <div class="font-medium">Starter</div>
+                                    <div class="text-sm text-gray-500">Trial (7 days left)</div>
+                                </td>
+                                <td>
+                                    <div class="font-medium">350</div>
+                                    <div class="text-sm text-gray-500">of 500</div>
+                                </td>
+                                <td>3</td>
+                                <td>
+                                    <div class="text-sm">Apr 4, 2025</div>
+                                    <div class="text-sm text-gray-500">2:15 PM</div>
+                                </td>
+                                <td>
+                                    <div class="flex space-x-2">
+                                        <button class="btn-icon text-gray-500 hover:text-blue-600" onclick="viewUserDetails('user2')">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button class="btn-icon text-gray-500 hover:text-green-600" onclick="openCreditAdjustmentModal('user2')">
+                                            <i class="fas fa-coins"></i>
+                                        </button>
+                                        <button class="btn-icon text-gray-500 hover:text-gray-700">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            
+                            <!-- User Row 3 -->
+                            <tr>
+                                <td>
+                                    <div class="flex items-center">
+                                        <img src="/api/placeholder/40/40" class="w-10 h-10 rounded-full mr-3" alt="User avatar">
+                                        <div>
+                                            <div class="font-medium">Michael Davis</div>
+                                            <div class="text-sm text-gray-500">michael.d@example.com</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="status-badge status-inactive">Inactive</span>
+                                </td>
+                                <td>
+                                    <div class="font-medium">Professional</div>
+                                    <div class="text-sm text-gray-500">Expired</div>
+                                </td>
+                                <td>
+                                    <div class="font-medium">0</div>
+                                    <div class="text-sm text-gray-500">of 0</div>
+                                </td>
+                                <td>8</td>
+                                <td>
+                                    <div class="text-sm">Mar 15, 2025</div>
+                                    <div class="text-sm text-gray-500">9:45 AM</div>
+                                </td>
+                                <td>
+                                    <div class="flex space-x-2">
+                                        <button class="btn-icon text-gray-500 hover:text-blue-600" onclick="viewUserDetails('user3')">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button class="btn-icon text-gray-500 hover:text-green-600" onclick="openCreditAdjustmentModal('user3')">
+                                            <i class="fas fa-coins"></i>
+                                        </button>
+                                        <button class="btn-icon text-gray-500 hover:text-gray-700">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            
+                            <!-- User Row 4 -->
+                            <tr>
+                                <td>
+                                    <div class="flex items-center">
+                                        <img src="/api/placeholder/40/40" class="w-10 h-10 rounded-full mr-3" alt="User avatar">
+                                        <div>
+                                            <div class="font-medium">Sarah Wilson</div>
+                                            <div class="text-sm text-gray-500">s.wilson@example.com</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="status-badge status-suspended">Suspended</span>
+                                </td>
+                                <td>
+                                    <div class="font-medium">Business</div>
+                                    <div class="text-sm text-gray-500">Yearly</div>
+                                </td>
+                                <td>
+                                    <div class

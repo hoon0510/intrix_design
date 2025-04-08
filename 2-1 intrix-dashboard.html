@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intrix - Dashboard</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2563EB;
+            --primary-dark: #1E40AF;
+            --primary-light: #DBEAFE;
+            --secondary: #10B981;
+            --accent: #F59E0B;
+            --dark: #111827;
+            --light: #F9FAFB;
+            --gray: #9CA3AF;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            color: var(--dark);
+            background-color: #F3F4F6;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #2563EB, #1E3A8A);
+        }
+        
+        .card {
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: all 0.2s ease;
+        }
+        
+        .card:hover {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .btn-outline {
+            background-color: white;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+            padding: 0.5rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary-light);
+        }
+        
+        .bottom-tab {
+            box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 5px;
+            transition: all 0.2s;
+        }
+        
+        .sidebar-link:hover {
+            background-color: #EFF6FF;
+        }
+        
+        .sidebar-link.active {
+            background-color: #DBEAFE;
+            color: #2563EB;
+            font-weight: 500;
+        }
+        
+        .sidebar-link i {
+            width: 20px;
+            text-align: center;
+            margin-right: 10px;
+        }
+        
+        .stat-card {
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: all 0.2s ease;
+        }
+        
+        .shortcut-card {
+            border-radius: 8px;
+            transition: all 0.2s ease;
+            border: 1px solid #E5E7EB;
+        }
+        
+        .shortcut-card:hover {
+            border-color: #2563EB;
+            background-color: #F9FAFB;
+        }
+        
+        .notification-item {
+            transition: all 0.2s ease;
+        }
+        
+        .notification-item:hover {
+            background-color: #F9FAFB;
+        }
+        
+        .notification-item.unread {
+            border-left: 3px solid #2563EB;
+        }
+        
+        .activity-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+        
+        .recent-dot-blue {
+            background-color: #2563EB;
+        }
+        
+        .recent-dot-green {
+            background-color: #10B981;
+        }
+        
+        .recent-dot-yellow {
+            background-color: #F59E0B;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            border-radius: 4px;
+            background-color: #E5E7EB;
+        }
+        
+        .progress-value {
+            height: 8px;
+            border-radius: 4px;
+            background-color: #2563EB;
+        }
+        
+        @media (max-width: 768px) {
+            .desktop-sidebar {
+                display: none;
+            }
+            
+            .mobile-nav {
+                display: flex;
+            }
+        }
+        
+        @media (min-width: 769px) {
+            .desktop-sidebar {
+                display: block;
+            }
+            
+            .mobile-nav {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Main Layout -->
+    <div class="flex flex-col min-h-screen">
+        <!-- Top Navigation Bar -->
+        <header class="bg-white shadow-sm sticky top-0 z-10">
+            <div class="container mx-auto px-4 py-3">
+                <div class="flex justify-between items-center">
+                    <!-- Logo -->
+                    <div class="flex items-center">
+                        <div class="text-2xl font-bold text-blue-600 tracking-tight">intrix</div>
+                        <div class="ml-1 md:ml-2 bg-blue-100 text-blue-800 text-xs px-1.5 py-0.5 rounded-full font-medium">BETA</div>
+                    </div>
+                    
+                    <!-- Search Bar - Only on desktop -->
+                    <div class="hidden md:flex items-center flex-1 max-w-md mx-4 md:mx-8">
+                        <div class="relative w-full">
+                            <input type="text" placeholder="Search projects or reports..." class="w-full bg-gray-100 rounded-lg py-2 px-4 pl-10 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white">
+                            <div class="absolute left-3 top-2.5 text-gray-400">
+                                <i class="fas fa-search"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Right Navigation Items -->
+                    <div class="flex items-center space-x-1 md:space-x-4">
+                        <div class="hidden md:block py-1 px-3 bg-gray-100 rounded-lg">
+                            <span class="text-sm text-gray-500">Credits:</span>
+                            <span class="text-sm font-medium">2,450</span>
+                        </div>
+                        <button class="p-2 text-gray-500 hover:text-gray-700 relative">
+                            <i class="far fa-bell"></i>
+                            <span class="absolute top-0 right-0 w-4 h-4 bg-red-500 text-white text-xs flex items-center justify-center rounded-full">3</span>
+                        </button>
+                        <button class="hidden md:block p-2 text-gray-500 hover:text-gray-700">
+                            <i class="far fa-question-circle"></i>
+                        </button>
+                        <div class="flex items-center">
+                            <img src="/api/placeholder/32/32" class="w-8 h-8 rounded-full" alt="User profile">
+                            <span class="hidden md:inline-block ml-2 text-sm font-medium">John Smith</span>
+                            <i class="hidden md:inline-block fas fa-chevron-down text-xs ml-2 text-gray-500"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content Area with Sidebar -->
+        <div class="flex flex-1 container mx-auto">
+            <!-- Desktop Sidebar -->
+            <aside class="desktop-sidebar w-56 pt-6 pr-4 pl-4 overflow-y-auto">
+                <div class="mb-6">
+                    <button class="btn-primary w-full flex items-center justify-center">
+                        <i class="fas fa-plus mr-2"></i>
+                        <span>New Analysis</span>
+                    </button>
+                </div>
+                
+                <div class="mb-4">
+                    <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 px-2">NAVIGATION</h3>
+                    <nav>
+                        <a href="#" class="sidebar-link active">
+                            <i class="fas fa-th-large"></i>
+                            <span>Dashboard</span>
+                        </a>
+                        <a href="#" class="sidebar-link">
+                            <i class="fas fa-project-diagram"></i>
+                            <span>Projects</span>
+                        </a>
+                        <a href="#" class="sidebar-link">
+                            <i class="fas fa-chart-bar"></i>
+                            <span>Analytics</span>
+                        </a>
+                        <a href="#" class="sidebar-link">
+                            <i class="fas fa-file-alt"></i>
+                            <span>Reports</span>
+                        </a>
+                        <a href="#" class="sidebar-link">
+                            <i class="fas fa-coins"></i>
+                            <span>Credits</span>
+                        </a>
+                    </nav>
+                </div>
+                
+                <div>
+                    <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 px-2">RECENT PROJECTS</h3>
+                    <nav>
+                        <a href="#" class="sidebar-link">
+                            <i class="fas fa-folder"></i>
+                            <span>Smartwatch Reviews</span>
+                        </a>
+                        <a href="#" class="sidebar-link">
+                            <i class="fas fa-folder"></i>
+                            <span>Coffee Brand</span>
+                        </a>
+                        <a href="#" class="sidebar-link">
+                            <i class="fas fa-folder"></i>
+                            <span>Summer Collection</span>
+                        </a>
+                    </nav>
+                </div>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="flex-1 p-4 pb-20 md:pb-8">
+                <!-- Mobile Search Bar -->
+                <div class="md:hidden mb-4 relative">
+                    <input type="text" placeholder="Search projects or reports..." class="w-full bg-gray-100 rounded-lg py-2 px-4 pl-10 text-sm">
+                    <div class="absolute left-3 top-2.5 text-gray-400">
+                        <i class="fas fa-search"></i>
+                    </div>
+                </div>
+                
+                <!-- Welcome Section -->
+                <div class="mb-6">
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+                        <div>
+                            <h1 class="text-xl md:text-2xl font-bold text-gray-900">Welcome back, John</h1>
+                            <p class="text-sm text-gray-500">Here's what's happening with your projects today.</p>
+                        </div>
+                        <div class="mt-4 md:mt-0">
+                            <button class="btn-primary">
+                                <i class="fas fa-plus mr-1"></i>
+                                New Analysis
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Summary Statistics -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                    <!-- Active Projects Card -->
+                    <div class="bg-white rounded-lg p-5 stat-card">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="text-sm font-semibold text-gray-500">Active Projects</h3>
+                            <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
+                                <i class="fas fa-folder text-blue-600"></i>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="text-3xl font-bold text-gray-900">12</div>
+                            <div class="ml-3 px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full flex items-center">
+                                <i class="fas fa-arrow-up mr-1"></i> 3
+                            </div>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-2">3 new projects in the last 30 days</p>
+                    </div>
+                    
+                    <!-- Available Credits Card -->
+                    <div class="bg-white rounded-lg p-5 stat-card">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="text-sm font-semibold text-gray-500">Available Credits</h3>
+                            <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
+                                <i class="fas fa-coins text-blue-600"></i>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="text-3xl font-bold text-gray-900">2,450</div>
+                            <a href="#" class="ml-3 text-xs text-blue-600 hover:underline">Buy more</a>
+                        </div>
+                        <div class="mt-2">
+                            <div class="progress-bar">
+                                <div class="progress-value" style="width: 65%"></div>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1">65% of your credits remaining</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Recent Analyses Card -->
+                    <div class="bg-white rounded-lg p-5 stat-card">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="text-sm font-semibold text-gray-500">Recent Analyses</h3>
+                            <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
+                                <i class="fas fa-chart-line text-blue-600"></i>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="text-3xl font-bold text-gray-900">18</div>
+                            <div class="ml-3 px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full flex items-center">
+                                <i class="fas fa-arrow-up mr-1"></i> 24%
+                            </div>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-2">24% increase in analysis activity</p>
+                    </div>
+                </div>
+                
+                <!-- Quick Actions & Notifications Section -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                    <!-- Quick Actions -->
+                    <div class="md:col-span-2 bg-white rounded-lg p-5 card">
+                        <h2 class="text-lg font-bold mb-4">Quick Actions</h2>
+                        <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+                            <!-- New Analysis Button -->
+                            <a href="#" class="shortcut-card p-4 flex flex-col items-center justify-center">
+                                <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center mb-2">
+                                    <i class="fas fa-plus text-blue-600"></i>
+                                </div>
+                                <span class="text-sm font-medium text-center">New Analysis</span>
+                            </a>
+                            
+                            <!-- Import Reviews Button -->
+                            <a href="#" class="shortcut-card p-4 flex flex-col items-center justify-center">
+                                <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center mb-2">
+                                    <i class="fas fa-file-import text-blue-600"></i>
+                                </div>
+                                <span class="text-sm font-medium text-center">Import Reviews</span>
+                            </a>
+                            
+                            <!-- Create Report Button -->
+                            <a href="#" class="shortcut-card p-4 flex flex-col items-center justify-center">
+                                <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center mb-2">
+                                    <i class="fas fa-file-alt text-blue-600"></i>
+                                </div>
+                                <span class="text-sm font-medium text-center">Create Report</span>
+                            </a>
+                            
+                            <!-- Export Data Button -->
+                            <a href="#" class="shortcut-card p-4 flex flex-col items-center justify-center">
+                                <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center mb-2">
+                                    <i class="fas fa-file-export text-blue-600"></i>
+                                </div>
+                                <span class="text-sm font-medium text-center">Export Data</span>
+                            </a>
+                            
+                            <!-- Analytics Button -->
+                            <a href="#" class="shortcut-card p-4 flex flex-col items-center justify-center">
+                                <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center mb-2">
+                                    <i class="fas fa-chart-bar text-blue-600"></i>
+                                </div>
+                                <span class="text-sm font-medium text-center">View Analytics</span>
+                            </a>
+                            
+                            <!-- Settings Button -->
+                            <a href="#" class="shortcut-card p-4 flex flex-col items-center justify-center">
+                                <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center mb-2">
+                                    <i class="fas fa-cog text-blue-600"></i>
+                                </div>
+                                <span class="text-sm font-medium text-center">Settings</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Notifications -->
+                    <div class="bg-white rounded-lg p-5 card">
+                        <div class="flex items-center justify-between mb-4">
+                            <h2 class="text-lg font-bold">Notifications</h2>
+                            <a href="#" class="text-sm text-blue-600 hover:underline">View all</a>
+                        </div>
+                        
+                        <div class="space-y-4">
+                            <!-- Unread Notification -->
+                            <div class="notification-item unread p-3 rounded-lg">
+                                <div class="flex">
+                                    <div class="w-9 h-9 rounded-full bg-blue-100 flex items-center justify-center mr-3 flex-shrink-0">
+                                        <i class="fas fa-bell text-blue-600 text-sm"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-medium">New feature available</p>
+                                        <p class="text-xs text-gray-500">Try our new branding strategy generator.</p>
+                                        <p class="text-xs text-gray-400 mt-1">Just now</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Unread Notification -->
+                            <div class="notification-item unread p-3 rounded-lg">
+                                <div class="flex">
+                                    <div class="w-9 h-9 rounded-full bg-green-100 flex items-center justify-center mr-3 flex-shrink-0">
+                                        <i class="fas fa-check text-green-600 text-sm"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-medium">Analysis completed</p>
+                                        <p class="text-xs text-gray-500">Smartwatch Reviews analysis is ready.</p>
+                                        <p class="text-xs text-gray-400 mt-1">2 hours ago</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Read Notification -->
+                            <div class="notification-item p-3 rounded-lg">
+                                <div class="flex">
+                                    <div class="w-9 h-9 rounded-full bg-yellow-100 flex items-center justify-center mr-3 flex-shrink-0">
+                                        <i class="fas fa-coins text-yellow-600 text-sm"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-medium">Credits low</p>
+                                        <p class="text-xs text-gray-500">Your credit balance is below 30%.</p>
+                                        <p class="text-xs text-gray-400 mt-1">Yesterday</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Recent Activity -->
+                <div class="bg-white rounded-lg p-5 card mb-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-lg font-bold">Recent Activity</h2>
+                        <a href="#" class="text-sm text-blue-600 hover:underline">View all</a>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <!-- Activity Item -->
+                        <div class="flex">
+                            <div class="flex flex-col items-center mr-4">
+                                <div class="activity-dot recent-dot-blue"></div>
+                                <div class="flex-grow border-l border-gray-200 ml-1 my-1"></div>
+                            </div>
+                            <div>
+                                <p class="text-sm font-medium">New analysis started</p>
+                                <p class="text-xs text-gray-500">You started a new analysis for Summer Collection.</p>
+                                <p class="text-xs text-gray-400 mt-1">Today, 10:30 AM</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Activity Item -->
+                        <div class="flex">
+                            <div class="flex flex-col items-center mr-4">
+                                <div class="activity-dot recent-dot-green"></div>
+                                <div class="flex-grow border-l border-gray-200 ml-1 my-1"></div>
+                            </div>
+                            <div>
+                                <p class="text-sm font-medium">Analysis completed</p>
+                                <p class="text-xs text-gray-500">Smartwatch Reviews analysis has been completed.</p>
+                                <p class="text-xs text-gray-400 mt-1">Yesterday, 3:45 PM</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Activity Item -->
+                        <div class="flex">
+                            <div class="flex flex-col items-center mr-4">
+                                <div class="activity-dot recent-dot-yellow"></div>
+                                <div class="flex-grow border-l border-gray-200 ml-1 my-1"></div>
+                            </div>
+                            <div>
+                                <p class="text-sm font-medium">Credits purchased</p>
+                                <p class="text-xs text-gray-500">You purchased 2,000 additional credits.</p>
+                                <p class="text-xs text-gray-400 mt-1">April 4, 2025, 11:22 AM</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Activity Item -->
+                        <div class="flex">
+                            <div class="flex flex-col items-center mr-4">
+                                <div class="activity-dot bg-gray-300"></div>
+                            </div>
+                            <div>
+                                <p class="text-sm font-medium">New project created</p>
+                                <p class="text-xs text-gray-500">You created a new project: Coffee Brand.</p>
+                                <p class="text-xs text-gray-400 mt-1">April 3, 2025, 9:15 AM</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Your Projects -->
+                <div class="bg-white rounded-lg p-5 card">
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-lg font-bold">Your Projects</h2>
+                        <a href="#" class="text-sm text-blue-600 hover:underline">View all</a>
+                    </div>
+                    
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full">
+                            <thead>
+                                <tr class="border-b border-gray-200">
+                                    <th class="py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Project Name</th>
+                                    <th class="py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                    <th class="py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Last Updated</th>
+                                    <th class="py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Credits Used</th>
+                                    <th class="py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-right">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200">
+                                <tr>
+                                    <td class="py-3 text-sm font-medium">Smartwatch Reviews</td>
+                                    <td class="py-3">
+                                        <span class="px-2 py-1 text-xs font-medium bg-green-100 text-green-800 rounded-full">Completed</span>
+                                    </td>
+                                    <td class="py-3 text-sm text-gray-500">April 5, 2025</td>
+                                    <td class="py-3 text-sm text-gray-500">350</td>
+                                    <td class="py-3 text-right">
+                                        <button class="text-gray-400 hover:text-gray-500">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 text-sm font-medium">Coffee Brand</td>
+                                    <td class="py-3">
+                                        <span class="px-2 py-1 text-xs font-medium bg-yellow-100 text-yellow-800 rounded-full">In Progress</span>
+                                    </td>
+                                    <td class="py-3 text-sm text-gray-500">April 4, 2025</td>
+                                    <td class="py-3 text-sm text-gray-500">120</td>
+                                    <td class="py-3 text-right">
+                                        <button class="text-gray-400 hover:text-gray-500">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 text-sm font-medium">Summer Collection</td>
+                                    <td class="py-3">
+                                        <span class="px-2 py-1 text-xs font-medium bg-blue-100 text-blue-800 rounded-full">New</span>
+                                    </td>
+                                    <td class="py-3 text-sm text-gray-500">April 3, 2025</td>
+                                    <td class="py-3 text-sm text-gray-500">0</td>
+                                    <td class="py-3 text-right">
+                                        <button class="text-gray-400 hover:text-gray-500">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 text-sm font-medium">Laptop Launch</td>
+                                    <td class="py-3">
+                                        <span class="px-2 py-1 text-xs font-medium bg-gray-100 text-gray-800 rounded-full">Draft</span>
+                                    </td>
+                                    <td class="py-3 text-sm text-gray-500">April 1, 2025</td>
+                                    <td class="py-3 text-sm text-gray-500">0</td>
+                                    <td class="py-3 text-right">
+                                        <button class="text-gray-400 hover:text-gray-500">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <!-- Mobile Bottom Navigation -->
+        <nav class="mobile-nav bg-white bottom-tab fixed bottom-0 left-0 right-0 h-16 px-4 z-10">
+            <div class="flex justify-around items-center h-full max-w-md mx-auto">
+                <button class="flex flex-col items-center justify-center text-blue-600">
+                    <i class="fas fa-th-large text-lg"></i>
+                    <span class="text-xs mt-1">Dashboard</span>
+                </button>
+                <button class="flex flex-col items-center justify-center text-gray-400">
+                    <i class="fas fa-folder text-lg"></i>
+                    <span class="text-xs mt-1">Projects</span>
+                </button>
+                <button class="flex flex-col items-center justify-center -mt-6">
+                    <div class="bg-blue-600 w-12 h-12 rounded-full flex items-center justify-center text-white shadow-lg">
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <span class="text-xs mt-1">New</span>
+                </button>
+                <button class="flex flex-col items-center justify-center text-gray-400">
+                    <i class="fas fa-chart-bar text-lg"></i>
+                    <span class="text-xs mt-1">Analytics</span>
+                </button>
+                <button class="flex flex-col items-center justify-center text-gray-400">
+                    <i class="fas fa-user text-lg"></i>
+                    <span class="text-xs mt-1">Account</span>
+                </button>
+            </div>
+        </nav>
+    </div>
+</body>
+</html>

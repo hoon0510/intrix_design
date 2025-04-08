@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intrix - API 키 설정 관리</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2563EB;
+            --primary-dark: #1E40AF;
+            --primary-light: #DBEAFE;
+            --secondary: #10B981;
+            --accent: #F59E0B;
+            --dark: #111827;
+            --light: #F9FAFB;
+            --gray: #9CA3AF;
+            --danger: #EF4444;
+        }
+        
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Malgun Gothic', '맑은 고딕', sans-serif;
+            color: var(--dark);
+            background-color: #F3F4F6;
+        }
+        
+        .card {
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: all 0.2s ease;
+        }
+        
+        .card:hover {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .btn-outline {
+            background-color: white;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+            padding: 0.5rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary-light);
+        }
+        
+        .status-tag {
+            font-size: 0.75rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 999px;
+            font-weight: 500;
+        }
+        
+        .status-enabled {
+            background-color: rgba(16, 185, 129, 0.1);
+            color: #065F46;
+        }
+        
+        .status-disabled {
+            background-color: rgba(239, 68, 68, 0.1);
+            color: #B91C1C;
+        }
+        
+        .toggle {
+            position: relative;
+            display: inline-block;
+            width: 44px;
+            height: 24px;
+        }
+        
+        .toggle input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 24px;
+        }
+        
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .toggle-slider {
+            background-color: var(--primary);
+        }
+        
+        input:checked + .toggle-slider:before {
+            transform: translateX(20px);
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div class="max-w-6xl mx-auto p-4">
+        <!-- API 키 설정 관리 섹션 -->
+        <div class="bg-white rounded-lg shadow-sm p-5 card mb-6">
+            <h3 class="font-semibold text-gray-700 mb-6">API 키 생성 및 관리</h3>
+            
+            <!-- API 키 관리 -->
+            <div class="border border-gray-200 rounded-lg p-5 mb-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h4 class="text-sm font-medium text-gray-700">API 키 관리</h4>
+                    <button class="btn-primary text-sm">
+                        <i class="fas fa-plus mr-1"></i>
+                        새 API 키 생성
+                    </button>
+                </div>
+                
+                <div class="overflow-x-auto rounded-lg border border-gray-200 mb-4">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    키 이름
+                                </th>
+                                <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    API 키
+                                </th>
+                                <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    생성일
+                                </th>
+                                <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    상태
+                                </th>
+                                <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    작업
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            <tr class="hover:bg-gray-50">
+                                <td class="px-4 py-3 whitespace-nowrap">
+                                    <div class="text-sm font-medium text-gray-900">메인 서비스</div>
+                                </td>
+                                <td class="px-4 py-3 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <span class="text-sm text-gray-500">sk_intrix_5f8a7d3e9b...</span>
+                                        <button class="ml-2 text-gray-400 hover:text-gray-600">
+                                            <i class="far fa-copy"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                                <td class="px-4 py-3 whitespace-nowrap">
+                                    <div class="text-sm text-gray-500">2025-03-15</div>
+                                </td>
+                                <td class="px-4 py-3 whitespace-nowrap">
+                                    <span class="status-tag status-enabled">활성화</span>
+                                </td>
+                                <td class="px-4 py-3 whitespace-nowrap">
+                                    <div class="flex space-x-2">
+                                        <button class="text-blue-600 hover:text-blue-800 text-sm">재발급</button>
+                                        <button class="text-red-600 hover:text-red-800 text-sm">폐기</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="px-4 py-3 whitespace-nowrap">
+                                    <div class="text-sm font-medium text-gray-900">개발 환경</div>
+                                </td>
+                                <td class="px-4 py-3 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <span class="text-sm text-gray-500">sk_intrix_dev_2c4f8e7a...</span>
+                                        <button class="ml-2 text-gray-400 hover:text-gray-600">
+                                            <i class="far fa-copy"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                                <td class="px-4 py-3 whitespace-nowrap">
+                                    <div class="text-sm text-gray-500">2025-04-01</div>
+                                </td>
+                                <td class="px-4 py-3 whitespace-nowrap">
+                                    <span class="status-tag status-enabled">활성화</span>
+                                </td>
+                                <td class="px-4 py-3 whitespace-nowrap">
+                                    <div class="flex space-x-2">
+                                        <button class="text-blue-600 hover:text-blue-800 text-sm">재발급</button>
+                                        <button class="text-red-600 hover:text-red-800 text-sm">폐기</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="px-4 py-3 whitespace-nowrap">
+                                    <div class="text-sm font-medium text-gray-900">테스트 서버</div>
+                                </td>
+                                <td class="px-4 py-3 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <span class="text-sm text-gray-500">sk_intrix_test_9d2e1f5b...</span>
+                                        <button class="ml-2 text-gray-400 hover:text-gray-600">
+                                            <i class="far fa-copy"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                                <td class="px-4 py-3 whitespace-nowrap">
+                                    <div class="text-sm text-gray-500">2025-04-05</div>
+                                </td>
+                                <td class="px-4 py-3 whitespace-nowrap">
+                                    <span class="status-tag status-disabled">비활성화</span>
+                                </td>
+                                <td class="px-4 py-3 whitespace-nowrap">
+                                    <div class="flex space-x-2">
+                                        <button class="text-blue-600 hover:text-blue-800 text-sm">활성화</button>
+                                        <button class="text-red-600 hover:text-red-800 text-sm">폐기</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="text-xs text-gray-500">
+                    <i class="fas fa-info-circle mr-1"></i>
+                    API 키는 한 번만 표시됩니다. 안전한 곳에 보관하세요. 키를 잊어버렸다면 새로운 키를 발급받아야 합니다.
+                </div>
+            </div>
+            
+            <!-- 외부 API 통합 -->
+            <div class="border border-gray-200 rounded-lg p-5 mb-6">
+                <h4 class="text-sm font-medium text-gray-700 mb-4">외부 API 통합</h4>
+                
+                <div class="space-y-4">
+                    <div class="flex justify-between items-start py-2 border-b border-gray-100">
+                        <div>
+                            <div class="flex items-center">
+                                <img src="/api/placeholder/24/24" class="w-6 h-6 mr-2 rounded" alt="Claude API">
+                                <h5 class="text-sm font-medium text-gray-800">Claude API</h5>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1">감정 분석 및 전략 생성 기능에 사용됩니다.</p>
+                        </div>
+                        <div class="w-64">
+                            <div class="flex flex-col space-y-2">
+                                <input type="password" class="w-full border border-gray-300 rounded px-3 py-2 text-sm" value="••••••••••••••••••••••••••••••">
+                                <div class="flex justify-between">
+                                    <span class="text-xs text-green-600">연결됨</span>
+                                    <button class="text-blue-600 text-xs">연결 테스트</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-between items-start py-2 border-b border-gray-100">
+                        <div>
+                            <div class="flex items-center">
+                                <img src="/api/placeholder/24/24" class="w-6 h-6 mr-2 rounded" alt="GPT API">
+                                <h5 class="text-sm font-medium text-gray-800">GPT API</h5>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1">전략 분석 및 브랜딩 생성 기능에 사용됩니다.</p>
+                        </div>
+                        <div class="w-64">
+                            <div class="flex flex-col space-y-2">
+                                <input type="password" class="w-full border border-gray-300 rounded px-3 py-2 text-sm" value="••••••••••••••••••••••••••••••">
+                                <div class="flex justify-between">
+                                    <span class="text-xs text-green-600">연결됨</span>
+                                    <button class="text-blue-600 text-xs">연결 테스트</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 데이터 암호화 설정 -->
+            <div class="border border-gray-200 rounded-lg p-5 mb-6">
+                <h4 class="text-sm font-medium text-gray-700 mb-4">데이터 암호화 설정</h4>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="flex items-center space-x-3">
+                        <label class="toggle">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                        <div>
+                            <h5 class="text-sm font-medium text-gray-800">데이터 암호화 활성화</h5>
+                            <p class="text-xs text-gray-500">저장된 데이터를 암호화합니다.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center space-x-3">
+                        <label class="toggle">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                        <div>
+                            <h5 class="text-sm font-medium text-gray-800">SSL/TLS 적용</h5>
+                            <p class="text-xs text-gray-500">모든 통신에 SSL/TLS를 적용합니다.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center space-x-3">
+                        <label class="toggle">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                        <div>
+                            <h5 class="text-sm font-medium text-gray-800">HTTP 보안 헤더 적용</h5>
+                            <p class="text-xs text-gray-500">보안 HTTP 헤더를 설정합니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 개인정보 보호 설정 -->
+            <div class="border border-gray-200 rounded-lg p-5">
+                <div class="flex justify-between items-center">
+                    <h4 class="text-sm font-medium text-gray-700">개인정보 보호 기간 (일)</h4>
+                    <div class="w-32">
+                        <input type="number" class="w-full border border-gray-300 rounded px-3 py-2 text-sm" value="365">
+                    </div>
+                </div>
+                <p class="text-xs text-gray-500 mt-2">비활성 사용자의 개인정보 보관 기간을 설정합니다.</p>
+            </div>
+            
+            <!-- 백업 및 자동 백업 설정 -->
+            <div class="mt-6 flex justify-between items-center">
+                <div>
+                    <h4 class="text-sm font-medium text-gray-700">백업 및 복원</h4>
+                    <p class="text-xs text-gray-500 mt-1">정기적인 자동 백업을 활성화합니다.</p>
+                </div>
+                <div class="flex space-x-2">
+                    <button class="btn-outline text-sm">백업 기록</button>
+                    <button class="btn-primary text-sm">지금 백업</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

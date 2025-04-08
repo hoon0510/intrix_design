@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intrix - 서비스 소개 | 감정 분석 기반 마케팅 전략 설계 시스템</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2563EB;
+            --primary-dark: #1E40AF;
+            --primary-light: #DBEAFE;
+            --secondary: #10B981;
+            --accent: #F59E0B;
+            --dark: #111827;
+            --light: #F9FAFB;
+            --gray: #9CA3AF;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            color: var(--dark);
+            background-color: #F3F4F6;
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, #2563EB, #1E3A8A);
+        }
+        
+        .card {
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: all 0.2s ease;
+        }
+        
+        .card:hover {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .btn-outline {
+            background-color: white;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary-light);
+        }
+        
+        .btn-secondary {
+            background-color: white;
+            color: var(--dark);
+            border: 1px solid #E5E7EB;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #F9FAFB;
+            border-color: #D1D5DB;
+        }
+        
+        .feature-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 64px;
+            height: 64px;
+            border-radius: 16px;
+            background-color: var(--primary-light);
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .tech-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: all 0.2s ease;
+        }
+        
+        .tech-card:hover {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .tech-logo {
+            width: 80px;
+            height: 80px;
+            background-color: #F9FAFB;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: #E5E7EB;
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-bottom: 2rem;
+        }
+        
+        .timeline-item:last-child {
+            padding-bottom: 0;
+        }
+        
+        .timeline-dot {
+            position: absolute;
+            left: -2rem;
+            width: 1.5rem;
+            height: 1.5rem;
+            border-radius: 50%;
+            background-color: var(--primary);
+            border: 3px solid white;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .team-member {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+        
+        .team-member img {
+            width: 100%;
+            height: auto;
+            transition: all 0.3s ease;
+        }
+        
+        .team-member-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
+            padding: 2rem 1.5rem 1.5rem;
+            transform: translateY(0);
+            transition: all 0.3s ease;
+        }
+        
+        .team-member:hover img {
+            transform: scale(1.05);
+        }
+        
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            transition: all 0.2s ease;
+        }
+        
+        .social-icon:hover {
+            background-color: var(--primary);
+        }
+        
+        .contact-card {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: all 0.2s ease;
+        }
+        
+        .contact-card:hover {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .contact-icon {
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            background-color: var(--primary-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Navigation -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <div class="text-2xl font-bold text-blue-600 tracking-tight">intrix</div>
+                    <div class="ml-1 md:ml-2 bg-blue-100 text-blue-800 text-xs px-1.5 py-0.5 rounded-full font-medium">BETA</div>
+                </div>
+                
+                <!-- Main Navigation -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="/" class="text-gray-600 hover:text-blue-600 font-medium">홈</a>
+                    <a href="#technology" class="text-gray-600 hover:text-blue-600 font-medium">기술 소개</a>
+                    <a href="#methodology" class="text-gray-600 hover:text-blue-600 font-medium">방법론</a>
+                    <a href="#team" class="text-gray-600 hover:text-blue-600 font-medium">팀 소개</a>
+                    <a href="#contact" class="text-gray-600 hover:text-blue-600 font-medium">연락처</a>
+                </nav>
+                
+                <!-- Right Side Buttons -->
+                <div class="flex items-center space-x-4">
+                    <a href="/login" class="hidden md:block text-gray-600 hover:text-blue-600 font-medium">로그인</a>
+                    <a href="/signup" class="btn-primary">무료로 시작하기</a>
+                    <button class="md:hidden p-2 text-gray-600">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-gradient text-white py-16">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto text-center">
+                <h1 class="text-4xl md:text-5xl font-bold mb-6">서비스 소개</h1>
+                <p class="text-xl text-blue-100 mb-8">Intrix는 소비자 감정 분석을 통해 심리적 전환점을 발견하고 효과적인 마케팅 전략을 설계하는 혁신적인 AI 기반 솔루션입니다.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technology Section -->
+    <section id="technology" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto text-center mb-12">
+                <div class="inline-flex items-center justify-center p-2 bg-blue-100 text-blue-700 rounded-full font-medium text-sm mb-4">기술 소개</div>
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">첨단 AI 기술의 다단계 처리 과정</h2>
+                <p class="text-lg text-gray-600">Intrix는 Claude와 GPT의 선도적인 AI 기술을 결합하여 감정 분석부터 전략 설계까지 정교한 파이프라인을 구현합니다.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <div class="tech-card">
+                    <div class="tech-logo">
+                        <img src="/api/placeholder/80/80" alt="Claude AI Logo" class="w-16 h-16">
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Claude AI</h3>
+                    <p class="text-gray-600 mb-4">다차원적 감정 분석을 위한 최고의 AI 모델로, 소비자 텍스트에서 표면적 감정을 넘어 기저 감정과 잠재 욕구까지 파악합니다.</p>
+                    <ul class="space-y-2 text-gray-600">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span>표면 및 기저 감정 식별</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span>감정 강도 및 맥락 이해</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span>심층적 심리 구조 해독</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="tech-card">
+                    <div class="tech-logo">
+                        <img src="/api/placeholder/80/80" alt="GPT AI Logo" class="w-16 h-16">
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">GPT AI</h3>
+                    <p class="text-gray-600 mb-4">감정 분석 결과를 바탕으로 정교한 마케팅 전략과 메시징을 설계하는 전문 AI 모델입니다.</p>
+                    <ul class="space-y-2 text-gray-600">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span>전략적 인사이트 도출</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span>심리적 전환 경로 설계</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span>전략적 메시징 프레임워크 구축</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="tech-card">
+                    <div class="tech-logo">
+                        <img src="/api/placeholder/80/80" alt="Intrix Integration Logo" class="w-16 h-16">
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">통합 시스템</h3>
+                    <p class="text-gray-600 mb-4">다양한 AI 모델의 결과를 유기적으로 통합하고 사용자 친화적인 인터페이스로 제공합니다.</p>
+                    <ul class="space-y-2 text-gray-600">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span>멀티스텝 AI 호출 최적화</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span>결과 포맷팅 및 시각화</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span>안전한 데이터 처리 및 저장</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="max-w-5xl mx-auto mt-12 bg-blue-50 rounded-lg p-6">
+                <h3 class="text-xl font-semibold text-gray-900 mb-4">기술 파이프라인</h3>
+                <div class="flex flex-col md:flex-row items-center justify-between">
+                    <div class="flex flex-col items-center text-center md:w-1/4 mb-6 md:mb-0">
+                        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 mb-3">
+                            <i class="fas fa-file-import text-2xl"></i>
+                        </div>
+                        <div class="font-medium">데이터 입력</div>
+                        <div class="text-sm text-gray-500">리뷰, VOC, 설문 등</div>
+                    </div>
+                    <div class="hidden md:block text-blue-600">
+                        <i class="fas fa-arrow-right text-xl"></i>
+                    </div>
+                    <div class="md:hidden text-blue-600 my-2">
+                        <i class="fas fa-arrow-down text-xl"></i>
+                    </div>
+                    <div class="flex flex-col items-center text-center md:w-1/4 mb-6 md:mb-0">
+                        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 mb-3">
+                            <i class="fas fa-heart-broken text-2xl"></i>
+                        </div>
+                        <div class="font-medium">감정 분석</div>
+                        <div class="text-sm text-gray-500">Claude AI</div>
+                    </div>
+                    <div class="hidden md:block text-blue-600">
+                        <i class="fas fa-arrow-right text-xl"></i>
+                    </div>
+                    <div class="md:hidden text-blue-600 my-2">
+                        <i class="fas fa-arrow-down text-xl"></i>
+                    </div>
+                    <div class="flex flex-col items-center text-center md:w-1/4 mb-6 md:mb-0">
+                        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 mb-3">
+                            <i class="fas fa-lightbulb text-2xl"></i>
+                        </div>
+                        <div class="font-medium">전략 설계</div>
+                        <div class="text-sm text-gray-500">GPT AI</div>
+                    </div>
+                    <div class="hidden md:block text-blue-600">
+                        <i class="fas fa-arrow-right text-xl"></i>
+                    </div>
+                    <div class="md:hidden text-blue-600 my-2">
+                        <i class="fas fa-arrow-down text-xl"></i>
+                    </div>
+                    <div class="flex flex-col items-center text-center md:w-1/4">
+                        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 mb-3">
+                            <i class="fas fa-chart-pie text-2xl"></i>
+                        </div>
+                        <div class="font-medium">결과 제공</div>
+                        <div class="text-sm text-gray-500">시각화 및 보고서</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Methodology Section -->
+    <section id="methodology" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto text-center mb-12">
+                <div class="inline-flex items-center justify-center p-2 bg-blue-100 text-blue-700 rounded-full font-medium text-sm mb-4">방법론</div>
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">인트릭스의 심리 기반 전략 방법론</h2>
+                <p class="text-lg text-gray-600">감정 분석에서 시작하여 실행 가능한 마케팅 전략으로 이어지는 독자적인 프레임워크입니다.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-5xl mx-auto">
+                <div>
+                    <div class="feature-icon">
+                        <i class="fas fa-heart text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">1. 감정 분석</h3>
+                    <p class="text-gray-600 mb-6">소비자의 표면적 감정과 그 아래 숨겨진 기저 감정을 발견하고 분석합니다.</p>
+                    
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="font-medium text-gray-900 mb-1">표면 감정 식별</div>
+                            <p class="text-gray-600">소비자가 명시적으로 표현한 감정 상태를 캡처합니다.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="font-medium text-gray-900 mb-1">기저 감정 해독</div>
+                            <p class="text-gray-600">텍스트 패턴, 어조, 단어 선택에서 드러나는 잠재적 감정을 발견합니다.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="font-medium text-gray-900 mb-1">감정 패턴 분석</div>
+                            <p class="text-gray-600">감정 흐름과 전환점을 분석하여 소비자 경험의 역동성을 이해합니다.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="feature-icon">
+                        <i class="fas fa-brain text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">2. 욕구 구조화</h3>
+                    <p class="text-gray-600 mb-6">소비자의 다층적 욕구 체계를 계층적으로 구조화합니다.</p>
+                    
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="font-medium text-gray-900 mb-1">표면 욕구 식별</div>
+                            <p class="text-gray-600">소비자가 명시적으로 표현한 요구와 필요사항을 분류합니다.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="font-medium text-gray-900 mb-1">기저 욕구 발견</div>
+                            <p class="text-gray-600">감정 분석에서 드러난 근본적인 심리적 필요와 동기를 발견합니다.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="font-medium text-gray-900 mb-1">상위 욕구 연결</div>
+                            <p class="text-gray-600">자아 이미지와 정체성에 관련된 상위 욕구를 기저 욕구와 연결합니다.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="feature-icon">
+                        <i class="fas fa-route text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">3. 심리적 전환 설계</h3>
+                    <p class="text-gray-600 mb-6">소비자의 현재 심리 상태에서 목표 상태로의 전환 경로를 설계합니다.</p>
+                    
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="font-medium text-gray-900 mb-1">현재 상태 정의</div>
+                            <p class="text-gray-600">소비자의 현재 인지, 감정, 행동 상태를 명확히 정의합니다.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="font-medium text-gray-900 mb-1">전환 마찰 식별</div>
+                            <p class="text-gray-600">심리적 전환을 방해하는 장벽과 저항 요소를 식별합니다.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="font-medium text-gray-900 mb-1">전환 트리거 설계</div>
+                            <p class="text-gray-600">행동 변화를 촉발하는 심리적 트리거와 전환점을 설계합니다.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="feature-icon">
+                        <i class="fas fa-bullhorn text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">4. 전략적 메시징 제공</h3>
+                    <p class="text-gray-600 mb-6">소비자의 심리 구조에 맞춘 효과적인 메시징과 전략을 설계합니다.</p>
+                    
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="font-medium text-gray-900 mb-1">메시징 프레임워크 구축</div>
+                            <p class="text-gray-600">소비자의 감정과 욕구에 공명하는 메시지 체계를 구축합니다.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="font-medium text-gray-900 mb-1">카피라이팅 가이드라인</div>
+                            <p class="text-gray-600">심리적 영향력이 큰 언어 요소와 표현 방식을 제안합니다.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="font-medium text-gray-900 mb-1">실행 전략 제시</div>
+                            <p class="text-gray-600">소비자 여정의 각 단계별 구체적인 실행 전략을 제시합니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="max-w-3xl mx-auto mt-16 text-center">
+                <div class="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg font-medium">인트릭스 방법론 자세히 알아보기</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto text-center mb-12">
+                <div class="inline-flex items-center justify-center p-2 bg-blue-100 text-blue-700 rounded-full font-medium text-sm mb-4">팀 소개</div>
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">인트릭스 개발팀</h2>
+                <p class="text-lg text-gray-600">심리학, 마케팅, 인공지능 분야의 전문가들이 모여 인트릭스를 만들었습니다.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
+                <div class="team-member">
+                    <img src="/api/placeholder/300/400" alt="Team Member" class="w-full">
+                    <div class="team-member-info">
+                        <h3 class="text-xl font-semibold text-white mb-1">김지훈</h3>
+                        <p class="text-blue-300 mb-3">CEO & 공동 창업자</p>
+                        <div class="flex space-x-2">
+                            <a href="#" class="social-icon">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="#" class="social-icon">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="team-member">
+                    <img src="/api/placeholder/300/400" alt="Team Member" class="w-full">
+                    <div class="team-member-info">
+                        <h3 class="text-xl font-semibold text-white mb-1">이소라</h3>
+                        <p class="text-blue-300 mb-3">CTO & 공동 창업자</p>
+                        <div class="flex space-x-2">
+                            <a href="#" class="social-icon">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="#" class="social-icon">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="team-member">
+                    <img src="/api/placeholder/300/400" alt="Team Member" class="w-full">
+                    <div class="team-member-info">
+                        <h3 class="text-xl font-semibold text-white mb-1">박준영</h3>
+                        <p class="text-blue-300 mb-3">AI 연구 책임자</p>
+                        <div class="flex space-x-2">
+                            <a href="#" class="social-icon">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="#" class="social-icon">
+                                <i class="fab fa-medium"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="team-member">
+                    <img src="/api/placeholder/300/400" alt="Team Member" class="w-full">
+                    <div class="team-member-info">
+                        <h3 class="text-xl font-semibold text-white mb-1">최민지</h3>
+                        <p class="text-blue-300 mb-3">UX/UI 디자인 책임자</p>
+                        <div class="flex space-x-2">
+                            <a href="#" class="social-icon">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="#" class="social-icon">
+                                <i class="fab fa-dribbble"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="max-w-3xl mx-auto mt-16">
+                <div class="bg-blue-50 rounded-lg p-8">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6 text-center">우리의 사명</h3>
+                    <p class="text-gray-600 text-lg leading-relaxed mb-6">인트릭스는 소비자의 감정과 심리에 대한 깊은 이해를 바탕으로 마케팅의 패러다임을 바꾸고자 합니다. 단순한 인구통계학적 세분화나 행동 데이터를 넘어, 소비자의 내면 세계와 진정한 욕구를 이해하는 것이 지속 가능한 마케팅의 핵심이라고 믿습니다.</p>
+                    <p class="text-gray-600 text-lg leading-relaxed">우리의 목표는 최첨단 AI 기술을 활용하여 소비자와 브랜드 사이의 진정한 감정적 연결을 구축하고, 이를 통해 의미 있는 마케팅 전략을 수립할 수 있는 도구를 제공하는 것입니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto text-center mb-12">
+                <div class="inline-flex items-center justify-center p-2 bg-blue-100 text-blue-700 rounded-full font-medium text-sm mb-4">연락처</div>
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">언제든지 연락주세요</h2>
+                <p class="text-lg text-gray-600">궁금한 점이나 협업 제안이 있으시면 아래 채널로 연락해주세요.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+                <div class="contact-card bg-white">
+                    <div class="p-6 text-center">
+                        <div class="contact-icon mx-auto">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">이메일</h3>
+                        <p class="text-gray-600 mb-4">문의 사항이나 제안이 있으시면 이메일로 연락주세요.</p>
+                        <a href="mailto:hello@intrix.ai" class="text-blue-600 font-medium">hello@intrix.ai</a>
+                    </div>
+                </div>
+                
+                <div class="contact-card bg-white">
+                    <div class="p-6 text-center">
+                        <div class="contact-icon mx-auto">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">주소</h3>
+                        <p class="text-gray-600 mb-4">서울특별시 강남구 테헤란로 123<br>인트릭스 타워 7층</p>
+                        <a href="#" class="text-blue-600 font-medium">지도 보기</a>
+                    </div>
+                </div>
+                
+                <div class="contact-card bg-white">
+                    <div class="p-6 text-center">
+                        <div class="contact-icon mx-auto">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">전화</h3>
+                        <p class="text-gray-600 mb-4">영업 및 고객 지원 팀이 도움을 드립니다.</p>
+                        <a href="tel:02-1234-5678" class="text-blue-600 font-medium">02-1234-5678</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="max-w-4xl mx-auto mt-12 bg-white rounded-lg shadow-sm overflow-hidden">
+                <div class="grid grid-cols-1 md:grid-cols-2">
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-6">메시지 보내기</h3>
+                        <form class="space-y-4">
+                            <div>
+                                <label for="name" class="block text-sm font-medium text-gray-700 mb-1">이름</label>
+                                <input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-700 mb-1">이메일</label>
+                                <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                            </div>
+                            <div>
+                                <label for="subject" class="block text-sm font-medium text-gray-700 mb-1">제목</label>
+                                <input type="text" id="subject" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                            </div>
+                            <div>
+                                <label for="message" class="block text-sm font-medium text-gray-700 mb-1">메시지</label>
+                                <textarea id="message" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"></textarea>
+                            </div>
+                            <button type="submit" class="btn-primary w-full">보내기</button>
+                        </form>
+                    </div>
+                    <div class="bg-blue-600 text-white p-8 flex flex-col justify-center">
+                        <h3 class="text-2xl font-bold mb-6">브랜드 협업 및 제휴</h3>
+                        <p class="mb-8 text-blue-100">인트릭스와의 협업, 제휴 또는 투자에 관심이 있으시면 저희 파트너십 팀에 문의해주세요.</p>
+                        <div class="space-y-4">
+                            <div class="flex items-center">
+                                <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center mr-4">
+                                    <i class="fas fa-user-tie"></i>
+                                </div>
+                                <div>
+                                    <div class="font-medium">김민우</div>
+                                    <div class="text-sm text-blue-200">파트너십 총괄</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center mr-4">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div>
+                                    <div class="font-medium">partnerships@intrix.ai</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center mr-4">
+                                    <i class="fas fa-phone-alt"></i>
+                                </div>
+                                <div>
+                                    <div class="font-medium">02-1234-5679</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="text-2xl font-bold text-white mb-4">intrix</div>
+                    <p class="text-gray-400 mb-4">감정 분석 기반 마케팅 전략 설계 시스템</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">서비스</h4>
+                    <ul class="space-y-2">
+                        <li><a href="/#features" class="text-gray-400 hover:text-white">주요 기능</a></li>
+                        <li><a href="#technology" class="text-gray-400 hover:text-white">기술 소개</a></li>
+                        <li><a href="#methodology" class="text-gray-400 hover:text-white">방법론</a></li>
+                        <li><a href="/#pricing" class="text-gray-400 hover:text-white">요금제</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">회사</h4>
+                    <ul class="space-y-2">
+                        <li><a href="/about" class="text-gray-400 hover:text-white">회사 소개</a></li>
+                        <li><a href="#team" class="text-gray-400 hover:text-white">팀 소개</a></li>
+                        <li><a href="/careers" class="text-gray-400 hover:text-white">채용</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-white">문의하기</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">지원</h4>
+                    <ul class="space-y-2">
+                        <li><a href="/help" class="text-gray-400 hover:text-white">고객 지원</a></li>
+                        <li><a href="/docs" class="text-gray-400 hover:text-white">문서</a></li>
+                        <li><a href="/privacy" class="text-gray-400 hover:text-white">개인정보처리방침</a></li>
+                        <li><a href="/terms" class="text-gray-400 hover:text-white">이용약관</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8 text-sm text-gray-400 text-center">
+                &copy; 2025 Intrix. All rights reserved.
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

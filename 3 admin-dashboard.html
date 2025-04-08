@@ -1,0 +1,1158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intrix - Admin Dashboard | Emotion-Driven Marketing Intelligence</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2563EB;
+            --primary-dark: #1E40AF;
+            --primary-light: #DBEAFE;
+            --secondary: #10B981;
+            --accent: #F59E0B;
+            --dark: #111827;
+            --light: #F9FAFB;
+            --gray: #9CA3AF;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            color: var(--dark);
+            background-color: #F3F4F6;
+        }
+        
+        .card {
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: all 0.2s ease;
+        }
+        
+        .card:hover {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .btn-outline {
+            background-color: white;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+            padding: 0.5rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary-light);
+        }
+        
+        .btn-secondary {
+            background-color: white;
+            color: var(--dark);
+            border: 1px solid #E5E7EB;
+            padding: 0.5rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #F9FAFB;
+            border-color: #D1D5DB;
+        }
+        
+        .btn-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+        
+        .btn-icon:hover {
+            background-color: #F3F4F6;
+        }
+        
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 5px;
+            transition: all 0.2s;
+        }
+        
+        .sidebar-link:hover {
+            background-color: #EFF6FF;
+        }
+        
+        .sidebar-link.active {
+            background-color: #DBEAFE;
+            color: #2563EB;
+            font-weight: 500;
+        }
+        
+        .sidebar-link i {
+            width: 20px;
+            text-align: center;
+            margin-right: 10px;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 0.5rem 0.75rem;
+            border: 1px solid #D1D5DB;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            transition: all 0.2s;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: #2563EB;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+        
+        .form-select {
+            width: 100%;
+            padding: 0.5rem 0.75rem;
+            border: 1px solid #D1D5DB;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236B7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 0.5rem center;
+            background-repeat: no-repeat;
+            background-size: 1.5em 1.5em;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+        
+        .form-select:focus {
+            outline: none;
+            border-color: #2563EB;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+        
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.25rem 0.75rem;
+            background-color: #EFF6FF;
+            color: #2563EB;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        
+        .tag-green {
+            background-color: #ECFDF5;
+            color: #059669;
+        }
+        
+        .tag-yellow {
+            background-color: #FFFBEB;
+            color: #D97706;
+        }
+        
+        .tag-red {
+            background-color: #FEF2F2;
+            color: #DC2626;
+        }
+        
+        .tab {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            font-weight: 500;
+            font-size: 0.875rem;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+        }
+        
+        .tab:hover {
+            color: #2563EB;
+        }
+        
+        .tab.active {
+            color: #2563EB;
+            border-bottom-color: #2563EB;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+        }
+        
+        .admin-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+        
+        .admin-table th {
+            background-color: #F9FAFB;
+            padding: 0.75rem 1rem;
+            text-align: left;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #6B7280;
+            border-bottom: 1px solid #E5E7EB;
+        }
+        
+        .admin-table td {
+            padding: 1rem;
+            font-size: 0.875rem;
+            border-bottom: 1px solid #E5E7EB;
+        }
+        
+        .admin-table tbody tr:hover {
+            background-color: #F9FAFB;
+        }
+        
+        .status-dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-right: 6px;
+        }
+        
+        .status-active {
+            background-color: #10B981;
+        }
+        
+        .status-pending {
+            background-color: #F59E0B;
+        }
+        
+        .status-inactive {
+            background-color: #EF4444;
+        }
+        
+        @media (max-width: 768px) {
+            .desktop-sidebar {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Main Layout -->
+    <div class="flex flex-col min-h-screen">
+        <!-- Top Navigation Bar -->
+        <header class="bg-white shadow-sm sticky top-0 z-10">
+            <div class="container mx-auto px-4 py-3">
+                <div class="flex justify-between items-center">
+                    <!-- Logo -->
+                    <div class="flex items-center">
+                        <div class="text-2xl font-bold text-blue-600 tracking-tight">intrix</div>
+                        <div class="ml-1 md:ml-2 bg-gray-100 text-gray-800 text-xs px-1.5 py-0.5 rounded-full font-medium">ADMIN</div>
+                    </div>
+                    
+                    <!-- Search Bar - Only on desktop -->
+                    <div class="hidden md:flex items-center flex-1 max-w-md mx-4 md:mx-8">
+                        <div class="relative w-full">
+                            <input type="text" placeholder="Search users, projects or payments..." class="w-full bg-gray-100 rounded-lg py-2 px-4 pl-10 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white">
+                            <div class="absolute left-3 top-2.5 text-gray-400">
+                                <i class="fas fa-search"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Right Navigation Items -->
+                    <div class="flex items-center space-x-1 md:space-x-4">
+                        <button class="p-2 text-gray-500 hover:text-gray-700 relative">
+                            <i class="far fa-bell"></i>
+                            <span class="absolute top-0 right-0 w-4 h-4 bg-red-500 text-white text-xs flex items-center justify-center rounded-full">5</span>
+                        </button>
+                        <div class="flex items-center">
+                            <img src="/api/placeholder/32/32" class="w-8 h-8 rounded-full" alt="Admin profile">
+                            <span class="hidden md:inline-block ml-2 text-sm font-medium">Admin User</span>
+                            <i class="hidden md:inline-block fas fa-chevron-down text-xs ml-2 text-gray-500"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content Area with Sidebar -->
+        <div class="flex flex-1 container mx-auto">
+            <!-- Desktop Sidebar -->
+            <aside class="desktop-sidebar w-56 pt-6 pr-4 pl-4 bg-white shadow-sm">
+                <div class="mb-4">
+                    <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 px-2">DASHBOARD</h3>
+                    <nav>
+                        <a href="#" class="sidebar-link active">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>Overview</span>
+                        </a>
+                        <a href="#" class="sidebar-link">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Analytics</span>
+                        </a>
+                        <a href="#" class="sidebar-link">
+                            <i class="fas fa-bell"></i>
+                            <span>Notifications</span>
+                            <span class="ml-auto bg-red-500 text-white text-xs px-1.5 py-0.5 rounded-full">5</span>
+                        </a>
+                    </nav>
+                </div>
+                
+                <div class="mb-4">
+                    <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 px-2">USERS</h3>
+                    <nav>
+                        <a href="#" class="sidebar-link">
+                            <i class="fas fa-users"></i>
+                            <span>All Users</span>
+                        </a>
+                        <a href="#" class="sidebar-link">
+                            <i class="fas fa-user-plus"></i>
+                            <span>New Registrations</span>
+                            <span class="ml-auto bg-blue-500 text-white text-xs px-1.5 py-0.5 rounded-full">12</span>
+                        </a>
+                        <a href="#" class="sidebar-link">
+                            <i class="fas fa-user-shield"></i>
+                            <span>Admins</span>
+                        </a>
+                    </nav>
+                </div>
+                
+                <div class="mb-4">
+                    <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 px-2">CONTENT</h3>
+                    <nav>
+                        <a href="#" class="sidebar-link">
+                            <i class="fas fa-file-alt"></i>
+                            <span>Pages</span>
+                        </a>
+                        <a href="#" class="sidebar-link">
+                            <i class="fas fa-question-circle"></i>
+                            <span>FAQ</span>
+                        </a>
+                        <a href="#" class="sidebar-link">
+                            <i class="fas fa-book"></i>
+                            <span>Documentation</span>
+                        </a>
+                    </nav>
+                </div>
+                
+                <div class="mb-4">
+                    <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 px-2">BILLING</h3>
+                    <nav>
+                        <a href="#" class="sidebar-link">
+                            <i class="fas fa-credit-card"></i>
+                            <span>Subscriptions</span>
+                        </a>
+                        <a href="#" class="sidebar-link">
+                            <i class="fas fa-tags"></i>
+                            <span>Pricing Plans</span>
+                        </a>
+                        <a href="#" class="sidebar-link">
+                            <i class="fas fa-ticket-alt"></i>
+                            <span>Promo Codes</span>
+                        </a>
+                    </nav>
+                </div>
+                
+                <div>
+                    <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 px-2">SETTINGS</h3>
+                    <nav>
+                        <a href="#" class="sidebar-link">
+                            <i class="fas fa-cog"></i>
+                            <span>General</span>
+                        </a>
+                        <a href="#" class="sidebar-link">
+                            <i class="fas fa-key"></i>
+                            <span>API Settings</span>
+                        </a>
+                        <a href="#" class="sidebar-link">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>Security</span>
+                        </a>
+                        <a href="#" class="sidebar-link">
+                            <i class="fas fa-database"></i>
+                            <span>Backups</span>
+                        </a>
+                    </nav>
+                </div>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="flex-1 p-6">
+                <!-- Page Header -->
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
+                    <div>
+                        <h1 class="text-2xl font-bold text-gray-900">Admin Dashboard</h1>
+                        <p class="text-sm text-gray-500">Welcome back, Admin. Here's what's happening today.</p>
+                    </div>
+                    <div class="flex mt-3 md:mt-0 space-x-3">
+                        <button class="btn-secondary">
+                            <i class="fas fa-download mr-1"></i>
+                            Export Report
+                        </button>
+                        <button class="btn-primary">
+                            <i class="fas fa-cog mr-1"></i>
+                            Settings
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Stats Cards Row -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                    <div class="bg-white rounded-lg shadow-sm p-4 card">
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="text-sm font-semibold text-gray-500">Total Users</h3>
+                            <div class="text-blue-600">
+                                <i class="fas fa-users"></i>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="text-2xl font-bold text-gray-900">2,543</div>
+                            <div class="ml-3 px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full flex items-center">
+                                <i class="fas fa-arrow-up mr-1"></i> 12.5%
+                            </div>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-2">Compared to previous month</p>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-sm p-4 card">
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="text-sm font-semibold text-gray-500">Active Projects</h3>
+                            <div class="text-blue-600">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="text-2xl font-bold text-gray-900">874</div>
+                            <div class="ml-3 px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full flex items-center">
+                                <i class="fas fa-arrow-up mr-1"></i> 8.2%
+                            </div>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-2">Compared to previous month</p>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-sm p-4 card">
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="text-sm font-semibold text-gray-500">Credit Utilization</h3>
+                            <div class="text-blue-600">
+                                <i class="fas fa-coins"></i>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="text-2xl font-bold text-gray-900">3.2M</div>
+                            <div class="ml-3 px-2 py-1 bg-red-100 text-red-800 text-xs rounded-full flex items-center">
+                                <i class="fas fa-arrow-down mr-1"></i> 4.6%
+                            </div>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-2">Compared to expected forecast</p>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-sm p-4 card">
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="text-sm font-semibold text-gray-500">Revenue</h3>
+                            <div class="text-blue-600">
+                                <i class="fas fa-dollar-sign"></i>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="text-2xl font-bold text-gray-900">$45,267</div>
+                            <div class="ml-3 px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full flex items-center">
+                                <i class="fas fa-arrow-up mr-1"></i> 15.3%
+                            </div>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-2">Current monthly revenue</p>
+                    </div>
+                </div>
+
+                <!-- API Usage Chart -->
+                <div class="bg-white rounded-lg shadow-sm p-5 card mb-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="font-semibold text-gray-700">API Usage & Cost Analysis</h3>
+                        <div class="flex items-center space-x-2">
+                            <select class="border border-gray-300 rounded px-2 py-1 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option>Last 7 Days</option>
+                                <option>Last 30 Days</option>
+                                <option>Last 90 Days</option>
+                                <option>This Year</option>
+                            </select>
+                            <button class="btn-icon text-gray-500 hover:text-gray-700">
+                                <i class="fas fa-ellipsis-v"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="h-60 flex items-center justify-center text-gray-400">
+                        <i class="fas fa-chart-area text-6xl opacity-20"></i>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-5">
+                        <div class="border-t border-gray-100 pt-3">
+                            <div class="text-xs font-semibold text-gray-500">CLAUDE API COSTS</div>
+                            <div class="flex items-center justify-between mt-1">
+                                <div class="text-xl font-bold text-gray-900">$12,452</div>
+                                <div class="px-2 py-1 bg-yellow-100 text-yellow-800 text-xs rounded-md flex items-center">
+                                    <i class="fas fa-exclamation-triangle mr-1"></i> 82% Budget
+                                </div>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-1.5 mt-2">
+                                <div class="bg-yellow-500 h-1.5 rounded-full" style="width: 82%"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="border-t border-gray-100 pt-3">
+                            <div class="text-xs font-semibold text-gray-500">GPT API COSTS</div>
+                            <div class="flex items-center justify-between mt-1">
+                                <div class="text-xl font-bold text-gray-900">$8,763</div>
+                                <div class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-md flex items-center">
+                                    <i class="fas fa-check mr-1"></i> 58% Budget
+                                </div>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-1.5 mt-2">
+                                <div class="bg-green-500 h-1.5 rounded-full" style="width: 58%"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="border-t border-gray-100 pt-3">
+                            <div class="text-xs font-semibold text-gray-500">TOTAL API COSTS</div>
+                            <div class="flex items-center justify-between mt-1">
+                                <div class="text-xl font-bold text-gray-900">$21,215</div>
+                                <div class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-md flex items-center">
+                                    <i class="fas fa-info-circle mr-1"></i> 71% Budget
+                                </div>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-1.5 mt-2">
+                                <div class="bg-blue-500 h-1.5 rounded-full" style="width: 71%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- User Management -->
+                <div class="bg-white rounded-lg shadow-sm p-5 card mb-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="font-semibold text-gray-700">User Management</h3>
+                        <div class="flex items-center space-x-3">
+                            <div class="relative">
+                                <input type="text" placeholder="Search users..." class="form-input py-1 pl-8 pr-4 text-sm">
+                                <div class="absolute left-3 top-1.5 text-gray-400">
+                                    <i class="fas fa-search text-xs"></i>
+                                </div>
+                            </div>
+                            <button class="btn-primary py-1 text-sm">
+                                <i class="fas fa-user-plus mr-1"></i>
+                                Add User
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="overflow-x-auto">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>User</th>
+                                    <th>Plan</th>
+                                    <th>Credits</th>
+                                    <th>Projects</th>
+                                    <th>Status</th>
+                                    <th>Last Login</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="flex items-center">
+                                        <img src="/api/placeholder/32/32" class="w-8 h-8 rounded-full mr-3" alt="User avatar">
+                                        <div>
+                                            <div class="font-medium">John Smith</div>
+                                            <div class="text-gray-500 text-xs">john@example.com</div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="tag">Premium</span>
+                                    </td>
+                                    <td>2,450</td>
+                                    <td>12</td>
+                                    <td>
+                                        <div class="flex items-center">
+                                            <span class="status-dot status-active"></span>
+                                            <span>Active</span>
+                                        </div>
+                                    </td>
+                                    <td>2 hours ago</td>
+                                    <td>
+                                        <div class="flex space-x-2">
+                                            <button class="btn-icon text-gray-500">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="btn-icon text-gray-500">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="flex items-center">
+                                        <img src="/api/placeholder/32/32" class="w-8 h-8 rounded-full mr-3" alt="User avatar">
+                                        <div>
+                                            <div class="font-medium">Emily Davis</div>
+                                            <div class="text-gray-500 text-xs">emily@example.com</div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="tag">Premium</span>
+                                    </td>
+                                    <td>1,845</td>
+                                    <td>7</td>
+                                    <td>
+                                        <div class="flex items-center">
+                                            <span class="status-dot status-inactive"></span>
+                                            <span>Inactive</span>
+                                        </div>
+                                    </td>
+                                    <td>2 weeks ago</td>
+                                    <td>
+                                        <div class="flex space-x-2">
+                                            <button class="btn-icon text-gray-500">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="btn-icon text-gray-500">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="flex items-center justify-between mt-4">
+                        <div class="text-sm text-gray-500">Showing 4 of 2,543 users</div>
+                        <div class="flex">
+                            <button class="bg-white border border-gray-300 rounded-l-md py-1 px-3 text-sm text-gray-500 hover:bg-gray-50">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <button class="bg-blue-600 border border-blue-600 py-1 px-3 text-sm text-white">1</button>
+                            <button class="bg-white border border-gray-300 py-1 px-3 text-sm text-gray-500 hover:bg-gray-50">2</button>
+                            <button class="bg-white border border-gray-300 py-1 px-3 text-sm text-gray-500 hover:bg-gray-50">3</button>
+                            <button class="bg-white border border-gray-300 rounded-r-md py-1 px-3 text-sm text-gray-500 hover:bg-gray-50">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Prompt Templates Management Section -->
+                <div class="bg-white rounded-lg shadow-sm p-5 card mb-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="font-semibold text-gray-700">AI Prompt Templates</h3>
+                        <button class="btn-primary py-1 text-sm">
+                            <i class="fas fa-plus mr-1"></i>
+                            New Template
+                        </button>
+                    </div>
+                    
+                    <div class="border-b border-gray-200 mb-4">
+                        <div class="flex -mb-px">
+                            <button class="tab active">
+                                <i class="fas fa-heart mr-2 text-xs"></i>
+                                Emotion Analysis
+                            </button>
+                            <button class="tab">
+                                <i class="fas fa-chess-knight mr-2 text-xs"></i>
+                                Strategic Design
+                            </button>
+                            <button class="tab">
+                                <i class="fas fa-bullhorn mr-2 text-xs"></i>
+                                Branding
+                            </button>
+                            <button class="tab">
+                                <i class="fas fa-tools mr-2 text-xs"></i>
+                                System
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="overflow-x-auto">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Template Name</th>
+                                    <th>Type</th>
+                                    <th>Last Modified</th>
+                                    <th>Version</th>
+                                    <th>API</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="font-medium">Emotional Spectrum Analysis</td>
+                                    <td>
+                                        <span class="tag">Core</span>
+                                    </td>
+                                    <td>Yesterday</td>
+                                    <td>v2.3</td>
+                                    <td>Claude</td>
+                                    <td>
+                                        <div class="flex items-center">
+                                            <span class="status-dot status-active"></span>
+                                            <span>Active</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="flex space-x-2">
+                                            <button class="btn-icon text-gray-500">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="btn-icon text-gray-500">
+                                                <i class="fas fa-copy"></i>
+                                            </button>
+                                            <button class="btn-icon text-gray-500">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="font-medium">Sentiment Context Processing</td>
+                                    <td>
+                                        <span class="tag">Advanced</span>
+                                    </td>
+                                    <td>3 days ago</td>
+                                    <td>v1.8</td>
+                                    <td>Claude</td>
+                                    <td>
+                                        <div class="flex items-center">
+                                            <span class="status-dot status-active"></span>
+                                            <span>Active</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="flex space-x-2">
+                                            <button class="btn-icon text-gray-500">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="btn-icon text-gray-500">
+                                                <i class="fas fa-copy"></i>
+                                            </button>
+                                            <button class="btn-icon text-gray-500">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="font-medium">Multi-dimensional Emotion Mapping</td>
+                                    <td>
+                                        <span class="tag">Experimental</span>
+                                    </td>
+                                    <td>1 week ago</td>
+                                    <td>v0.5</td>
+                                    <td>Claude</td>
+                                    <td>
+                                        <div class="flex items-center">
+                                            <span class="status-dot status-pending"></span>
+                                            <span>Testing</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="flex space-x-2">
+                                            <button class="btn-icon text-gray-500">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="btn-icon text-gray-500">
+                                                <i class="fas fa-copy"></i>
+                                            </button>
+                                            <button class="btn-icon text-gray-500">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- System Monitoring and Status -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div class="bg-white rounded-lg shadow-sm p-4 card">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="font-semibold text-gray-700">System Status</h3>
+                            <button class="text-sm text-blue-600 hover:text-blue-800">Refresh</button>
+                        </div>
+                        
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-green-600 mr-3">
+                                        <i class="fas fa-server"></i>
+                                    </div>
+                                    <span class="font-medium">API Server</span>
+                                </div>
+                                <div class="flex items-center text-green-600">
+                                    <span class="status-dot status-active"></span>
+                                    <span class="text-sm font-medium">Operational</span>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-green-600 mr-3">
+                                        <i class="fas fa-database"></i>
+                                    </div>
+                                    <span class="font-medium">Database</span>
+                                </div>
+                                <div class="flex items-center text-green-600">
+                                    <span class="status-dot status-active"></span>
+                                    <span class="text-sm font-medium">Operational</span>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-green-600 mr-3">
+                                        <i class="fas fa-memory"></i>
+                                    </div>
+                                    <span class="font-medium">Cache System</span>
+                                </div>
+                                <div class="flex items-center text-green-600">
+                                    <span class="status-dot status-active"></span>
+                                    <span class="text-sm font-medium">Operational</span>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 rounded-full bg-yellow-100 flex items-center justify-center text-yellow-600 mr-3">
+                                        <i class="fas fa-tasks"></i>
+                                    </div>
+                                    <span class="font-medium">Queue System</span>
+                                </div>
+                                <div class="flex items-center text-yellow-600">
+                                    <span class="status-dot status-pending"></span>
+                                    <span class="text-sm font-medium">High Load</span>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-green-600 mr-3">
+                                        <i class="fas fa-robot"></i>
+                                    </div>
+                                    <span class="font-medium">AI APIs</span>
+                                </div>
+                                <div class="flex items-center text-green-600">
+                                    <span class="status-dot status-active"></span>
+                                    <span class="text-sm font-medium">Operational</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4 pt-4 border-t border-gray-100">
+                            <div class="flex items-center justify-between text-sm">
+                                <span class="text-gray-500">Last Incident:</span>
+                                <span class="font-medium">3 days ago</span>
+                            </div>
+                            <div class="flex items-center justify-between text-sm mt-1">
+                                <span class="text-gray-500">Uptime:</span>
+                                <span class="font-medium">99.94%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-sm p-4 card">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="font-semibold text-gray-700">Recent Activity</h3>
+                            <button class="text-sm text-blue-600 hover:text-blue-800">View All</button>
+                        </div>
+                        
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 mr-3 flex-shrink-0">
+                                    <i class="fas fa-user-plus"></i>
+                                </div>
+                                <div>
+                                    <div class="font-medium">New User Registration</div>
+                                    <div class="text-sm text-gray-500">Thomas Wilson signed up with Enterprise plan</div>
+                                    <div class="text-xs text-gray-400 mt-1">10 minutes ago</div>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="w-8 h-8 rounded-full bg-yellow-100 flex items-center justify-center text-yellow-600 mr-3 flex-shrink-0">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                </div>
+                                <div>
+                                    <div class="font-medium">API Rate Limit Warning</div>
+                                    <div class="text-sm text-gray-500">Claude API reaching 80% of daily quota</div>
+                                    <div class="text-xs text-gray-400 mt-1">28 minutes ago</div>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-green-600 mr-3 flex-shrink-0">
+                                    <i class="fas fa-dollar-sign"></i>
+                                </div>
+                                <div>
+                                    <div class="font-medium">Payment Received</div>
+                                    <div class="text-sm text-gray-500">$249.99 from Sarah Johnson (Premium Plan)</div>
+                                    <div class="text-xs text-gray-400 mt-1">2 hours ago</div>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 mr-3 flex-shrink-0">
+                                    <i class="fas fa-code"></i>
+                                </div>
+                                <div>
+                                    <div class="font-medium">System Update</div>
+                                    <div class="text-sm text-gray-500">Prompt templates updated to version 2.3</div>
+                                    <div class="text-xs text-gray-400 mt-1">Yesterday</div>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="w-8 h-8 rounded-full bg-red-100 flex items-center justify-center text-red-600 mr-3 flex-shrink-0">
+                                    <i class="fas fa-bug"></i>
+                                </div>
+                                <div>
+                                    <div class="font-medium">Error Reported</div>
+                                    <div class="text-sm text-gray-500">File upload issue from iOS devices</div>
+                                    <div class="text-xs text-gray-400 mt-1">2 days ago</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Credit Package Management -->
+                <div class="bg-white rounded-lg shadow-sm p-5 card mb-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="font-semibold text-gray-700">Credit Packages</h3>
+                        <button class="btn-primary py-1 text-sm">
+                            <i class="fas fa-plus mr-1"></i>
+                            New Package
+                        </button>
+                    </div>
+                    
+                    <div class="overflow-x-auto">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Package Name</th>
+                                    <th>Credits</th>
+                                    <th>Initial Price</th>
+                                    <th>Final Price</th>
+                                    <th>API Cost</th>
+                                    <th>Profit Margin</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="font-medium">Starter</td>
+                                    <td>500</td>
+                                    <td>$5.99</td>
+                                    <td>$7.99</td>
+                                    <td>$1.35</td>
+                                    <td>
+                                        <div class="flex items-center text-green-600">
+                                            <i class="fas fa-arrow-up mr-1"></i>
+                                            <span>342%</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="flex items-center">
+                                            <span class="status-dot status-active"></span>
+                                            <span>Active</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="flex space-x-2">
+                                            <button class="btn-icon text-gray-500">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="btn-icon text-gray-500">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="font-medium">Pro</td>
+                                    <td>2,000</td>
+                                    <td>$21.99</td>
+                                    <td>$29.99</td>
+                                    <td>$5.40</td>
+                                    <td>
+                                        <div class="flex items-center text-green-600">
+                                            <i class="fas fa-arrow-up mr-1"></i>
+                                            <span>307%</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="flex items-center">
+                                            <span class="status-dot status-active"></span>
+                                            <span>Active</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="flex space-x-2">
+                                            <button class="btn-icon text-gray-500">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="btn-icon text-gray-500">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="font-medium">Team</td>
+                                    <td>10,000</td>
+                                    <td>$89.99</td>
+                                    <td>$119.99</td>
+                                    <td>$27.00</td>
+                                    <td>
+                                        <div class="flex items-center text-green-600">
+                                            <i class="fas fa-arrow-up mr-1"></i>
+                                            <span>233%</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="flex items-center">
+                                            <span class="status-dot status-active"></span>
+                                            <span>Active</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="flex space-x-2">
+                                            <button class="btn-icon text-gray-500">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="btn-icon text-gray-500">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="font-medium">Enterprise Custom</td>
+                                    <td>50,000</td>
+                                    <td>$399.99</td>
+                                    <td>$499.99</td>
+                                    <td>$135.00</td>
+                                    <td>
+                                        <div class="flex items-center text-green-600">
+                                            <i class="fas fa-arrow-up mr-1"></i>
+                                            <span>196%</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="flex items-center">
+                                            <span class="status-dot status-pending"></span>
+                                            <span>Draft</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="flex space-x-2">
+                                            <button class="btn-icon text-gray-500">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="btn-icon text-gray-500">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</body>
+</html>2">
+                                            <button class="btn-icon text-gray-500">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="btn-icon text-gray-500">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="flex items-center">
+                                        <img src="/api/placeholder/32/32" class="w-8 h-8 rounded-full mr-3" alt="User avatar">
+                                        <div>
+                                            <div class="font-medium">Sarah Johnson</div>
+                                            <div class="text-gray-500 text-xs">sarah@example.com</div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="tag">Enterprise</span>
+                                    </td>
+                                    <td>8,745</td>
+                                    <td>28</td>
+                                    <td>
+                                        <div class="flex items-center">
+                                            <span class="status-dot status-active"></span>
+                                            <span>Active</span>
+                                        </div>
+                                    </td>
+                                    <td>5 mins ago</td>
+                                    <td>
+                                        <div class="flex space-x-2">
+                                            <button class="btn-icon text-gray-500">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="btn-icon text-gray-500">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="flex items-center">
+                                        <img src="/api/placeholder/32/32" class="w-8 h-8 rounded-full mr-3" alt="User avatar">
+                                        <div>
+                                            <div class="font-medium">Michael Brown</div>
+                                            <div class="text-gray-500 text-xs">michael@example.com</div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="tag">Basic</span>
+                                    </td>
+                                    <td>350</td>
+                                    <td>3</td>
+                                    <td>
+                                        <div class="flex items-center">
+                                            <span class="status-dot status-pending"></span>
+                                            <span>Pending</span>
+                                        </div>
+                                    </td>
+                                    <td>1 day ago</td>
+                                    <td>
+                                        <div class="flex space-x-
