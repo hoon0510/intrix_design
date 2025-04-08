@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intrix - 데모 요청 | 감정 분석 기반 마케팅 전략 설계 시스템</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2563EB;
+            --primary-dark: #1E40AF;
+            --primary-light: #DBEAFE;
+            --secondary: #10B981;
+            --accent: #F59E0B;
+            --dark: #111827;
+            --light: #F9FAFB;
+            --gray: #9CA3AF;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            color: var(--dark);
+            background-color: #F3F4F6;
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, #2563EB, #1E3A8A);
+        }
+        
+        .card {
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: all 0.2s ease;
+        }
+        
+        .card:hover {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .btn-outline {
+            background-color: white;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary-light);
+        }
+        
+        .btn-secondary {
+            background-color: white;
+            color: var(--dark);
+            border: 1px solid #E5E7EB;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #F9FAFB;
+            border-color: #D1D5DB;
+        }
+        
+        .feature-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background-color: var(--primary-light);
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .demo-benefit-card {
+            border-radius: 8px;
+            border: 1px solid #E5E7EB;
+            transition: all 0.2s ease;
+            padding: 1.5rem;
+        }
+        
+        .demo-benefit-card:hover {
+            border-color: #93C5FD;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .input-field {
+            width: 100%;
+            padding: 0.625rem 0.75rem;
+            border: 1px solid #E5E7EB;
+            border-radius: 0.375rem;
+            font-size: 0.875rem;
+            transition: all 0.2s ease;
+        }
+        
+        .input-field:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+        
+        .testimonial-quote {
+            position: relative;
+            padding-left: 2.5rem;
+        }
+        
+        .testimonial-quote::before {
+            content: '"';
+            position: absolute;
+            top: -0.5rem;
+            left: 0;
+            font-size: 4rem;
+            line-height: 1;
+            color: #93C5FD;
+            font-family: Georgia, serif;
+        }
+        
+        .demo-step {
+            position: relative;
+        }
+        
+        .demo-step-number {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            background-color: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+        
+        .faq-item h3 {
+            cursor: pointer;
+            position: relative;
+            padding-right: 2rem;
+        }
+        
+        .faq-item h3::after {
+            content: "\f078";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.875rem;
+            color: var(--primary);
+            transition: all 0.2s ease;
+        }
+        
+        .faq-item.open h3::after {
+            transform: translateY(-50%) rotate(180deg);
+        }
+        
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .faq-item.open .faq-answer {
+            max-height: 1000px;
+        }
+        
+        .form-field {
+            margin-bottom: 1.25rem;
+        }
+        
+        .form-field label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #4B5563;
+            margin-bottom: 0.375rem;
+        }
+        
+        .form-field input,
+        .form-field select,
+        .form-field textarea {
+            width: 100%;
+            padding: 0.625rem 0.75rem;
+            border: 1px solid #E5E7EB;
+            border-radius: 0.375rem;
+            font-size: 0.875rem;
+            transition: all 0.2s ease;
+        }
+        
+        .form-field input:focus,
+        .form-field select:focus,
+        .form-field textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+        
+        .bg-pattern {
+            background-image: radial-gradient(#2563EB 1px, transparent 1px);
+            background-size: 20px 20px;
+            opacity: 0.1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Navigation -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <div class="text-2xl font-bold text-blue-600 tracking-tight">intrix</div>
+                    <div class="ml-1 md:ml-2 bg-blue-100 text-blue-800 text-xs px-1.5 py-0.5 rounded-full font-medium">BETA</div>
+                </div>
+                
+                <!-- Main Navigation -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="/" class="text-gray-600 hover:text-blue-600 font-medium">홈</a>
+                    <a href="#features" class="text-gray-600 hover:text-blue-600 font-medium">주요 기능</a>
+                    <a href="#cases" class="text-gray-600 hover:text-blue-600 font-medium">활용 사례</a>
+                    <a href="#pricing" class="text-gray-600 hover:text-blue-600 font-medium">요금제</a>
+                    <a href="#demo" class="text-blue-600 font-medium">데모 요청</a>
+                </nav>
+                
+                <!-- Right Side Buttons -->
+                <div class="flex items-center space-x-4">
+                    <a href="/login" class="hidden md:block text-gray-600 hover:text-blue-600 font-medium">로그인</a>
+                    <a href="/signup" class="btn-primary">무료로 시작하기</a>
+                    <button class="md:hidden p-2 text-gray-600">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-gradient text-white py-16">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto text-center">
+                <h1 class="text-4xl md:text-5xl font-bold mb-6">Intrix 데모를 경험해보세요</h1>
+                <p class="text-xl text-blue-100 mb-8">감정 분석을 통해 소비자의 심리적 전환점을 발견하고 마케팅 전략을 혁신하는 방법을 직접 확인하세요.</p>
+                <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                    <a href="#request-form" class="btn-primary bg-white text-blue-600 hover:bg-blue-50">데모 요청하기</a>
+                    <a href="#how-it-works" class="btn-outline border-white text-white hover:bg-blue-800">데모 절차 알아보기</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Request Demo Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">데모를 통해 확인할 수 있는 가치</h2>
+                <p class="text-lg text-gray-600">1:1 맞춤형 데모를 통해 Intrix가 비즈니스에 어떤 변화를 가져올 수 있는지 확인하세요.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                <div class="demo-benefit-card bg-white">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">실제 데이터로 검증된 결과</h3>
+                    <p class="text-gray-600">귀사의 실제 VOC 데이터를 활용하여 감정 분석이 어떻게 진행되는지 직접 확인하세요. 데이터 제공 시 더 정확한 인사이트를 얻을 수 있습니다.</p>
+                </div>
+                
+                <div class="demo-benefit-card bg-white">
+                    <div class="feature-icon">
+                        <i class="fas fa-lightbulb text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">맞춤형 전략 인사이트</h3>
+                    <p class="text-gray-600">귀사의 산업과 비즈니스 목표에 맞춘 마케팅 전략 인사이트와 전환점 분석을 받아보세요. 범용적인 데이터가 아닌 맞춤형 분석을 제공합니다.</p>
+                </div>
+                
+                <div class="demo-benefit-card bg-white">
+                    <div class="feature-icon">
+                        <i class="fas fa-question-circle text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">전문가와의 1:1 Q&A</h3>
+                    <p class="text-gray-600">감정 분석 전문가와 직접 소통하며 궁금한 점을 해결하세요. 데모 세션에서는 귀사의 특정 요구사항에 맞는 질문에 답변해 드립니다.</p>
+                </div>
+            </div>
+            
+            <div class="max-w-4xl mx-auto bg-blue-50 rounded-lg p-6 md:p-8">
+                <div class="flex flex-col md:flex-row items-center">
+                    <div class="md:w-1/2 mb-6 md:mb-0 md:mr-8">
+                        <div class="testimonial-quote">
+                            <p class="text-lg text-gray-700 italic mb-4">"인트릭스 데모를 통해 소비자 감정 분석이 마케팅 전략에 어떤 영향을 미치는지 직접 확인할 수 있었습니다. 우리 회사의 실제 데이터를 기반으로 한 분석 결과가 매우 인상적이었습니다."</p>
+                            <div class="flex items-center">
+                                <img src="/api/placeholder/40/40" alt="Testimonial" class="w-10 h-10 rounded-full mr-3">
+                                <div>
+                                    <div class="font-semibold text-gray-900">김지현</div>
+                                    <div class="text-sm text-gray-500">마케팅 디렉터, 테크 기업</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="md:w-1/2">
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <div class="text-blue-500 mr-3 mt-0.5">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                                <span class="text-gray-700">직접 체험하는 감정 분석 프로세스</span>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="text-blue-500 mr-3 mt-0.5">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                                <span class="text-gray-700">귀사의 특정 산업 및 고객에 맞춘 분석</span>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="text-blue-500 mr-3 mt-0.5">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                                <span class="text-gray-700">실제 분석 결과와 마케팅 전략 제안</span>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="text-blue-500 mr-3 mt-0.5">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                                <span class="text-gray-700">ROI 계산 및 비즈니스 적용 방안</span>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="text-blue-500 mr-3 mt-0.5">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                                <span class="text-gray-700">귀사의 기존 마케팅 프로세스와의 통합 방법</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How Demo Works -->
+    <section id="how-it-works" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">데모 진행 절차</h2>
+                <p class="text-lg text-gray-600">Intrix 데모는 귀사의 필요에 맞게 맞춤화되어 진행됩니다.</p>
+            </div>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-white rounded-lg shadow-sm p-6 relative pl-12">
+                        <div class="demo-step-number">1</div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">데모 요청</h3>
+                        <p class="text-gray-600 mb-3">아래 양식을 작성하여 데모를 요청합니다. 귀사의 업종과 관심 분야를 알려주시면 더 맞춤화된 데모를 준비할 수 있습니다.</p>
+                        <p class="text-sm text-gray-500">소요 시간: 2분</p>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow-sm p-6 relative pl-12">
+                        <div class="demo-step-number">2</div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">일정 확정</h3>
+                        <p class="text-gray-600 mb-3">요청 접수 후 24시간 이내에 담당자가 연락하여 데모 일정을 조율합니다. 편하신 날짜와 시간에 맞춰 진행됩니다.</p>
+                        <p class="text-sm text-gray-500">소요 시간: 5분 통화</p>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow-sm p-6 relative pl-12">
+                        <div class="demo-step-number">3</div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">데이터 준비 (선택)</h3>
+                        <p class="text-gray-600 mb-3">실제 데이터로 분석을 원하시면 고객 리뷰, 설문조사, VOC 등의 텍스트 데이터를 준비해 주세요. 데이터가 없어도 데모는 가능합니다.</p>
+                        <p class="text-sm text-gray-500">데이터 볼륨에 따라 다름</p>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow-sm p-6 relative pl-12">
+                        <div class="demo-step-number">4</div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">데모 진행</h3>
+                        <p class="text-gray-600 mb-3">화상 회의를 통해 Intrix의 기능과 실제 사용 방법을 시연하고, 귀사의 데이터를 기반으로 한 인사이트를 제공합니다.</p>
+                        <p class="text-sm text-gray-500">소요 시간: 45-60분</p>
+                    </div>
+                </div>
+                
+                <div class="bg-blue-600 text-white rounded-lg p-6 mt-8">
+                    <div class="flex flex-col md:flex-row items-center justify-between">
+                        <div class="mb-4 md:mb-0">
+                            <h3 class="text-xl font-semibold mb-2">준비되셨나요?</h3>
+                            <p class="text-blue-100">지금 바로 데모를 요청하고 Intrix의 놀라운 기능을 경험해보세요.</p>
+                        </div>
+                        <a href="#request-form" class="btn-primary bg-white text-blue-600 hover:bg-blue-50 whitespace-nowrap">데모 요청하기</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Request Form -->
+    <section id="request-form" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">데모 요청하기</h2>
+                <p class="text-lg text-gray-600">아래 양식을 작성하여 맞춤형 데모를 신청하세요. 영업팀이 빠르게 연락드립니다.</p>
+            </div>
+            
+            <div class="max-w-3xl mx-auto">
+                <div class="bg-white rounded-lg shadow-sm overflow-hidden">
+                    <div class="p-6 md:p-8">
+                        <form>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div class="form-field">
+                                    <label for="full-name">이름 *</label>
+                                    <input type="text" id="full-name" required placeholder="홍길동">
+                                </div>
+                                
+                                <div class="form-field">
+                                    <label for="email">이메일 *</label>
+                                    <input type="email" id="email" required placeholder="your@email.com">
+                                </div>
+                                
+                                <div class="form-field">
+                                    <label for="company">회사명 *</label>
+                                    <input type="text" id="company" required placeholder="주식회사 인트릭스">
+                                </div>
+                                
+                                <div class="form-field">
+                                    <label for="job-title">직책</label>
+                                    <input type="text" id="job-title" placeholder="마케팅 매니저">
+                                </div>
+                                
+                                <div class="form-field">
+                                    <label for="phone">연락처 *</label>
+                                    <input type="tel" id="phone" required placeholder="010-1234-5678">
+                                </div>
+                                
+                                <div class="form-field">
+                                    <label for="company-size">회사 규모</label>
+                                    <select id="company-size">
+                                        <option value="">선택해주세요</option>
+                                        <option value="1-10">1-10명</option>
+                                        <option value="11-50">11-50명</option>
+                                        <option value="51-200">51-200명</option>
+                                        <option value="201-500">201-500명</option>
+                                        <option value="501+">501명 이상</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-field">
+                                    <label for="industry">업종 *</label>
+                                    <select id="industry" required>
+                                        <option value="">선택해주세요</option>
+                                        <option value="tech">기술/IT</option>
+                                        <option value="retail">리테일/이커머스</option>
+                                        <option value="finance">금융/핀테크</option>
+                                        <option value="healthcare">의료/헬스케어</option>
+                                        <option value="food">식품/음료</option>
+                                        <option value="beauty">화장품/뷰티</option>
+                                        <option value="education">교육</option>
+                                        <option value="manufacturing">제조업</option>
+                                        <option value="other">기타</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-field">
+                                    <label for="interest">관심 분야 (복수 선택 가능) *</label>
+                                    <select id="interest" required multiple class="h-24">
+                                        <option value="emotion-analysis">감정 분석</option>
+                                        <option value="brand-positioning">브랜드 포지셔닝</option>
+                                        <option value="product-launch">신제품 출시 전략</option>
+                                        <option value="marketing-message">마케팅 메시지 개발</option>
+                                        <option value="customer-journey">고객 여정 최적화</option>
+                                        <option value="competitor-analysis">경쟁사 분석</option>
+                                        <option value="voc-analysis">VOC 분석</option>
+                                        <option value="api-integration">API 연동</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-field mt-4">
+                                <label for="message">추가 문의사항</label>
+                                <textarea id="message" rows="4" placeholder="데모에서 중점적으로 알고 싶은 내용이나 질문 사항을 적어주세요."></textarea>
+                            </div>
+                            
+                            <div class="mt-6">
+                                <label class="flex items-start">
+                                    <input type="checkbox" required class="mt-1 text-blue-600">
+                                    <span class="ml-2 text-sm text-gray-600">인트릭스의 <a href="/privacy" class="text-blue-600 hover:underline">개인정보 처리방침</a>을 읽었으며 이에 동의합니다. *</span>
+                                </label>
+                            </div>
+                            
+                            <div class="mt-8">
+                                <button type="submit" class="btn-primary w-full">데모 요청하기</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">자주 묻는 질문</h2>
+                <p class="text-lg text-gray-600">Intrix 데모에 관한 궁금증을 해결해드립니다.</p>
+            </div>
+            
+            <div class="max-w-3xl mx-auto space-y-4">
+                <div class="faq-item bg-white rounded-lg p-5 shadow-sm">
+                    <h3 class="text-lg font-semibold text-gray-900">데모는 얼마나 오래 진행되나요?</h3>
+                    <div class="faq-answer mt-2">
+                        <p class="text-gray-600">일반적으로 데모 세션은 45분에서 60분 정도 소요됩니다. 귀사의 요구사항과 질문에 따라 시간이 조금 더 연장될 수 있습니다. 필요한 경우 추가 세션도 가능합니다.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item bg-white rounded-lg p-5 shadow-sm">
+                    <h3 class="text-lg font-semibold text-gray-900">데모를 위해 우리 회사 데이터를 제공해야 하나요?</h3>
+                    <div class="faq-answer mt-2">
+                        <p class="text-gray-600">반드시 필요하지는 않습니다. 원하신다면 샘플 데이터로 진행 가능합니다. 다만, 귀사의 실제 데이터(고객 리뷰, VOC 등)를 활용할 경우 더 정확하고 관련성 높은 인사이트를 얻을 수 있습니다. 모든 데이터는 기밀로 처리되며 데모 이후 삭제됩니다.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item bg-white rounded-lg p-5 shadow-sm">
+                    <h3 class="text-lg font-semibold text-gray-900">데모는 무료인가요?</h3>
+                    <div class="faq-answer mt-2">
+                        <p class="text-gray-600">네, Intrix 데모는 완전히 무료로 제공됩니다. 데모 요청 및 참여에 따른 어떠한 비용이나 의무도 발생하지 않습니다. 이는 귀사가 Intrix의 가치를 충분히 이해하고 평가할 수 있도록 돕기 위함입니다.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item bg-white rounded-lg p-5 shadow-sm">
+                    <h3 class="text-lg font-semibold text-gray-900">데모는 어떤 방식으로 진행되나요?</h3>
+                    <div class="faq-answer mt-2">
+                        <p class="text-gray-600">데모는 주로 Zoom 또는 Google Meet과 같은 화상회의 플랫폼을 통해 온라인으로 진행됩니다. 원하시는 경우 대면 미팅도 가능합니다. 데모에서는 Intrix 담당자가 플랫폼의 기능을 시연하고, 귀사의 질문에 답변해 드립니다.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item bg-white rounded-lg p-5 shadow-sm">
+                    <h3 class="text-lg font-semibold text-gray-900">데모 후 무료 체험 기간이 있나요?</h3>
+                    <div class="faq-answer mt-2">
+                        <p class="text-gray-600">네, 데모 이후 귀사에 맞춘 14일 무료 체험 계정을 제공해 드립니다. 이 기간 동안 모든 기능을 제한 없이 사용해보실 수 있으며, 필요한 경우 기술 지원도 받으실 수 있습니다.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item bg-white rounded-lg p-5 shadow-sm">
+                    <h3 class="text-lg font-semibold text-gray-900">데모 신청 후 얼마나 빨리 연락을 받을 수 있나요?</h3>
+                    <div class="faq-answer mt-2">
+                        <p class="text-gray-600">일반적으로 데모 요청 접수 후 영업일 기준 24시간 이내에 담당자가 연락을 드립니다. 성수기에는 약간의 지연이 있을 수 있으나, 최대한 빠르게 응대해 드리고 있습니다.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-16 bg-blue-600">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto text-center text-white">
+                <h2 class="text-3xl font-bold mb-6">지금 바로 Intrix의 힘을 경험해보세요</h2>
+                <p class="text-xl text-blue-100 mb-8">데이터 기반의 감정 분석으로 마케팅 전략의 새로운 차원을 열어보세요.</p>
+                <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                    <a href="#request-form" class="btn-primary bg-white text-blue-600 hover:bg-blue-50">데모 요청하기</a>
+                    <a href="/signup" class="btn-outline border-white text-white hover:bg-blue-700">무료로 시작하기</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="text-2xl font-bold text-white mb-4">intrix</div>
+                    <p class="text-gray-400 mb-4">감정 분석 기반 마케팅 전략 설계 시스템</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">서비스</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#features" class="text-gray-400 hover:text-white">주요 기능</a></li>
+                        <li><a href="#how-it-works" class="text-gray-400 hover:text-white">서비스 소개</a></li>
+                        <li><a href="#cases" class="text-gray-400 hover:text-white">활용 사례</a></li>
+                        <li><a href="#pricing" class="text-gray-400 hover:text-white">요금제</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">회사</h4>
+                    <ul class="space-y-2">
+                        <li><a href="/about" class="text-gray-400 hover:text-white">회사 소개</a></li>
+                        <li><a href="/blog" class="text-gray-400 hover:text-white">블로그</a></li>
+                        <li><a href="/careers" class="text-gray-400 hover:text-white">채용</a></li>
+                        <li><a href="/contact" class="text-gray-400 hover:text-white">문의하기</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">지원</h4>
+                    <ul class="space-y-2">
+                        <li><a href="/help" class="text-gray-400 hover:text-white">고객 지원</a></li>
+                        <li><a href="/docs" class="text-gray-400 hover:text-white">문서</a></li>
+                        <li><a href="/privacy" class="text-gray-400 hover:text-white">개인정보처리방침</a></li>
+                        <li><a href="/terms" class="text-gray-400 hover:text-white">이용약관</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8 text-sm text-gray-400 text-center">
+                &copy; 2025 Intrix. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // FAQ Accordion
+        document.addEventListener('DOMContentLoaded', function() {
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('h3');
+                
+                question.addEventListener('click', () => {
+                    // Toggle current item
+                    item.classList.toggle('open');
+                    
+                    // Close other items
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item) {
+                            otherItem.classList.remove('open');
+                        }
+                    });
+                });
+            });
+            
+            // Open first FAQ item by default
+            faqItems[0].classList.add('open');
+        });
+        
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
