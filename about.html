@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intrix - 회사 소개 | 감정 분석 기반 마케팅 전략 설계 시스템</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2563EB;
+            --primary-dark: #1E40AF;
+            --primary-light: #DBEAFE;
+            --secondary: #10B981;
+            --accent: #F59E0B;
+            --dark: #111827;
+            --light: #F9FAFB;
+            --gray: #9CA3AF;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            color: var(--dark);
+            background-color: #F3F4F6;
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, #2563EB, #1E3A8A);
+        }
+        
+        .card {
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: all 0.2s ease;
+        }
+        
+        .card:hover {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .btn-outline {
+            background-color: white;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary-light);
+        }
+        
+        .timeline {
+            position: relative;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 24px;
+            height: 100%;
+            width: 2px;
+            background-color: #E5E7EB;
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-left: 60px;
+            margin-bottom: 3rem;
+        }
+        
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .timeline-dot {
+            position: absolute;
+            left: 15px;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            border: 3px solid white;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background-color: var(--primary-light);
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .team-member {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .team-member:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .team-member img {
+            transition: all 0.5s ease;
+        }
+        
+        .team-member:hover img {
+            transform: scale(1.05);
+        }
+        
+        .team-member-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
+            padding: 2rem 1.5rem 1.5rem;
+        }
+        
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            transition: all 0.2s ease;
+        }
+        
+        .social-icon:hover {
+            background-color: var(--primary);
+            transform: translateY(-2px);
+        }
+        
+        .value-card {
+            border-radius: 8px;
+            border: 1px solid #E5E7EB;
+            transition: all 0.3s ease;
+            padding: 1.5rem;
+        }
+        
+        .value-card:hover {
+            border-color: #93C5FD;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .stat-card {
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            background-color: white;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .partner-logo {
+            filter: grayscale(100%);
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+        
+        .partner-logo:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+        }
+        
+        .fancy-quote {
+            position: relative;
+        }
+        
+        .fancy-quote::before {
+            content: '"';
+            position: absolute;
+            top: -1.5rem;
+            left: -1rem;
+            font-size: 6rem;
+            line-height: 1;
+            color: rgba(37, 99, 235, 0.1);
+            font-family: Georgia, serif;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Navigation -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <div class="text-2xl font-bold text-blue-600 tracking-tight">intrix</div>
+                    <div class="ml-1 md:ml-2 bg-blue-100 text-blue-800 text-xs px-1.5 py-0.5 rounded-full font-medium">BETA</div>
+                </div>
+                
+                <!-- Main Navigation -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="/" class="text-gray-600 hover:text-blue-600 font-medium">홈</a>
+                    <a href="/about" class="text-blue-600 font-medium">회사 소개</a>
+                    <a href="/features" class="text-gray-600 hover:text-blue-600 font-medium">주요 기능</a>
+                    <a href="/pricing" class="text-gray-600 hover:text-blue-600 font-medium">요금제</a>
+                    <a href="/contact" class="text-gray-600 hover:text-blue-600 font-medium">문의하기</a>
+                </nav>
+                
+                <!-- Right Side Buttons -->
+                <div class="flex items-center space-x-4">
+                    <a href="/login" class="hidden md:block text-gray-600 hover:text-blue-600 font-medium">로그인</a>
+                    <a href="/signup" class="btn-primary">무료로 시작하기</a>
+                    <button class="md:hidden p-2 text-gray-600">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-gradient text-white py-16">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto text-center">
+                <h1 class="text-4xl md:text-5xl font-bold mb-6">회사 소개</h1>
+                <p class="text-xl text-blue-100 mb-8">인트릭스(Intrix)는 감정 분석 AI 기술을 활용해 소비자와 브랜드 사이의<br>진정한 감정적 연결을 구축하는 마케팅 인텔리전스 플랫폼입니다.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Story Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-6xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <div class="inline-flex items-center justify-center py-1 px-3 bg-blue-100 text-blue-800 rounded-full text-sm font-medium mb-4">우리의 이야기</div>
+                        <h2 class="text-3xl font-bold text-gray-900 mb-6">감정 기반 마케팅의 혁신</h2>
+                        <div class="space-y-4">
+                            <p class="text-gray-600">인트릭스는 2022년, 마케팅 데이터 분석과 AI 연구의 전문가들이 모여 설립했습니다. 창립자들은 기존 마케팅 분석 솔루션이 소비자의 표면적인 행동 데이터만 분석할 뿐, 그 행동의 배경이 되는 감정과 심리를 충분히 이해하지 못한다는 문제점을 발견했습니다.</p>
+                            <p class="text-gray-600">우리는 소비자의 감정과 심리에 대한 깊은 이해 없이는 진정으로 효과적인 마케팅이 불가능하다고 믿습니다. 이러한 믿음을 바탕으로, Claude와 GPT와 같은 최첨단 AI 기술을 활용하여 소비자의 감정을 다차원적으로 분석하고, 이를 실행 가능한 마케팅 전략으로 변환하는 혁신적인 플랫폼을 개발했습니다.</p>
+                            <p class="text-gray-600">인트릭스의 독자적인 감정 분석 알고리즘은 소비자 리뷰, VOC, 설문조사 등의 텍스트 데이터에서 표면적 감정을 넘어 기저 감정과 잠재 욕구까지 파악하여, 브랜드가 소비자와 더 깊은 감정적 연결을 구축할 수 있도록 돕습니다.</p>
+                        </div>
+                    </div>
+                    <div>
+                        <img src="/api/placeholder/600/500" alt="Intrix 창립 스토리" class="rounded-lg shadow-lg w-full">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission & Vision Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-16">
+                    <div class="inline-flex items-center justify-center py-1 px-3 bg-blue-100 text-blue-800 rounded-full text-sm font-medium mb-4">미션 & 비전</div>
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">우리가 추구하는 가치</h2>
+                    <p class="text-xl text-gray-600 max-w-3xl mx-auto">데이터와 감정의 조화를 통해 마케팅의 새로운 패러다임을 만들어갑니다.</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                    <div class="bg-blue-600 rounded-2xl p-8 text-white shadow-xl">
+                        <h3 class="text-2xl font-bold mb-4">미션</h3>
+                        <div class="fancy-quote relative pl-6">
+                            <p class="text-xl leading-relaxed">소비자의 감정과 심리에 대한 깊은 이해를 바탕으로 브랜드와 소비자 간의 진정한 연결을 구축하여, 더 의미 있고 효과적인 마케팅 커뮤니케이션을 가능하게 합니다.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-2xl p-8 shadow-xl border border-gray-100">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">비전</h3>
+                        <div class="fancy-quote relative pl-6">
+                            <p class="text-xl leading-relaxed text-gray-600">2030년까지 감정 기반 마케팅 인텔리전스 분야의 글로벌 리더가 되어, 전 세계 모든 규모의 기업이 소비자의 감정을 이해하고 존중하는 마케팅을 실현할 수 있도록 합니다.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
+                    <div class="value-card bg-white">
+                        <div class="feature-icon">
+                            <i class="fas fa-heart text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">소비자 공감</h3>
+                        <p class="text-gray-600">소비자의 감정과 필요를 진심으로 이해하고 공감하는 마케팅이 가장 효과적이라고 믿습니다.</p>
+                    </div>
+                    
+                    <div class="value-card bg-white">
+                        <div class="feature-icon">
+                            <i class="fas fa-lightbulb text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">혁신적 사고</h3>
+                        <p class="text-gray-600">끊임없는 연구와 혁신을 통해 감정 분석과 마케팅 기술의 경계를 확장합니다.</p>
+                    </div>
+                    
+                    <div class="value-card bg-white">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">데이터 윤리</h3>
+                        <p class="text-gray-600">소비자 데이터의 보호와 윤리적 활용을 최우선으로 하며, 투명하고 책임감 있는 AI 사용을 지향합니다.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Journey Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-16">
+                    <div class="inline-flex items-center justify-center py-1 px-3 bg-blue-100 text-blue-800 rounded-full text-sm font-medium mb-4">성장 여정</div>
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">인트릭스의 발자취</h2>
+                    <p class="text-xl text-gray-600 max-w-3xl mx-auto">혁신과 도전의 여정 속에서 글로벌 기업으로 성장해가는 과정입니다.</p>
+                </div>
+                
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="bg-white rounded-lg p-6 shadow-sm border border-gray-100">
+                            <div class="text-blue-600 font-semibold mb-2">2022년 5월</div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">창립</h3>
+                            <p class="text-gray-600">감정 분석 기반 마케팅 전략 설계를 위한 인트릭스 설립. 5명의 창립 멤버로 시작</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="bg-white rounded-lg p-6 shadow-sm border border-gray-100">
+                            <div class="text-blue-600 font-semibold mb-2">2022년 11월</div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">시드 투자 유치</h3>
+                            <p class="text-gray-600">블루포인트파트너스와 스마일게이트인베스트먼트로부터 10억원 시드 투자 유치</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="bg-white rounded-lg p-6 shadow-sm border border-gray-100">
+                            <div class="text-blue-600 font-semibold mb-2">2023년 4월</div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">베타 서비스 출시</h3>
+                            <p class="text-gray-600">첫 베타 서비스 출시 및 10개 기업 파일럿 프로그램 운영</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="bg-white rounded-lg p-6 shadow-sm border border-gray-100">
+                            <div class="text-blue-600 font-semibold mb-2">2023년 9월</div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">프리 시리즈 A 투자 유치</h3>
+                            <p class="text-gray-600">30억원 규모의 프리 시리즈 A 투자 유치 및 팀 확장 (20명)</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="bg-white rounded-lg p-6 shadow-sm border border-gray-100">
+                            <div class="text-blue-600 font-semibold mb-2">2024년 2월</div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">공식 서비스 출시</h3>
+                            <p class="text-gray-600">감정 분석 플랫폼 인트릭스 1.0 공식 출시 및 100개 기업 고객 확보</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="bg-white rounded-lg p-6 shadow-sm border border-gray-100">
+                            <div class="text-blue-600 font-semibold mb-2">2024년 10월</div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">글로벌 확장</h3>
+                            <p class="text-gray-600">일본 및 동남아시아 시장 진출 시작, 다국어 지원 서비스 확장</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="bg-white rounded-lg p-6 shadow-sm border border-gray-100">
+                            <div class="text-blue-600 font-semibold mb-2">2025년 1월</div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">시리즈 A 투자 유치</h3>
+                            <p class="text-gray-600">100억원 규모의 시리즈 A 투자 유치 및 인트릭스 2.0 개발 착수</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Team Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-16">
+                    <div class="inline-flex items-center justify-center py-1 px-3 bg-blue-100 text-blue-800 rounded-full text-sm font-medium mb-4">리더십 팀</div>
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">혁신적인 팀을 소개합니다</h2>
+                    <p class="text-xl text-gray-600 max-w-3xl mx-auto">감정 분석, 인공지능, 마케팅 분야의 전문가들이 모였습니다.</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="team-member">
+                        <img src="/api/placeholder/400/500" alt="Team Member" class="w-full h-80 object-cover">
+                        <div class="team-member-info">
+                            <h3 class="text-xl font-semibold text-white mb-1">김지훈</h3>
+                            <p class="text-blue-300 mb-3">CEO & 공동 창업자</p>
+                            <div class="flex space-x-2">
+                                <a href="#" class="social-icon">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                                <a href="#" class="social-icon">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="team-member">
+                        <img src="/api/placeholder/400/500" alt="Team Member" class="w-full h-80 object-cover">
+                        <div class="team-member-info">
+                            <h3 class="text-xl font-semibold text-white mb-1">이소라</h3>
+                            <p class="text-blue-300 mb-3">CTO & 공동 창업자</p>
+                            <div class="flex space-x-2">
+                                <a href="#" class="social-icon">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                                <a href="#" class="social-icon">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="team-member">
+                        <img src="/api/placeholder/400/500" alt="Team Member" class="w-full h-80 object-cover">
+                        <div class="team-member-info">
+                            <h3 class="text-xl font-semibold text-white mb-1">박준영</h3>
+                            <p class="text-blue-300 mb-3">AI 연구 책임자</p>
+                            <div class="flex space-x-2">
+                                <a href="#" class="social-icon">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                                <a href="#" class="social-icon">
+                                    <i class="fab fa-medium"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="team-member">
+                        <img src="/api/placeholder/400/500" alt="Team Member" class="w-full h-80 object-cover">
+                        <div class="team-member-info">
+                            <h3 class="text-xl font-semibold text-white mb-1">최민지</h3>
+                            <p class="text-blue-300 mb-3">디자인 책임자</p>
+                            <div class="flex space-x-2">
+                                <a href="#" class="social-icon">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                                <a href="#" class="social-icon">
+                                    <i class="fab fa-dribbble"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-12">
+                    <a href="/careers" class="btn-primary">채용 정보 보기</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Company Culture Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-6xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <img src="/api/placeholder/600/400" alt="Intrix 회사 문화" class="rounded-lg shadow-lg w-full">
+                    </div>
+                    <div>
+                        <div class="inline-flex items-center justify-center py-1 px-3 bg-blue-100 text-blue-800 rounded-full text-sm font-medium mb-4">회사 문화</div>
+                        <h2 class="text-3xl font-bold text-gray-900 mb-6">혁신하는 문화, 성장하는 팀</h2>
+                        <div class="space-y-4">
+                            <p class="text-gray-600">인트릭스는 호기심과 열정을 가진 인재들이 자유롭게 아이디어를 나누고, 실험하고, 때로는 실패할 수 있는 환경을 지향합니다. 우리는 이런 과정을 통해 진정한 혁신이 일어난다고 믿기 때문입니다.</p>
+                            <p class="text-gray-600">상하 관계보다는 상호 존중과 협력을 중시하며, 직급과 관계없이 누구나 자신의 의견을 자유롭게 표현할 수 있습니다. 우리는 다양한 배경과 관점을 가진 인재들이 함께할 때 더 강력한 팀이 된다고 믿습니다.</p>
+                            <p class="text-gray-600">또한 일과 삶의 균형을 중요시하며, 구성원 각자가 자신의 역량을 최대한 발휘할 수 있는 유연한 근무 환경을 제공합니다. 우리는 단순히 일하는 곳이 아니라, 함께 성장하고 발전하는 공동체를 만들어가고 있습니다.</p>
+                        </div>
+                        
+                        <div class="mt-8 grid grid-cols-2 gap-4">
+                            <div class="bg-gray-50 rounded-lg p-4">
+                                <div class="font-semibold text-gray-900 mb-1">자율과 책임</div>
+                                <p class="text-sm text-gray-600">업무 방식과 시간을 스스로 결정하고 결과에 책임지는 문화</p>
+                            </div>
+                            <div class="bg-gray-50 rounded-lg p-4">
+                                <div class="font-semibold text-gray-900 mb-1">지속적 학습</div>
+                                <p class="text-sm text-gray-600">끊임없는 학습과 성장을 위한 교육 지원 및 컨퍼런스 참가</p>
+                            </div>
+                            <div class="bg-gray-50 rounded-lg p-4">
+                                <div class="font-semibold text-gray-900 mb-1">투명한 소통</div>
+                                <p class="text-sm text-gray-600">회사의 의사결정과 성과를 구성원 모두와 투명하게 공유</p>
+                            </div>
+                            <div class="bg-gray-50 rounded-lg p-4">
+                                <div class="font-semibold text-gray-900 mb-1">다양성 존중</div>
+                                <p class="text-sm text-gray-600">다양한 배경과 관점을 가진 팀원들의 의견을 존중하는 문화</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-16 bg-blue-600 text-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold mb-4">인트릭스의 현재</h2>
+                    <p class="text-xl text-blue-100 max-w-3xl mx-auto">지속적인 성장과 혁신을 통해 더 많은 기업들에게 가치를 제공하고 있습니다.</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                    <div class="bg-white bg-opacity-10 rounded-xl p-6 text-center">
+                        <div class="text-4xl font-bold mb-2">30+</div>
+                        <p class="text-blue-100">전문가 팀원</p>
+                    </div>
+                    
+                    <div class="bg-white bg-opacity-10 rounded-xl p-6 text-center">
+                        <div class="text-4xl font-bold mb-2">250+</div>
+                        <p class="text-blue-100">기업 고객</p>
+                    </div>
+                    
+                    <div class="bg-white bg-opacity-10 rounded-xl p-6 text-center">
+                        <div class="text-4xl font-bold mb-2">500만+</div>
+                        <p class="text-blue-100">분석된 소비자 리뷰</p>
+                    </div>
+                    
+                    <div class="bg-white bg-opacity-10 rounded-xl p-6 text-center">
+                        <div class="text-4xl font-bold mb-2">3개국</div>
+                        <p class="text-blue-100">서비스 제공 국가</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials & Partners Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-16">
+                    <div class="inline-flex items-center justify-center py-1 px-3 bg-blue-100 text-blue-800 rounded-full text-sm font-medium mb-4">함께하는 기업들</div>
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">고객 후기</h2>
+                    <p class="text-xl text-gray-600 max-w-3xl mx-auto">인트릭스를 통해 감정 기반 마케팅의 효과를 경험한 기업들의 이야기입니다.</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+                    <div class="bg-white rounded-lg shadow-sm p-6 border border-gray-100">
+                        <div class="flex items-center mb-4">
+                            <img src="/api/placeholder/48/48" alt="Testimonial" class="w-12 h-12 rounded-full mr-4">
+                            <div>
+                                <div class="font-semibold text-gray-900">김지현</div>
+                                <div class="text-sm text-gray-500">마케팅 디렉터, 테크 기업</div>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 mb-4">"인트릭스를 통해 소비자의 진짜 욕구를 발견할 수 있었습니다. 표면적인 피드백을 넘어 심층적인 욕구를 이해하고 이에 맞는 전략을 수립할 수 있었습니다."</p>
+                        <div class="flex text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow-sm p-6 border border-gray-100">
+                        <div class="flex items-center mb-4">
+                            <img src="/api/placeholder/48/48" alt="Testimonial" class="w-12 h-12 rounded-full mr-4">
+                            <div>
+                                <div class="font-semibold text-gray-900">이준호</div>
+                                <div class="text-sm text-gray-500">CEO, 스타트업</div>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 mb-4">"기존의 설문 데이터로는 찾지 못했던 인사이트를 인트릭스의 감정 분석으로 발견했습니다. 우리의 메시징 전략을 완전히 바꾸는 계기가 되었어요."</p>
+                        <div class="flex text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow-sm p-6 border border-gray-100">
+                        <div class="flex items-center mb-4">
+                            <img src="/api/placeholder/48/48" alt="Testimonial" class="w-12 h-12 rounded-full mr-4">
+                            <div>
+                                <div class="font-semibold text-gray-900">박소영</div>
+                                <div class="text-sm text-gray-500">브랜드 매니저, 화장품 기업</div>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 mb-4">"마케팅 전략을 수립하는 시간이 크게 줄었습니다. AI가 추천하는 전략적 메시징은 항상 놀라울 정도로 정확했고, 실제 캠페인에서 큰 성과를 얻었습니다."</p>
+                        <div class="flex text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mb-16">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-8">함께하는 파트너사</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-6 gap-6 items-center">
+                        <div class="partner-logo p-4">
+                            <img src="/api/placeholder/120/60" alt="Partner Logo" class="mx-auto h-12">
+                        </div>
+                        <div class="partner-logo p-4">
+                            <img src="/api/placeholder/120/60" alt="Partner Logo" class="mx-auto h-12">
+                        </div>
+                        <div class="partner-logo p-4">
+                            <img src="/api/placeholder/120/60" alt="Partner Logo" class="mx-auto h-12">
+                        </div>
+                        <div class="partner-logo p-4">
+                            <img src="/api/placeholder/120/60" alt="Partner Logo" class="mx-auto h-12">
+                        </div>
+                        <div class="partner-logo p-4">
+                            <img src="/api/placeholder/120/60" alt="Partner Logo" class="mx-auto h-12">
+                        </div>
+                        <div class="partner-logo p-4">
+                            <img src="/api/placeholder/120/60" alt="Partner Logo" class="mx-auto h-12">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto bg-blue-600 rounded-xl overflow-hidden shadow-xl">
+                <div class="grid grid-cols-1 md:grid-cols-2">
+                    <div class="p-8 md:p-12 text-white">
+                        <h2 class="text-2xl md:text-3xl font-bold mb-4">인트릭스와 함께 마케팅의 미래를 만들어가세요</h2>
+                        <p class="text-blue-100 mb-6">감정 분석 기반 마케팅 전략으로 소비자와의 진정한 연결을 구축하세요.</p>
+                        <div class="flex flex-wrap gap-3">
+                            <a href="/signup" class="btn-primary bg-white text-blue-600 hover:bg-blue-50">무료로 시작하기</a>
+                            <a href="/contact" class="btn-outline border-white text-white hover:bg-blue-700">문의하기</a>
+                        </div>
+                    </div>
+                    <div class="hidden md:block">
+                        <img src="/api/placeholder/600/400" alt="CTA Image" class="h-full w-full object-cover">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="text-2xl font-bold text-white mb-4">intrix</div>
+                    <p class="text-gray-400 mb-4">감정 분석 기반 마케팅 전략 설계 시스템</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">서비스</h4>
+                    <ul class="space-y-2">
+                        <li><a href="/features" class="text-gray-400 hover:text-white">주요 기능</a></li>
+                        <li><a href="/how-it-works" class="text-gray-400 hover:text-white">서비스 소개</a></li>
+                        <li><a href="/cases" class="text-gray-400 hover:text-white">활용 사례</a></li>
+                        <li><a href="/pricing" class="text-gray-400 hover:text-white">요금제</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">회사</h4>
+                    <ul class="space-y-2">
+                        <li><a href="/about" class="text-gray-400 hover:text-white">회사 소개</a></li>
+                        <li><a href="/blog" class="text-gray-400 hover:text-white">블로그</a></li>
+                        <li><a href="/careers" class="text-gray-400 hover:text-white">채용</a></li>
+                        <li><a href="/contact" class="text-gray-400 hover:text-white">문의하기</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">지원</h4>
+                    <ul class="space-y-2">
+                        <li><a href="/help" class="text-gray-400 hover:text-white">고객 지원</a></li>
+                        <li><a href="/docs" class="text-gray-400 hover:text-white">문서</a></li>
+                        <li><a href="/privacy" class="text-gray-400 hover:text-white">개인정보처리방침</a></li>
+                        <li><a href="/terms" class="text-gray-400 hover:text-white">이용약관</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8 text-sm text-gray-400 text-center">
+                &copy; 2025 Intrix. All rights reserved.
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
