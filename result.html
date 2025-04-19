@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intrix AI - 전략 분석 결과</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+            background-color: #f5f7fa;
+        }
+        
+        .dark body {
+            background-color: #111827;
+        }
+        
+        .need-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 3px;
+        }
+        
+        .need-dot.active {
+            background-color: #111827;
+        }
+        
+        .dark .need-dot.active {
+            background-color: #f3f4f6;
+        }
+        
+        .need-dot.inactive {
+            background-color: #e5e7eb;
+        }
+        
+        .dark .need-dot.inactive {
+            background-color: #374151;
+        }
+        
+        .section-card {
+            transition: all 0.2s ease;
+        }
+        
+        .section-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .copy-btn {
+            transition: all 0.2s ease;
+        }
+        
+        .copy-btn:hover {
+            background-color: rgba(17, 24, 39, 0.05);
+        }
+        
+        .dark .copy-btn:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .progress-bar {
+            height: 8px;
+            border-radius: 4px;
+            background-color: #e5e7eb;
+            overflow: hidden;
+        }
+        
+        .dark .progress-bar {
+            background-color: #374151;
+        }
+        
+        .progress-value {
+            height: 100%;
+            border-radius: 4px;
+            background-color: #111827;
+            transition: width 1s ease-in-out;
+        }
+        
+        .dark .progress-value {
+            background-color: #f3f4f6;
+        }
+        
+        .copywriting-card {
+            border-left: 4px solid #111827;
+            transition: all 0.2s ease;
+        }
+        
+        .dark .copywriting-card {
+            border-left-color: #f3f4f6;
+        }
+        
+        .copywriting-card:hover {
+            border-left-width: 6px;
+        }
+        
+        .branding-tag {
+            background-color: rgba(17, 24, 39, 0.05);
+            border-radius: 4px;
+            padding: 0.25rem 0.5rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        
+        .dark .branding-tag {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body class="min-h-screen py-8">
+    <div class="max-w-3xl mx-auto px-4">
+        <!-- 상단 헤더 및 공유 버튼 -->
+        <header class="flex justify-between items-center mb-6">
+            <div>
+                <h1 class="text-3xl font-bold text-gray-900 dark:text-white">Intrix AI</h1>
+                <p class="text-gray-600 dark:text-gray-400">AI 기반 전략 분석 결과</p>
+            </div>
+            <div class="flex space-x-2">
+                <button class="copy-btn flex items-center px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 text-sm font-medium">
+                    <i class="fas fa-copy mr-2"></i> 전체 복사
+                </button>
+                <button class="copy-btn flex items-center px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 text-sm font-medium">
+                    <i class="fas fa-share-alt mr-2"></i> 공유하기
+                </button>
+            </div>
+        </header>
+        
+        <!-- 전략 요약 타이틀 -->
+        <div class="section-card bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 mb-6">
+            <h1 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">[전략 요약 타이틀]</h1>
+            <div class="text-gray-500 dark:text-gray-400 text-sm flex items-center">
+                <span class="mr-4"><i class="far fa-calendar-alt mr-1"></i> [날짜]</span>
+                <span><i class="far fa-clock mr-1"></i> 분석 소요시간: [시간]</span>
+            </div>
+        </div>
+        
+        <!-- 감정 분석 요약 -->
+        <div class="section-card bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 mb-6">
+            <div class="flex justify-between items-start mb-4">
+                <h2 class="text-xl font-semibold text-gray-900 dark:text-white">감정 분석 요약</h2>
+            </div>
+                <div id="emotionAnalysisSummary" class="text-gray-700 dark:text-gray-300 mb-6">
+                    [감정 분석 요약 문장]
+                </div>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- 상위 욕구 -->
+                <div>
+                    <h3 class="text-md font-medium text-gray-700 dark:text-gray-300 mb-3">상위 욕구</h3>
+                    
+                <div id="need1" class="space-y-4">
+                        <!-- 욕구 1 -->
+                        <div>
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="text-sm font-medium text-gray-700 dark:text-gray-300">[상위 욕구 1]</span>
+                                <div class="flex">
+                                    <div class="need-dot active"></div>
+                                    <div class="need-dot active"></div>
+                                    <div class="need-dot active"></div>
+                                    <div class="need-dot active"></div>
+                                    <div class="need-dot active"></div>
+                                </div>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-value" style="width: 95%;"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- 욕구 2 -->
+                        <div>
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="text-sm font-medium text-gray-700 dark:text-gray-300">[상위 욕구 2]</span>
+                                <div class="flex">
+                                    <div class="need-dot active"></div>
+                                    <div class="need-dot active"></div>
+                                    <div class="need-dot active"></div>
+                                    <div class="need-dot active"></div>
+                                    <div class="need-dot inactive"></div>
+                                </div>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-value" style="width: 85%;"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- 욕구 3 -->
+                        <div>
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="text-sm font-medium text-gray-700 dark:text-gray-300">[상위 욕구 3]</span>
+                                <div class="flex">
+                                    <div class="need-dot active"></div>
+                                    <div class="need-dot active"></div>
+                                    <div class="need-dot active"></div>
+                                    <div class="need-dot active"></div>
+                                    <div class="need-dot inactive"></div>
+                                </div>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-value" style="width: 78%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 하위 욕구 -->
+                <div>
+                    <h3 class="text-md font-medium text-gray-700 dark:text-gray-300 mb-3">하위 욕구</h3>
+                    
+                <div id="need2" class="space-y-4">
+                        <!-- 욕구 1 -->
+                        <div>
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="text-sm font-medium text-gray-700 dark:text-gray-300">[하위 욕구 1]</span>
+                                <div class="flex">
+                                    <div class="need-dot active"></div>
+                                    <div class="need-dot active"></div>
+                                    <div class="need-dot active"></div>
+                                    <div class="need-dot inactive"></div>
+                                    <div class="need-dot inactive"></div>
+                                </div>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-value" style="width: 62%;"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- 욕구 2 -->
+                        <div>
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="text-sm font-medium text-gray-700 dark:text-gray-300">[하위 욕구 2]</span>
+                                <div class="flex">
+                                    <div class="need-dot active"></div>
+                                    <div class="need-dot active"></div>
+                                    <div class="need-dot inactive"></div>
+                                    <div class="need-dot inactive"></div>
+                                    <div class="need-dot inactive"></div>
+                                </div>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-value" style="width: 45%;"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- 욕구 3 -->
+                        <div>
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="text-sm font-medium text-gray-700 dark:text-gray-300">[하위 욕구 3]</span>
+                                <div class="flex">
+                                    <div class="need-dot active"></div>
+                                    <div class="need-dot active"></div>
+                                    <div class="need-dot inactive"></div>
+                                    <div class="need-dot inactive"></div>
+                                    <div class="need-dot inactive"></div>
+                                </div>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-value" style="width: 35%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 전략 설계 결과 -->
+        <div class="section-card bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 mb-6">
+            <div class="flex justify-between items-start mb-4">
+                <h2 class="text-xl font-semibold text-gray-900 dark:text-white">전략 설계 결과</h2>
+            </div>
+            
+                <div id="strategyContent" class="prose dark:prose-invert text-gray-700 dark:text-gray-300 max-w-none">
+                    [전략 설계 결과 텍스트]
+                </div>
+        </div>
+        
+        <!-- 추천 카피라이팅 -->
+        <div class="section-card bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 mb-6">
+            <div class="flex justify-between items-start mb-4">
+                <h2 class="text-xl font-semibold text-gray-900 dark:text-white">추천 카피라이팅</h2>
+            </div>
+            
+            <div class="space-y-4">
+                <div id="copywriting1" class="copywriting-card bg-gray-50 dark:bg-gray-750 p-4 rounded-md">
+                    <h3 class="font-medium text-gray-900 dark:text-white mb-2">카피 1</h3>
+                    <p class="text-gray-700 dark:text-gray-300 text-lg">[추천 카피 1]</p>
+                </div>
+                
+                <!-- 카피 2 -->
+                <div id="copywriting2" class="copywriting-card bg-gray-50 dark:bg-gray-750 p-4 rounded-md">
+                    <h3 class="font-medium text-gray-900 dark:text-white mb-2">카피 2</h3>
+                    <p class="text-gray-700 dark:text-gray-300 text-lg">[추천 카피 2]</p>
+                </div>
+                
+                <!-- 카피 3 -->
+                <div id="copywriting3" class="copywriting-card bg-gray-50 dark:bg-gray-750 p-4 rounded-md">
+                    <h3 class="font-medium text-gray-900 dark:text-white mb-2">카피 3</h3>
+                    <p class="text-gray-700 dark:text-gray-300 text-lg">[추천 카피 3]</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 브랜딩 전략 -->
+        <div class="section-card bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 mb-6">
+            <div class="flex justify-between items-start mb-4">
+                <h2 class="text-xl font-semibold text-gray-900 dark:text-white">브랜딩 전략</h2>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <div id="referencePoint" class="bg-gray-50 dark:bg-gray-750 p-4 rounded-md">
+                    <h3 class="font-medium text-gray-900 dark:text-white mb-2">Reference Point</h3>
+                    <p class="text-gray-700 dark:text-gray-300">
+                        [Reference Point 내용]
+                    </p>
+                </div>
+                
+                <!-- Frame Shift -->
+                <div id="frameShift" class="bg-gray-50 dark:bg-gray-750 p-4 rounded-md">
+                    <h3 class="font-medium text-gray-900 dark:text-white mb-2">Frame Shift</h3>
+                    <p class="text-gray-700 dark:text-gray-300">
+                        [Frame Shift 내용]
+                    </p>
+                </div>
+                
+                <!-- Positioning 문장 -->
+                <div id="positioning" class="md:col-span-2 bg-gray-50 dark:bg-gray-750 p-4 rounded-md">
+                    <h3 class="font-medium text-gray-900 dark:text-white mb-2">Positioning 문장</h3>
+                    <p class="text-gray-700 dark:text-gray-300 text-lg font-medium">
+                        [Positioning 문장]
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 푸터 -->
+        <footer class="text-center mt-8 mb-4 text-sm text-gray-500 dark:text-gray-400">
+            <p>© 2025 Intrix AI. All rights reserved.</p>
+            <p class="mt-1">분석 ID: [분석 ID]</p>
+        </footer>
+    </div>
+    
+        <script>
+        // 복사 기능
+        document.querySelectorAll('.copy-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const allText = document.body.innerText;
+                navigator.clipboard.writeText(allText).then(() => {
+                    const originalText = this.innerHTML;
+                    this.innerHTML = '<i class="fas fa-check mr-2"></i> 복사됨';
+                    setTimeout(() => {
+                        this.innerHTML = originalText;
+                    }, 2000);
+                });
+            });
+        });
+        
+        // 프로그레스바 애니메이션
+        document.addEventListener('DOMContentLoaded', function() {
+            const progressBars = document.querySelectorAll('.progress-value');
+            setTimeout(() => {
+                progressBars.forEach(bar => {
+                    const width = bar.style.width;
+                    bar.style.width = '0';
+                    setTimeout(() => {
+                        bar.style.width = width;
+                    }, 100);
+                });
+            }, 500);
+            
+            // 결과 데이터 렌더링 예시 (실제로는 API나 다른 소스에서 데이터를 받아오게 됨)
+            // renderResultData(resultData);
+        });
+        
+        // 결과 데이터를 각 영역에 렌더링하는 함수
+        function renderResultData(data) {
+            // 전략 요약 타이틀
+            document.querySelector('.section-card h1').textContent = data.title;
+            
+            // 날짜 및 분석시간
+            document.querySelectorAll('.text-gray-500 span')[0].innerHTML = 
+                `<i class="far fa-calendar-alt mr-1"></i> ${data.date}`;
+            document.querySelectorAll('.text-gray-500 span')[1].innerHTML = 
+                `<i class="far fa-clock mr-1"></i> 분석 소요시간: ${data.analysisTime}`;
+            
+            // 감정 분석 요약
+            document.getElementById('emotionAnalysisSummary').textContent = data.emotionSummary;
+            
+            // 상위 욕구
+            const topNeeds = document.querySelectorAll('.space-y-4')[0].querySelectorAll('div > div:first-child');
+            data.topNeeds.forEach((need, index) => {
+                if (index < topNeeds.length) {
+                    // 욕구 이름
+                    topNeeds[index].querySelector('span').textContent = need.name;
+                    
+                    // 점수 시각화 (도트)
+                    const dots = topNeeds[index].querySelectorAll('.need-dot');
+                    dots.forEach((dot, i) => {
+                        if (i < need.score) {
+                            dot.classList.add('active');
+                            dot.classList.remove('inactive');
+                        } else {
+                            dot.classList.add('inactive');
+                            dot.classList.remove('active');
+                        }
+                    });
+                    
+                    // 프로그레스바
+                    const progressBar = topNeeds[index].nextElementSibling.querySelector('.progress-value');
+                    progressBar.style.width = `${need.score * 20}%`;
+                }
+            });
+            
+            // 하위 욕구 (유사하게 구현)
+            
+            // 전략 설계 결과
+            document.getElementById('strategyContent').innerHTML = data.strategyContent;
+            
+            // 추천 카피라이팅
+            document.getElementById('copywriting1').querySelector('p').textContent = data.copywritings[0];
+            document.getElementById('copywriting2').querySelector('p').textContent = data.copywritings[1];
+            document.getElementById('copywriting3').querySelector('p').textContent = data.copywritings[2];
+            
+            // 브랜딩 전략
+            document.getElementById('referencePoint').querySelector('p').innerHTML = data.referencePoint;
+            document.getElementById('frameShift').querySelector('p').innerHTML = data.frameShift;
+            document.getElementById('positioning').querySelector('p').innerHTML = data.positioning;
+            
+            // 분석 ID
+            document.querySelector('footer p:last-child').textContent = `분석 ID: ${data.analysisId}`;
+        }
+        </script>
+</body>
+</html>
