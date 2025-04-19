@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intrix AI - 페이지를 찾을 수 없습니다</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+        
+        .floating-icon {
+            animation: float 4s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-100">
+    <div class="h-screen flex flex-col justify-center items-center text-center p-4">
+        <!-- 404 아이콘 -->
+        <div class="floating-icon mb-8">
+            <svg width="120" height="120" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-gray-400 dark:text-gray-500">
+                <path d="M9.17157 14.8284L12 12M14.8284 9.17157L12 12M12 12L9.17157 9.17157M12 12L14.8284 14.8284" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="1.5"/>
+            </svg>
+        </div>
+        
+        <!-- 오류 코드 -->
+        <div class="text-gray-400 dark:text-gray-500 text-6xl font-bold mb-4">404</div>
+        
+        <!-- 타이틀 및 서브텍스트 -->
+        <h1 class="text-4xl font-bold mb-4 text-gray-800 dark:text-gray-100">페이지를 찾을 수 없습니다</h1>
+        <p class="text-gray-500 dark:text-gray-400 mb-8 max-w-md">
+            입력하신 주소를 다시 확인해주세요. 요청하신 페이지가 이동되었거나 삭제되었을 수 있습니다.
+        </p>
+        
+        <!-- 버튼 -->
+        <a href="/" class="bg-black dark:bg-gray-700 text-white px-6 py-2 rounded hover:bg-gray-800 dark:hover:bg-gray-600 transition-colors">
+            홈으로 돌아가기
+        </a>
+        
+        <!-- 브랜드 로고 -->
+        <div class="mt-12 text-gray-600 dark:text-gray-400">
+            <span class="font-semibold text-lg">Intrix AI</span>
+        </div>
+    </div>
+</body>
+</html>
