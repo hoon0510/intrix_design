@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intrix AI - 전략 자동화 시스템</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+            background-color: #f9fafb;
+        }
+        
+        .dark body {
+            background-color: #111827;
+        }
+        
+        .form-input {
+            transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        }
+        
+        .form-input:focus {
+            border-color: #374151;
+            box-shadow: 0 0 0 3px rgba(55, 65, 81, 0.1);
+            outline: none;
+        }
+        
+        .dark .form-input:focus {
+            border-color: #9ca3af;
+            box-shadow: 0 0 0 3px rgba(156, 163, 175, 0.1);
+        }
+        
+        .transition-height {
+            transition: all 0.3s ease-in-out;
+            overflow: hidden;
+        }
+        
+        .btn-primary {
+            background-color: #111827;
+            color: white;
+            transition: all 0.2s ease;
+        }
+        
+        .btn-primary:hover {
+            background-color: #374151;
+            transform: translateY(-1px);
+        }
+        
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+        
+        .dark .btn-primary {
+            background-color: #4b5563;
+        }
+        
+        .dark .btn-primary:hover {
+            background-color: #6b7280;
+        }
+        
+        .radio-container {
+            display: flex;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            border: 1px solid #e5e7eb;
+            transition: all 0.2s ease;
+        }
+        
+        .dark .radio-container {
+            border-color: #374151;
+        }
+        
+        .radio-container:hover {
+            background-color: #f3f4f6;
+        }
+        
+        .dark .radio-container:hover {
+            background-color: #1f2937;
+        }
+        
+        .radio-container.selected {
+            border-color: #111827;
+            background-color: rgba(17, 24, 39, 0.05);
+        }
+        
+        .dark .radio-container.selected {
+            border-color: #9ca3af;
+            background-color: rgba(156, 163, 175, 0.1);
+        }
+        
+        .custom-radio {
+            -webkit-appearance: none;
+            appearance: none;
+            background-color: white;
+            margin: 0;
+            width: 1.25rem;
+            height: 1.25rem;
+            border: 2px solid #d1d5db;
+            border-radius: 50%;
+            display: grid;
+            place-content: center;
+        }
+        
+        .dark .custom-radio {
+            background-color: #374151;
+            border-color: #6b7280;
+        }
+        
+        .custom-radio::before {
+            content: "";
+            width: 0.65rem;
+            height: 0.65rem;
+            border-radius: 50%;
+            transform: scale(0);
+            transition: transform 0.1s ease-in-out;
+            box-shadow: inset 1rem 1rem #111827;
+        }
+        
+        .dark .custom-radio::before {
+            box-shadow: inset 1rem 1rem #e5e7eb;
+        }
+        
+        .custom-radio:checked::before {
+            transform: scale(1);
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <div class="max-w-2xl mx-auto p-6">
+        <header class="py-6">
+            <h1 class="text-3xl font-bold text-center mt-6 mb-2 text-gray-900 dark:text-white">Intrix AI</h1>
+            <p class="text-center text-gray-600 dark:text-gray-400 mb-8">AI 기반 전략 자동화 시스템</p>
+        </header>
+        
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8">
+            <form class="space-y-6" id="intrixForm">
+                <!-- 시장 유형 선택 -->
+                <div>
+                    <label class="font-medium text-gray-700 dark:text-gray-300 mb-3 block text-sm">시장 유형</label>
+                    <div class="flex gap-4">
+                        <label class="radio-container selected flex-1">
+                            <input type="radio" name="marketType" value="existing" checked 
+                                   class="custom-radio">
+                            <span class="ml-3 text-sm font-medium text-gray-700 dark:text-gray-300">기존시장</span>
+                        </label>
+                        <label class="radio-container flex-1">
+                            <input type="radio" name="marketType" value="new"
+                                   class="custom-radio">
+                            <span class="ml-3 text-sm font-medium text-gray-700 dark:text-gray-300">신시장</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- 아이템명 -->
+                <div>
+                    <label for="itemName" class="font-medium text-gray-700 dark:text-gray-300 mb-2 block text-sm">아이템명</label>
+                    <input type="text" id="itemName" name="itemName" required
+                           placeholder="제품 또는 서비스명을 입력하세요"
+                           class="form-input w-full border border-gray-300 dark:border-gray-600 rounded-md px-4 py-2 text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400">
+                </div>
+
+                <!-- 타겟 고객 -->
+                <div>
+                    <label for="targetCustomer" class="font-medium text-gray-700 dark:text-gray-300 mb-2 block text-sm">타겟 고객</label>
+                    <input type="text" id="targetCustomer" name="targetCustomer" required
+                           placeholder="주요 타겟 고객층을 입력하세요"
+                           class="form-input w-full border border-gray-300 dark:border-gray-600 rounded-md px-4 py-2 text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400">
+                </div>
+
+                <!-- 사용 시나리오 -->
+                <div>
+                    <label for="useScenario" class="font-medium text-gray-700 dark:text-gray-300 mb-2 block text-sm">사용 시나리오</label>
+                    <textarea id="useScenario" name="useScenario" rows="4" required
+                              placeholder="제품/서비스의 사용 시나리오를 설명해주세요"
+                              class="form-input w-full border border-gray-300 dark:border-gray-600 rounded-md px-4 py-2 text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 resize-y"></textarea>
+                </div>
+
+                <!-- 목표 포지셔닝 -->
+                <div>
+                    <label for="targetPositioning" class="font-medium text-gray-700 dark:text-gray-300 mb-2 block text-sm">목표 포지셔닝</label>
+                    <input type="text" id="targetPositioning" name="targetPositioning" required
+                           placeholder="원하는 시장 내 포지셔닝을 입력하세요"
+                           class="form-input w-full border border-gray-300 dark:border-gray-600 rounded-md px-4 py-2 text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400">
+                </div>
+
+                <!-- 리뷰 입력 (기존시장 선택시에만 표시) -->
+                <div id="reviewSection" class="transition-height max-h-96">
+                    <div class="flex justify-between items-center mb-2">
+                        <label class="font-medium text-gray-700 dark:text-gray-300 text-sm">리뷰 입력</label>
+                        <span class="text-xs text-gray-500 dark:text-gray-400" id="review-count">1 / 200</span>
+                    </div>
+                    
+                    <div id="review-container" class="space-y-2">
+                        <div class="review-input-group">
+                            <input type="text" name="reviews[]" required
+                                  placeholder="고객 리뷰나 텍스트 피드백을 입력해주세요"
+                                  class="form-input w-full border border-gray-300 dark:border-gray-600 rounded-md px-4 py-2 text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400">
+                        </div>
+                    </div>
+                    
+                    <button type="button" id="add-review-btn" class="mt-2 text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                        </svg>
+                        리뷰 추가
+                    </button>
+                    
+                    <p class="text-xs text-gray-500 dark:text-gray-400 mt-2">* 실제 고객 리뷰 또는 앱스토어/웹사이트 리뷰를 제공하면 더 정확한 분석이 가능합니다.</p>
+                </div>
+
+                <!-- 제출 버튼 -->
+                <div class="pt-4">
+                    <button type="submit" class="btn-primary rounded-md py-3 px-6 text-sm font-medium w-full shadow-sm">
+                        분석 요청하기
+                    </button>
+                </div>
+            </form>
+        </div>
+        
+        <footer class="mt-8 text-center text-sm text-gray-500 dark:text-gray-400">
+            <p>© 2025 Intrix AI. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const marketTypeRadios = document.querySelectorAll('input[name="marketType"]');
+            const reviewSection = document.getElementById('reviewSection');
+            const radioContainers = document.querySelectorAll('.radio-container');
+            const reviewContainer = document.getElementById('review-container');
+            const addReviewBtn = document.getElementById('add-review-btn');
+            const reviewCountElement = document.getElementById('review-count');
+            let reviewCount = 1;
+            
+            // 라디오 버튼 스타일 처리
+            marketTypeRadios.forEach(radio => {
+                radio.addEventListener('change', function() {
+                    // 모든 컨테이너에서 selected 클래스 제거
+                    radioContainers.forEach(container => {
+                        container.classList.remove('selected');
+                    });
+                    
+                    // 선택된 라디오 버튼의 부모 컨테이너에 selected 클래스 추가
+                    this.closest('.radio-container').classList.add('selected');
+                    
+                    // 리뷰 섹션 토글
+                    toggleReviewSection();
+                });
+            });
+            
+            // 리뷰 입력창 추가 기능
+            addReviewBtn.addEventListener('click', function() {
+                addReviewInput();
+            });
+            
+            function addReviewInput() {
+                if (reviewCount >= 200) {
+                    alert('최대 200개까지만 리뷰를 추가할 수 있습니다.');
+                    return;
+                }
+                
+                const newReviewInput = document.createElement('div');
+                newReviewInput.className = 'review-input-group flex';
+                newReviewInput.innerHTML = `
+                    <input type="text" name="reviews[]" required
+                           placeholder="고객 리뷰나 텍스트 피드백을 입력해주세요"
+                           class="form-input w-full border border-gray-300 dark:border-gray-600 rounded-md px-4 py-2 text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400">
+                    <button type="button" class="remove-review-btn ml-2 text-gray-400 hover:text-red-500" aria-label="리뷰 제거">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                `;
+                
+                reviewContainer.appendChild(newReviewInput);
+                reviewCount++;
+                updateReviewCount();
+                
+                // 삭제 버튼에 이벤트 리스너 추가
+                const removeBtn = newReviewInput.querySelector('.remove-review-btn');
+                removeBtn.addEventListener('click', function() {
+                    reviewContainer.removeChild(newReviewInput);
+                    reviewCount--;
+                    updateReviewCount();
+                });
+                
+                // reviewSection의 높이 조정
+                adjustReviewSectionHeight();
+            }
+            
+            function updateReviewCount() {
+                reviewCountElement.textContent = `${reviewCount} / 200`;
+            }
+            
+            function adjustReviewSectionHeight() {
+                if (reviewCount > 3) {
+                    reviewSection.style.maxHeight = `${Math.min(reviewCount * 50 + 100, 500)}px`;
+                    reviewSection.style.overflowY = 'auto';
+                } else {
+                    reviewSection.style.maxHeight = 'auto';
+                    reviewSection.style.overflowY = 'visible';
+                }
+            }
+            
+            function toggleReviewSection() {
+                const isExistingMarket = document.querySelector('input[name="marketType"][value="existing"]').checked;
+                const reviewInputs = document.querySelectorAll('input[name="reviews[]"]');
+                
+                if (isExistingMarket) {
+                    reviewSection.style.maxHeight = "500px"; // 충분한 높이 설정
+                    reviewSection.classList.remove('max-h-0');
+                    reviewSection.style.display = "block";
+                    
+                    // 모든 리뷰 입력창에 required 속성 설정
+                    if (reviewInputs.length > 0) {
+                        reviewInputs[0].setAttribute('required', '');
+                    }
+                } else {
+                    reviewSection.style.maxHeight = "0";
+                    reviewSection.classList.add('max-h-0');
+                    setTimeout(() => {
+                        reviewSection.style.display = "none";
+                    }, 300); // 트랜지션 후 display none 처리
+                    
+                    // 모든 리뷰 입력창에서 required 속성 제거
+                    reviewInputs.forEach(input => {
+                        input.removeAttribute('required');
+                    });
+                }
+            }
+            
+            // 폼 제출 이벤트
+            document.getElementById('intrixForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                // 여기에 폼 제출 로직 추가
+                
+                // 제출 버튼 상태 변경 (예시)
+                const submitButton = this.querySelector('button[type="submit"]');
+                submitButton.disabled = true;
+                submitButton.innerText = '분석 중...';
+                
+                // 폼 데이터 수집 (예시)
+                const formData = new FormData(this);
+                const reviews = formData.getAll('reviews[]');
+                console.log('리뷰 목록:', reviews);
+                
+                // 실제 제출 로직은 여기에 구현
+                setTimeout(() => {
+                    alert('분석 요청이 완료되었습니다. 결과는 이메일로 전송됩니다.');
+                    submitButton.disabled = false;
+                    submitButton.innerText = '분석 요청하기';
+                }, 2000);
+            });
+            
+            // 초기 상태 설정
+            toggleReviewSection();
+        });
+    </script>
+</body>
+</html>
