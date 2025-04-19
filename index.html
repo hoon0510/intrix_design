@@ -1,0 +1,336 @@
+            <div class="grid md:grid-cols-3 gap-8 mt-12">
+                <div class="feature-card bg-gray-50 dark:bg-gray-750 rounded-xl p-6 text-center">
+                    <div class="benefit-icon mx-auto">
+                        <i class="fas fa-bolt text-2xl text-amber-500"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">시간 절약</h3>
+                    <p class="text-gray-600 dark:text-gray-300">
+                        수십 시간의 분석과 전략 기획 작업을 단 몇 초로 단축할 수 있습니다.
+                    </p>
+                </div>
+                
+                <div class="feature-card bg-gray-50 dark:bg-gray-750 rounded-xl p-6 text-center">
+                    <div class="benefit-icon mx-auto">
+                        <i class="fas fa-bullseye text-2xl text-red-500"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">데이터 기반 분석</h3>
+                    <p class="text-gray-600 dark:text-gray-300">
+                        고객 감정과 욕구에 기반한 분석으로 객관적인 인사이트를 얻을 수 있습니다.
+                    </p>
+                </div>
+                
+                <div class="feature-card bg-gray-50 dark:bg-gray-750 rounded-xl p-6 text-center">
+                    <div class="benefit-icon mx-auto">
+                        <i class="fas fa-comment-dots text-2xl text-green-500"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">자동 카피 생성</h3>
+                    <p class="text-gray-600 dark:text-gray-300">
+                        감정에 호소하는 맞춤형 카피를 자동으로 생성해 활용할 수 있습니다.
+                    </p>
+                </div>
+            </div><!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intrix - 감정 분석 기반 마케팅 전략 자동화</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(90deg, #111827 0%, #4B5563 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+        
+        .dark .gradient-text {
+            background: linear-gradient(90deg, #F3F4F6 0%, #9CA3AF 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+        
+        .feature-card {
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-8px);
+        }
+        
+        .benefit-icon {
+            width: 64px;
+            height: 64px;
+            background-color: #f3f4f6;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+        
+        .dark .benefit-icon {
+            background-color: #374151;
+        }
+        
+        .step-card {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .step-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .step-number {
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            width: 40px;
+            height: 40px;
+            background-color: #111827;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.25rem;
+        }
+        
+        .dark .step-number {
+            background-color: #f3f4f6;
+            color: #111827;
+        }
+        
+        .hero-circle {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(17,24,39,0.05) 0%, rgba(255,255,255,0) 70%);
+            z-index: -1;
+        }
+        
+        .dark .hero-circle {
+            background: radial-gradient(circle, rgba(243,244,246,0.05) 0%, rgba(17,24,39,0) 70%);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-100">
+    <!-- 네비게이션 -->
+    <nav class="bg-white dark:bg-gray-800 shadow-sm fixed w-full z-10">
+        <div class="max-w-5xl mx-auto px-4">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="/" class="flex-shrink-0 flex items-center">
+                        <span class="text-xl font-bold text-gray-900 dark:text-white">Intrix</span>
+                    </a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="/analyzer" class="bg-black dark:bg-gray-700 text-white rounded px-4 py-2 text-sm hover:bg-gray-800 dark:hover:bg-gray-600 transition-colors">
+                        전략 분석 시작하기
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero 영역 -->
+    <header class="pt-28 pb-20 md:pt-36 md:pb-24 relative overflow-hidden">
+        <div class="hero-circle top-1/4 right-0 transform translate-x-1/2"></div>
+        <div class="hero-circle bottom-0 left-0 transform -translate-x-1/3"></div>
+        
+        <div class="max-w-5xl mx-auto px-4 space-y-10">
+            <div class="text-center max-w-3xl mx-auto">
+                <h1 class="text-5xl md:text-6xl font-bold mb-6 leading-tight">
+                    <span class="gradient-text">감정에서 전략으로,</span><br/>
+                    단 몇 초 만에
+                </h1>
+                <p class="text-lg text-gray-600 dark:text-gray-300 mb-8 leading-relaxed">
+                    고객 반응을 분석해 바로 적용 가능한 전략, 카피, 브랜딩까지 자동 생성합니다.
+                    더 이상 전략 기획에 수십 시간을 투자하지 마세요.
+                </p>
+                <a href="/analyzer" class="bg-black dark:bg-gray-700 text-white rounded-lg px-8 py-4 text-lg font-medium hover:bg-gray-800 dark:hover:bg-gray-600 transition-colors shadow-lg">
+                    전략 분석 시작하기
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 서비스가 필요한 이유 -->
+    <section class="py-16 bg-white dark:bg-gray-800">
+        <div class="max-w-5xl mx-auto px-4 space-y-10">
+            <div class="text-center max-w-3xl mx-auto">
+                <h2 class="text-3xl font-bold mb-6 text-gray-900 dark:text-gray-100">감에 의존한 전략, 이제 그만</h2>
+                <p class="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+                    고객 리뷰에 숨어있는 진짜 감정을 기반으로 설계된 전략을 받아보세요.
+                    데이터에 기반한 객관적 인사이트로 제품과 서비스의 시장 포지셔닝을 명확히 합니다.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Intrix를 사용하면 -->
+    <section class="py-16">
+        <div class="max-w-5xl mx-auto px-4 space-y-10">
+            <div class="text-center max-w-3xl mx-auto">
+                <h2 class="text-3xl font-bold mb-6 text-gray-900 dark:text-gray-100">Intrix를 사용하면</h2>
+                <p class="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+                    타겟, 상황, 목표만 입력하면 전문가 수준의 마케팅 전략을 자동으로 얻을 수 있습니다.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8 mt-12">
+                <div class="feature-card bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                    <h3 class="text-xl font-semibold mb-4 flex items-center">
+                        <span class="w-8 h-8 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center mr-2 flex-shrink-0">
+                            <i class="fas fa-lightbulb text-yellow-500"></i>
+                        </span>
+                        전략 설계
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                        고객의 감정 패턴과 욕구에 맞춘 맞춤형 마케팅 전략을 제공합니다. 핵심 가치 제안, 차별화 포인트, 커뮤니케이션 방향성까지 상세히 안내합니다.
+                    </p>
+                </div>
+                
+                <div class="feature-card bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                    <h3 class="text-xl font-semibold mb-4 flex items-center">
+                        <span class="w-8 h-8 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center mr-2 flex-shrink-0">
+                            <i class="fas fa-comment-dots text-blue-500"></i>
+                        </span>
+                        바로 적용 가능한 카피
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                        고객의 내면 욕구를 고려한 효과적인 카피를 생성합니다. 헤드라인, 제품 설명, 슬로건 등 다양한 용도의 마케팅 문구를 즉시 활용할 수 있습니다.
+                    </p>
+                </div>
+                
+                <div class="feature-card bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                    <h3 class="text-xl font-semibold mb-4 flex items-center">
+                        <span class="w-8 h-8 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center mr-2 flex-shrink-0">
+                            <i class="fas fa-bullseye text-red-500"></i>
+                        </span>
+                        포지셔닝 문장
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                        시장 내 차별화된 위치를 명확히 표현하는 포지셔닝 문장을 생성합니다. Reference Point와 Frame Shift 전략까지 포함하여 브랜드 아이덴티티를 강화합니다.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <p class="text-lg text-gray-600 dark:text-gray-300 mb-6">
+                    모든 마케팅 담당자가 전략 전문가가 될 수 있습니다.<br>
+                    Intrix와 함께라면 누구나 데이터 기반의 전략 기획이 가능합니다.
+                </p>
+                <a href="/analyzer" class="bg-black dark:bg-gray-700 text-white rounded px-6 py-3 text-lg font-medium hover:bg-gray-800 dark:hover:bg-gray-600 transition-colors">
+                    무료로 시작하기
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 어떻게 사용하나요? -->
+    <section class="py-16 bg-white dark:bg-gray-800">
+        <div class="max-w-5xl mx-auto px-4 space-y-10">
+            <div class="text-center max-w-3xl mx-auto">
+                <h2 class="text-3xl font-bold mb-6 text-gray-900 dark:text-gray-100">어떻게 사용하나요?</h2>
+                <p class="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+                    단 3단계로 바로 사용할 수 있습니다. 복잡한 설정이나 학습 과정이 필요 없습니다.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8 mt-12">
+                <div class="step-card bg-gray-50 dark:bg-gray-750 rounded-xl p-6 pt-8">
+                    <div class="step-number">1</div>
+                    <h3 class="text-xl font-semibold mb-4 text-gray-900 dark:text-gray-100">타겟과 상황 입력</h3>
+                    <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                        제품/서비스 이름, 타겟 고객, 사용 시나리오, 목표 포지셔닝을 간단히 입력합니다.
+                    </p>
+                </div>
+                
+                <div class="step-card bg-gray-50 dark:bg-gray-750 rounded-xl p-6 pt-8">
+                    <div class="step-number">2</div>
+                    <h3 class="text-xl font-semibold mb-4 text-gray-900 dark:text-gray-100">리뷰 입력 (선택사항)</h3>
+                    <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                        기존 시장의 경우, 고객 리뷰나 피드백을 입력하면 더 정확한 분석이 가능합니다. 없어도 괜찮습니다.
+                    </p>
+                </div>
+                
+                <div class="step-card bg-gray-50 dark:bg-gray-750 rounded-xl p-6 pt-8">
+                    <div class="step-number">3</div>
+                    <h3 class="text-xl font-semibold mb-4 text-gray-900 dark:text-gray-100">결과 받기</h3>
+                    <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                        전략 분석, 카피라이팅, 브랜딩 요소가 포함된 종합 결과를 몇 초 안에 받아볼 수 있습니다.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="bg-gray-100 dark:bg-gray-750 rounded-xl p-8 flex flex-col md:flex-row items-center justify-between mt-12">
+                <div class="mb-6 md:mb-0">
+                    <h3 class="text-xl font-bold mb-2">바로 시작해보세요</h3>
+                    <p class="text-gray-600 dark:text-gray-300">
+                        회원가입 없이 무료로 첫 분석을 경험할 수 있습니다.
+                    </p>
+                </div>
+                <a href="/analyzer" class="bg-black dark:bg-gray-700 text-white rounded px-6 py-3 text-lg font-medium hover:bg-gray-800 dark:hover:bg-gray-600 transition-colors whitespace-nowrap">
+                    전략 분석 시작하기
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 푸터 -->
+    <footer class="py-12 bg-gray-100 dark:bg-gray-850">
+        <div class="max-w-5xl mx-auto px-4">
+            <div class="grid md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <h3 class="text-lg font-semibold mb-4 text-gray-800 dark:text-gray-200">Intrix</h3>
+                    <p class="text-gray-600 dark:text-gray-400">
+                        감정 분석 기반 마케팅 전략 자동화 서비스
+                    </p>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4 text-gray-800 dark:text-gray-200">링크</h3>
+                    <ul class="space-y-2 text-gray-600 dark:text-gray-400">
+                        <li><a href="/analyzer" class="hover:text-gray-900 dark:hover:text-gray-200">전략 분석 도구</a></li>
+                        <li><a href="/terms" class="hover:text-gray-900 dark:hover:text-gray-200">이용약관</a></li>
+                        <li><a href="/privacy" class="hover:text-gray-900 dark:hover:text-gray-200">개인정보 처리방침</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4 text-gray-800 dark:text-gray-200">문의</h3>
+                    <p class="text-gray-600 dark:text-gray-400">
+                        Email: support@intrix.ai<br>
+                        전화: 02-123-4567
+                    </p>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-200 dark:border-gray-700 pt-8 mt-8">
+                <div class="text-sm text-gray-500 dark:text-gray-400 mb-4">
+                    © 2025 Intrix. All rights reserved.
+                </div>
+                
+                <!-- 윤리 고지문 -->
+                <div class="bg-gray-200 dark:bg-gray-700 p-4 rounded-lg text-sm text-gray-600 dark:text-gray-300">
+                    <p class="font-medium mb-2">전략 자동화 책임 안내</p>
+                    <p>
+                        Intrix는 고객의 감정과 욕구 분석을 기반으로 전략과 카피를 자동 생성합니다. 저희 시스템은 데이터 기반 인사이트를 제공하지만, 그 결과에 대한 가치 판단은 하지 않습니다. 제안된 전략의 윤리적 적합성과 실행 여부는 전적으로 이용자의 판단에 달려 있습니다. Intrix는 전략 자동화를 위한 도구로서, 최종 결정과 그에 따른 윤리적 책임은 사용자에게 있음을 안내드립니다.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
